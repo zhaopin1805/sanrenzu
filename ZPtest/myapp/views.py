@@ -23,11 +23,11 @@ def company_register_home(request):
 
 
 def user_register(request):
-    login_name = request.POST.get('username')
-    login_pwd = request.POST.get('userpwd')
+    login_name = request.POST.get('user_name')
+    login_pwd = request.POST.get('user_pwd')
     user_phone = request.POST.get('phone')
     user_email = request.POST.get('email')
-    new_user = User()
+    new_user = Users()
     new_user.login_name = login_name
     new_user.login_pwd = login_pwd
     new_user.user_phone = user_phone
@@ -39,7 +39,7 @@ def user_register(request):
 def user_login(request):
     name = request.POST.get('login_name')
     pwd = request.POST.get('login_pwd')
-    users = User.objects.filter(login_name=name, login_pwd=pwd)
+    users = Users.objects.filter(login_name=name, login_pwd=pwd)
     if users:
         user = users.first()
         # 登陆成功后设置session属性，预留
@@ -52,12 +52,12 @@ def company_register(request):
     """
      login_pwd :预留md5加密
     """
-    login_name = request.POST.get('login_name')
-    login_pwd = request.POST.get('login_pwd')
-    company_name = request.POST.get('company_name')
+    login_name = request.POST.get('company_name')
+    login_pwd = request.POST.get('company_pwd')
+    company_name = request.POST.get('name')
     company_email = request.POST.get('company_email')
     company_phone = request.POST.get('company_phone')
-    company_info = request.POST.get('company_info')
+    company_info = request.POST.get('com_info')
     company = Companies()  # 实例化表对象
     company.login_name = login_name
     company.login_pwd = login_pwd
@@ -89,7 +89,7 @@ def user_set(request):  # 查看数据库中是否存在该邮箱和电话
     phone = request.GET.get('phone')
     email = request.GET.get('email')
     print(phone,email)
-    if User.objects.filter(user_email=email, user_phone=phone):
+    if Users.objects.filter(user_email=email, user_phone=phone):
         data['status'] = '200'
         print(data)
         return JsonResponse(data)
@@ -102,7 +102,7 @@ def user_set(request):  # 查看数据库中是否存在该邮箱和电话
 def user_reset(request):
     phone = request.POST.get('phone')
     email = request.POST.get('email')
-    user = User.objects.filter(user_phone=phone,user_email=email)
+    user = Users.objects.filter(user_phone=phone,user_email=email)
     pwd = user.login_pwd
     name = user.login_name
     text = '账号：{} 密码：{}'.format(name,pwd)

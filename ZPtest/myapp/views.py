@@ -84,26 +84,95 @@ def go_user_reset(request):
     return render(request, 'user_reset.html')
 
 
-def user_set(request):  # 查看数据库中是否存在该邮箱和电话
+def go_company_reset(request):
+    return render(request, 'company_reset.html')
+
+
+def email_phone_set(request):  # 查看数据库中是否存在该邮箱和电话
     data = {}
     phone = request.GET.get('phone')
     email = request.GET.get('email')
-    print(phone,email)
-    if Users.objects.filter(user_email=email, user_phone=phone):
-        data['status'] = '200'
-        print(data)
-        return JsonResponse(data)
+    user = request.GET.get('user')
+    if user == 'user':
+        if Users.objects.filter(user_email=email, user_phone=phone):
+            data['status'] = 200
+            print(data)
+            return JsonResponse(data)
+        else:
+            data['status'] = 404
+            print(data)
+            return JsonResponse(data)
     else:
-        data['status'] = '404'
-        print(data)
+        if Companies.objects.filter(company_phone=phone, company_email=email):
+            data['status'] = 200
+            print(data)
+            return JsonResponse(data)
+        else:
+            data['status'] = 404
+            print(data)
+            return JsonResponse(data)
+
+
+def email_phone_reset(request):
+    data = {}
+    phone = request.GET.get('phone')
+    email = request.GET.get('email')
+    user = Users.objects.filter(user_phone=phone, user_email=email)
+    pwd = user[0].login_pwd
+    name = user[0].login_name
+    text = '账号：{} 密码：{}'.format(name, pwd)
+    try:
+        mail(your_user=email, title_text=text)
+        data['status'] = 200
+        data['show'] = '邮箱发送成功，请查收'
+        return JsonResponse(data)
+    except Exception as e:
+        print(e)
+        data['status'] = 404
+        data['status'] = '发送失败'
         return JsonResponse(data)
 
 
-def user_reset(request):
-    phone = request.POST.get('phone')
-    email = request.POST.get('email')
-    user = Users.objects.filter(user_phone=phone,user_email=email)
-    pwd = user.login_pwd
-    name = user.login_name
-    text = '账号：{} 密码：{}'.format(name,pwd)
-    mail(user=email,title_text=text)
+def set_phone(request):
+    data = {}
+    phone = request.GET.get('phone')
+    user = request.GET.get('user')
+    if user == 'user':
+        if Users.objects.filter(user_phone=phone):
+            data['status'] = 200
+            data['title'] = '改手机号已经被注册过'
+            return JsonResponse(data)
+        else:
+            data['status'] = 404
+            return JsonResponse(data)
+    else:
+        if Companies.objects.filter(company_phone=phone):
+            data['status'] = 200
+            data['title'] = '改手机号已经被注册过'
+            return JsonResponse(data)
+        else:
+            data['status'] = 404
+            return JsonResponse(data)
+
+
+def set_email(request):
+    data = {}
+    email = request.GET.get('email')
+    user = request.GET.get('user')
+    if user == 'user':
+        if Users.objects.filter(user_email=email):
+            data['status'] = 200
+            data['title'] = '该邮箱已经被注册过'
+            print(data)
+            return JsonResponse(data)
+        else:
+            data['status'] = 404
+            return JsonResponse(data)
+    else:
+        if Companies.objects.filter(company_phone=email):
+            data['status'] = 200
+            data['title'] = '改邮箱已经被注册过'
+            return JsonResponse(data)
+        else:
+            data['status'] = 404
+            return JsonResponse(data)

@@ -11,11 +11,11 @@ from email.mime.text import MIMEText
 from email.header import Header
 
 
-def mail(my_sender='liao_fanfan@163.com', my_password='Liaofan33', user='', content_text='密码找回', title_text=''):
+def mail(my_sender='liao_fanfan@163.com', my_password='Liaofan33', your_user='', content_text='密码找回', title_text=''):
     try:
         msg = MIMEText(content_text, 'plain', 'utf-8')
         msg['From'] = my_sender  # 发件人的邮箱昵称和邮箱账号
-        msg['To'] = user  # 收件人的邮箱昵称和邮箱账号
+        msg['To'] = your_user  # 收件人的邮箱昵称和邮箱账号
         msg['Subject'] = Header(title_text, 'utf-8')  # 邮箱主题
 
         server = smtplib.SMTP('smtp.163.com', 25)  # 邮箱协议地址和端口
@@ -26,4 +26,5 @@ def mail(my_sender='liao_fanfan@163.com', my_password='Liaofan33', user='', cont
         server.quit()  # 退出
     except smtplib.SMTPException as e:
         print(e)
+
 

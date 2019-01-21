@@ -14,6 +14,11 @@ urlpatterns = [
     path('user_login/', user_login, name='user_login'),
     path('company_login/', company_login, name='company_login'),
     path('go_user_reset/', go_user_reset, name='go_user_reset'),
-    path('user_set/', user_set, name='user_set'),
-    path('user_reset/', user_reset, name='user_reset')
+    path('go_company_reset/', go_company_reset, name='go_company_reset'),
+    path('user_set/', email_phone_set, name='user_set'),
+    path('user_reset/', email_phone_reset, name='user_reset'),
+    path('company_set/', email_phone_set, name='company_set'),
+    path('company_reset/', email_phone_reset, name='company_reset'),
+    path('set_phone/', set_phone, name='set_phone'),
+    path('set_email/', set_email, name='set_email')
 ]

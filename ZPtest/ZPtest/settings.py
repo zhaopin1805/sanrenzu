@@ -75,14 +75,24 @@ WSGI_APPLICATION = 'ZPtest.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'NB_test',
+#         'USER': 'root',
+#         'PASSWORD': 'python1805',
+#         'PORT': 3306,
+#         'HOST': '118.25.209.213',
+#     }
+# }
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'NB_test',
         'USER': 'root',
-        'PASSWORD': 'python1805',
+        'PASSWORD': 'Liaofan33',
         'PORT': 3306,
-        'HOST': '118.25.209.213',
+        'HOST': 'localhost',
     }
 }
 

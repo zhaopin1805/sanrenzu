@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>欢迎访问博纳人才网</title>
+    <style type="text/css">
+    body{
+        background: url(../static/img/bg.jpg) no-repeat;
+        background-size: cover;
+    }
+    *{
+        margin:0;
+        padding: 0;
+    }
+    .title{
+        font-size: 80px;
+        line-height: 200px;
+    }
+    .titlediv{
+        width:1000px;
+        height: 200px;
+        margin:0 auto;
+    }
+    img{
+        width: 200px;
+        height: 200px;
+        float:left;
+    }
+    .zhuce{
+        width:300px;
+        height: 200px;
+        margin:90px auto 0;
+     }
+     .login{
+        border:1px solid gray;
+        text-align: center;
+        width: 300px;
+        height: 35px;
+     }
+   /* .login a{
+        display: inline-block;
+        font-size: 26px;
+    }*/
+    .company{
+        background: skyblue;
+        display: inline-block;
+        width: 150px;
+        float: left;
+    }
+    .user{
+        display: inline-block;
+        width: 150px;
+    }
+    .company a {
+        line-height: 35px;
+        display: inline-block;
+        height: 35px;
+    }
+    .user a{
+        line-height: 35px;
+        display: inline-block;
+        height: 35px;
+    }
+    .btn{
+        width: 300px;
+        height: 35px;
+        border-radius: 5px;
+        font-size: 16px;
+        margin-top: 20px;
+    }
+    form{
+        position: relative;
+    }
+    .username{
+        margin:15px auto 2px;
+    }
+    input{
+        width: 300px;
+        height: 28px;
+        border: 1px solid gray;
+    }
+    .reg{
+        margin-top: 17px;
+        text-align: center;
+    }
+    .reg a:nth-child(1){
+        margin-right: 30px;
+    }
+    .reg a{
+        text-decoration: none;
+        color: black;
+        font-size: 18px;
+    }
+    .reg a:hover{
+        color:blue;
+    }
+    .reg a:action{
+        color:gray;
+    }
+    </style>
+</head>
+<body>
+<div class="titlediv">
+<img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1547879279633&di=2be207cc066923f3105357742052e656&imgtype=0&src=http%3A%2F%2Fimage8.huangye88.cn%2F2016%2F08%2F16%2Fe71aa11fd9f72cedd7abfeed500a977d_350_350.jpg">
+<h1 class="title">欢迎光临博纳人才网</h1>
+</div>
+<div class="zhuce">
+    <div class="login">
+        <div class="company"><a>企业登录</a></div>
+        <div class="user"><a href={% url 'NB:user_home' %}>用户登录</a></div>
+    </div>
+
+<div>
+
+    <form>
+        <div class="username"><input type="text" name="username"  placeholder="请输入手机号/邮箱/用户名"></div>
+        <div class="password"><input type="password" name="psd" placeholder="请输入密码"></div>
+        <input type="submit" value="登录" class="btn"><br>
+    </form>
+
+</div>
+<div class="reg">
+    <a href="">忘记密码</a>
+    <a href={% url 'NB:company_register_home' %}>注册账号</a>
+</div>
+</div>
+</body>
+</html>

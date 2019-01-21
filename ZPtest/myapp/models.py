@@ -7,7 +7,6 @@ from django.db import models
 
 
 class User(models.Model):  # 用户表
-    user_id = models.IntegerField(primary_key=True)
     login_name = models.CharField(max_length=12)
     login_pwd = models.CharField(max_length=12)
     vip = models.BooleanField(default=0)  # 0表示非会员，1表示会员
@@ -15,11 +14,10 @@ class User(models.Model):  # 用户表
     user_email = models.CharField(max_length=30)
 
     class Meta:
-        db_table = 'use'
+        db_table = 'user'
 
 
 class Companies(models.Model):  # 企业表
-    company_id = models.IntegerField(auto_created=True, primary_key=True)
     login_name = models.CharField(max_length=12)
     login_pwd = models.CharField(max_length=15)
     company_name = models.CharField(max_length=50, null=True)
@@ -36,7 +34,6 @@ class Companies(models.Model):  # 企业表
 
 
 class Talents(models.Model):  # 人才表
-    talents_id = models.IntegerField(primary_key=True)
     company = models.OneToOneField(Companies, on_delete=models.CASCADE)  # 一方主动方关联企业表
     classify = models.CharField(max_length=10, null=True)
 
@@ -45,7 +42,6 @@ class Talents(models.Model):  # 人才表
 
 
 class Resume(models.Model):  #简历表
-    resume_id = models.IntegerField(primary_key=True)
     # 关联User表，一对多关系，简历表为多方表
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     # 关联Talents表，一对多关系，简历表为多方表
@@ -74,7 +70,6 @@ class Resume(models.Model):  #简历表
 
 
 class Collect(models.Model):  # 职位收藏表
-    collect_id = models.IntegerField(auto_created=True, primary_key=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
     class Meta:
@@ -83,7 +78,6 @@ class Collect(models.Model):  # 职位收藏表
 
 # 城市表City
 class City(models.Model):
-    city_id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=20, null=True)
     letter = models.CharField(max_length=5, null=True)
 
@@ -92,7 +86,6 @@ class City(models.Model):
 
 
 class Job(models.Model):  # 职位表
-    job_id = models.IntegerField(auto_created=True, primary_key=True)
     company = models.ForeignKey(Companies, on_delete=models.CASCADE)  # 关联公司表，多方
     job_name = models.CharField(max_length=10)
     money = models.CharField(max_length=10)
@@ -111,7 +104,6 @@ class Job(models.Model):  # 职位表
 
 class Record(models.Model):  # 投递记录表
     resume = models.ForeignKey(Resume, on_delete=models.CASCADE)  # 多方关联简历表
-    record_id = models.IntegerField(primary_key=True)
     job = models.OneToOneField(Job, on_delete=models.CASCADE)  # 一方主动方关联职位表
     resume_state = models.CharField(max_length=20)
 
@@ -120,7 +112,6 @@ class Record(models.Model):  # 投递记录表
 
 
 class Shield(models.Model):  # 屏蔽公司表
-    shield_id = models.IntegerField(primary_key=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)  # 多方关联用户表
     company = models.ForeignKey(Companies, on_delete=models.CASCADE)  # 多方关联企业表
 
@@ -129,7 +120,6 @@ class Shield(models.Model):  # 屏蔽公司表
 
 
 class Vip(models.Model):  # 套餐表
-    vip_id = models.IntegerField(auto_created=True, primary_key=True)
     grade = models.CharField(max_length=10)
     jon_num = models.IntegerField()
     resume_num = models.IntegerField()
@@ -139,8 +129,7 @@ class Vip(models.Model):  # 套餐表
         db_table = 'vip'
 
 
-class Check(models.Model):  # 查看纪录表
-    check_id = models.IntegerField(auto_created=True, primary_key=True)
+class Chck(models.Model):  # 查看纪录表
     company = models.ForeignKey(Companies, on_delete=models.CASCADE)
     resume = models.ForeignKey(Resume, on_delete=models.CASCADE)
 

@@ -78,11 +78,11 @@ WSGI_APPLICATION = 'ZPtest.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'NB_test',
+        'NAME': 'nb_test',
         'USER': 'root',
-        'PASSWORD': 'python1805',
+        'PASSWORD': '123456',
         'PORT': 3306,
-        'HOST': '118.25.209.213',
+        'HOST': 'localhost',
     }
 }
 

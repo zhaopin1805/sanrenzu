@@ -112,7 +112,7 @@
 
 <div>
 
-    <form action="{% url 'NB:company_login' %}">
+    <form action="{% url 'NB:company_login' %}" method="post">
         <div class="username"><input type="text" name="username"  placeholder="请输入手机号/邮箱/用户名"></div>
         <div class="password"><input type="password" name="password" placeholder="请输入密码"></div>
         <input type="submit" value="登录" class="btn"><br>

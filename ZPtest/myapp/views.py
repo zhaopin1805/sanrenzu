@@ -37,12 +37,21 @@ def user_register(request):
 
 
 def user_login(request):
-    name = request.POST.get('login_name')
+    user_name_phone_email = request.POST.get('login_name')
     pwd = request.POST.get('login_pwd')
-    users = Users.objects.filter(login_name=name, login_pwd=pwd)
-    if users:
-        user = users.first()
-        # 登陆成功后设置session属性，预留
+    users_name_login = Users.objects.filter(login_name=user_name_phone_email, login_pwd=pwd)
+    users_phone_login = Users.objects.filter(user_phone=user_name_phone_email, login_pwd=pwd)
+    users_email_login = Users.objects.filter(user_email=user_name_phone_email, login_pwd=pwd)
+    if users_name_login or users_phone_login or users_email_login:
+        if users_name_login:
+            user = users_name_login.first()
+            request.session['user_id'] = user.id
+        if users_phone_login:
+            user.id = users_phone_login.first()
+            request.session['user_id'] = user.id
+        if users_email_login:
+            user.id = users_email_login.first()
+            request.session['user_id'] = user.id
         return redirect(reverse('NB:use'))
     else:
         return redirect(reverse('NB:user_home'))
@@ -70,12 +79,22 @@ def company_register(request):
 
 
 def company_login(request):
-    login_name_phone = request.POST.get('username')  # 用户名或者电话
+    login_name_phone_email = request.POST.get('username')  # 用户名或者电话
     login_pwd = request.POST.get('password')  # 密码
-    company_name_login = Companies.objects.filter(login_name=login_name_phone, login_pwd=login_pwd)  # 实例化表对象
-    company_phone_login = Companies.objects.filter(company_phone=login_name_phone, login_pwd=login_pwd)
-    if company_name_login or company_phone_login:  # 预留session
-        return redirect(reverse('NB:company'))
+    company_name_login = Companies.objects.filter(login_name=login_name_phone_email, login_pwd=login_pwd)  # 实例化表对象
+    company_phone_login = Companies.objects.filter(company_phone=login_name_phone_email, login_pwd=login_pwd)
+    company_email_login = Companies.objects.filter(company_email=login_name_phone_email, login_pwd=login_pwd)
+    if company_name_login or company_phone_login or company_email_login:  # 预留session
+        if company_name_login:
+            company = company_name_login.first()
+            request.session['company_id'] = company.id
+        if company_phone_login:
+            company = company_name_login.first()
+            request.session['company_id'] = company.id
+        if company_email_login:
+            company = company_email_login.first()
+            request.session['company_id'] = company.id
+        return redirect(reverse('NB:go_company_mine'))
     else:
         return redirect(reverse('NB:company_home'))
 
@@ -86,6 +105,20 @@ def go_user_reset(request):
 
 def go_company_reset(request):
     return render(request, 'company_reset.html')
+
+
+def go_company_mine(request):
+    if request.session.get('company_id'):
+        return render(request, 'company_mine.html')
+    else:
+        return redirect(reverse('NB:company_home'))
+
+
+def go_user_mine(request):
+    if request.session.get('user_id'):
+        return render(request, 'cuser_mine.html')
+    else:
+        return redirect(reverse('NB:user_home'))
 
 
 def email_phone_set(request):  # 查看数据库中是否存在该邮箱和电话
@@ -117,12 +150,16 @@ def email_phone_reset(request):
     data = {}
     phone = request.GET.get('phone')
     email = request.GET.get('email')
-    user = Users.objects.filter(user_phone=phone, user_email=email)
-    pwd = user[0].login_pwd
-    name = user[0].login_name
+    user = request.GET.get('user')
+    if user == 'user':
+        user_company = Users.objects.filter(user_phone=phone, user_email=email)
+    else:
+        user_company = Companies.objects.filter(company_phone=phone, company_email=email)
+    pwd = user_company[0].login_pwd
+    name = user_company[0].login_name
     text = '账号：{} 密码：{}'.format(name, pwd)
     try:
-        mail(your_user=email, title_text=text)
+        mail(your_user=email, content_text=text)
         data['status'] = 200
         data['show'] = '邮箱发送成功，请查收'
         return JsonResponse(data)

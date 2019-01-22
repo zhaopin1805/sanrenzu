@@ -133,8 +133,13 @@
     $(function () {
         $('#txtUsername').blur(function () {
             if ($('#txtUsername').val() != '') {
-                $('#usernameSpan').html('')
-                $('#btnReg').attr('disabled', false)
+                if ($('#txtUsername').val().match(/^[a-zA-Z0-9_-]{4,16}$/)) {
+                    $('#usernameSpan').html('')
+                    $('#btnReg').attr('disabled', false)
+                } else {
+                    $('#usernameSpan').html('<h5 style="color: red">***用户名带有特殊字符或者少于4位***</h5>')
+                    $('#btnReg').attr('disabled', true)
+                }
             } else {
                 $('#usernameSpan').html('<h5 style="color: red">***用户名不能为空***</h5>')
                 $('#btnReg').attr('disabled', true)
@@ -178,7 +183,7 @@
                 if ($('#userphone').val().length == 11) {
                     $.getJSON('/set_phone/', {'user': 'user', 'phone': phone}, function (data) {
                         if (data['status'] == 200) {
-                            $('#new_phone').html('<h5 style="color: red">***'+data['title']+'</h5>')
+                            $('#new_phone').html('<h5 style="color: red">***' + data['title'] + '</h5>')
                             $('#btnReg').attr('disabled', true)
                         } else {
                             $('#new_phone').html('')
@@ -205,9 +210,9 @@
                     $('#new_checkuserpass').html('<h5 style="color: red">***邮箱格式不对***</h5>')
                     $('#btnReg').attr('disabled', true)
                 } else {
-                    $.getJSON('/set_email/', {'user':'user','email': email}, function (data) {
+                    $.getJSON('/set_email/', {'user': 'user', 'email': email}, function (data) {
                         if (data['status'] == 200) {
-                            $('#new_checkuserpass').html('<h5 style="color: red">***'+data['title']+'</h5>')
+                            $('#new_checkuserpass').html('<h5 style="color: red">***' + data['title'] + '</h5>')
                             $('#btnReg').attr('disabled', true)
                         } else {
                             $('#new_checkuserpass').html('')

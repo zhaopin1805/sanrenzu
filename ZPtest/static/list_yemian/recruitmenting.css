@@ -1,0 +1,150 @@
+.plate {
+    float: right;
+    width: 79%;
+}
+
+.plate-header {
+    display: flex;
+    justify-content: space-between;
+    height: 80px;
+    line-height: 80px;
+    align-items: center;
+}
+
+.plate-header .filter {
+    /* display: flex; */
+}
+
+.plate-header .filter .text {}
+
+.plate-header .filter .down {
+    display: inline-block;
+    width: 24px;
+    height: 18px;
+    background: url(../image/down.png) no-repeat;
+    background-size: 15px;
+    background-position: center;
+    position: relative;
+    top: 2px;
+}
+
+.plate-header .publish {
+    width: 130px;
+    height: 30px;
+    line-height: 30px;
+    background: #2f517c;
+    color: #fff;
+    text-align: center;
+    border-radius: 16px;
+}
+
+.plate-bottom {
+    width: 100%;
+}
+
+.plate-bottom .thead {
+    background-color: #2f517c;
+    color: #fff;
+    line-height: 30px;
+    height: 45px;
+    width: 100%;
+}
+
+
+.plate-bottom .thead span {
+    display: inline-block;
+    text-align: center;
+}
+
+.plate-bottom .thead-one {
+    width: 20%;
+}
+
+.plate-bottom .thead-two {
+    width: 10%;
+}
+
+.plate-bottom .thead-three {
+    width: 20%;
+}
+.plate-bottom .thead-four {
+    width: 20%;
+}
+.plate-bottom .thead-five {
+    width: 20%;
+}
+
+.position {
+    height: 67px;
+    background-color: #fff;
+    padding: 40px 1%;
+    color: #B7BAC4;
+}
+
+.position + div {
+	margin-top:10px;
+}
+
+.position .select {
+
+margin-right: 20px;
+}
+
+.name span {
+    color: #414A60;
+    font-size: 20px;
+}
+
+.name ul {
+    margin-top: 15px;
+}
+
+.name ul li {
+    float: left;
+    margin-right: 5px;
+}
+
+.name p {
+    position: relative;
+}
+
+.name a {
+    position: absolute;
+    top: 5px;
+    left: 223px;
+    color: #F68271;
+    display: inline-block;
+    width: 55px;
+    text-align: center;
+    font-size: 12px;
+    line-height: 20px;
+    border: 1px solid #F68271;
+    border-radius: 10px;
+}
+
+.number ul li {
+    float: left;
+    padding: 0 10px;
+    height: 60px;
+    border-right: 1px solid #ECE8E8;
+}
+
+.number ul li p:first-child {
+    font-size: 22px;
+    color: #959595;
+    margin: -5px 0 17px 0;
+    text-align: center;
+}
+
+.number ul li p.CV {
+    color: #F68271;
+}
+
+.edit {
+    text-align: center;
+}
+
+.edit a {
+    color: #A9A9A9;
+    line-height: 60px;
+}

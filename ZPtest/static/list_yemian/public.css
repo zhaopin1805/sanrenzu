@@ -1,0 +1,159 @@
+@charset "utf-8";
+
+
+body {
+    min-width: 1024px;
+    background-color: #f6f6f6;
+}
+
+/* 头部导航 */
+
+.tophead {
+    
+    border-bottom: 1px solid #fff
+}
+
+.header {
+    height: 90px;
+    margin-bottom: 4px;
+    background-color: #f6f6f6;
+}
+
+.header .logo {
+    float: left;
+    height: 90px;
+}
+
+.header .logo img {
+    position: relative;
+    top: 15%;
+}
+
+.header-nav {
+    float: left;
+    height: 90px;
+    line-height: 90px;
+    margin-left: 20px;
+}
+
+.header-nav>li {
+    float: left;
+    color: #123b6d;
+    width: 117px;
+    text-align: center;
+    border-bottom: 4px solid #f6f6f6;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.nav-active {
+    border-bottom: 4px solid #2f517c !important;
+    background-color: #eee;
+}
+
+.header .inform {
+    float: right;
+    cursor: pointer;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.header .inform img {
+    height: 22px;
+    width: 26px;
+}
+
+
+
+
+/* 侧边栏 */
+
+.sidebar {
+    width: 17%;
+    background: #eeeeee;
+    margin-top: 10px;
+    float: left;
+}
+
+.sidebar-title {
+    font-size: 23px;
+    background: #2f517c;
+    height: 88px;
+    line-height: 88px;
+    text-align: center;
+    color: #fff;
+}
+
+.sidebar-pie {
+    border-top: 1px solid #e0e0e0;
+}
+
+.sidebar-pie-title {
+    font-size: 20px;
+    line-height: 100px;
+    text-align: center;
+    cursor: pointer;
+    color: #555;
+}
+
+.sidebar-pie-ul {
+    display: none;
+    margin-bottom: 38px;
+}
+
+.sidebar-pie-list {
+    font-size: 16px;
+    text-align: center;
+    line-height: 30px;
+    cursor: pointer;
+}  
+
+.header .logo {
+    float: left;
+    height: 90px;
+}
+
+.header .logo img {
+    position: relative;
+    top: 15%;
+}
+
+.header-nav {
+    float: left;
+    height: 90px;
+    line-height: 90px;
+    margin-left: 20px;
+    margin-bottom: 4px;
+}
+
+.header-nav>li {
+    float: left;
+    color: #123b6d;
+    width: 117px;
+    text-align: center;
+    border-bottom: 4px solid #f6f6f6;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.nav-active {
+    border-bottom: 4px solid #2f517c !important;
+    background-color: #eee;
+}
+
+.header .inform {
+    float: right;
+    cursor: pointer;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.header .inform img {
+    height: 22px;
+    width: 26px;
+}
+
+
+

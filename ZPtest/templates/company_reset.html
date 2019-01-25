@@ -126,7 +126,7 @@
 </div>
 <div class="zhuce">
     <div class="login">
-        <h3 class="">找回密码</h3>
+        <h3 class="">企业找回密码</h3>
     </div>
 
     <div>
@@ -164,19 +164,30 @@
         $('#button').click(function () {
             var email = $('#email').val()
             var phone = $('#phone').val()
-            if (email != '' || phone != '' ){
-                $.getJSON('/user_reset/', {'user':'company','email': email, 'phone': phone }, function (data) {
-                if (data['status'] == 200) {
-                    $('#button').attr('value', data["show"])
-                    $('#button').attr('disabled', true)
+            var butn = $('.btn').attr('id')
+            alert(butn)
+            if (email != '' || phone != '') {
+                if (butn == 'button') {
+                    $.getJSON('/user_reset/', {'user': 'company', 'email': email, 'phone': phone}, function (data) {
+                        if (data['status'] == 200) {
+                            $('#button').attr('value', data["show"])
+                            $('#button').attr('id', 'button2')
+                            $('#button').attr('disabled', true)
+                        } else {
+                            $('#button').attr('value', data["show"])
+                        }
+                    })
                 } else {
-                    $('#button').attr('value', data["show"])
+                    if ($('.btn').attr('id') == 'button2') {
+                        $('#button2').click(function () {
+                            window.open({% url 'NB:go_company_mine' %})
+                        })
+                    }
                 }
-            })
-            }
-            else {
+            } else {
                 $('#xinxi').html('<h5 style="color: red">***电话和邮箱不能为空***</h5>')
             }
         })
     })
+
 </script>

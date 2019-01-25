@@ -182,7 +182,7 @@
             if (phone != '') {
                 $('#new_phone').html('')
                 if ($('#userphone').val().length == 11) {
-                    $.getJSON('/set_phone/', {'user': 'user', 'phone': phone}, function (data) {
+                    $.getJSON('/set_phone/', {'user': 'company', 'phone': phone}, function (data) {
                         if (data['status'] == 200) {
                             $('#new_phone').html('<h5 style="color: red">***'+data['title']+'</h5>')
                             $('#btnReg').attr('disabled', true)
@@ -210,7 +210,7 @@
                     $('#new_checkuserpass').html('<h5 style="color: red">***邮箱格式不对***</h5>')
                     $('#btnReg').attr('disabled', true)
                 } else {
-                    $.getJSON('/set_email/', {'user': 'user', 'email': email}, function (data) {
+                    $.getJSON('/set_email/', {'user': 'company', 'email': email}, function (data) {
                         if (data['status'] == 200) {
                             $('#new_checkuserpass').html('<h5 style="color: red">***'+data['title']+'</h5>')
                             $('#btnReg').attr('disabled', true)

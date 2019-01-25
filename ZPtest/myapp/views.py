@@ -37,8 +37,8 @@ def user_register(request):
 
 
 def user_login(request):
-    user_name_phone_email = request.POST.get('login_name')
-    pwd = request.POST.get('login_pwd')
+    user_name_phone_email = request.POST.get('user_name')
+    pwd = request.POST.get('user_pwd')
     users_name_login = Users.objects.filter(login_name=user_name_phone_email, login_pwd=pwd)
     users_phone_login = Users.objects.filter(user_phone=user_name_phone_email, login_pwd=pwd)
     users_email_login = Users.objects.filter(user_email=user_name_phone_email, login_pwd=pwd)
@@ -52,7 +52,7 @@ def user_login(request):
         if users_email_login:
             user.id = users_email_login.first()
             request.session['user_id'] = user.id
-        return redirect(reverse('NB:use'))
+        return redirect(reverse('NB:go_user_mine'))
     else:
         return redirect(reverse('NB:user_home'))
 
@@ -116,9 +116,35 @@ def go_company_mine(request):
 
 def go_user_mine(request):
     if request.session.get('user_id'):
-        return render(request, 'cuser_mine.html')
+        return render(request, 'user_mine.html')
     else:
         return redirect(reverse('NB:user_home'))
+
+
+def go_company_zhiweisousuo(request):
+    return render(request, 'company_zhiweilist.html')
+
+
+def go_cpmpany_shoujianxiang(request):
+    return render(request, 'company_shoujianxiang.html')
+
+
+def upload_resume_home(request):
+    return render(request, 'upload_resume.html')
+
+
+def upload_job_home(request):
+    return render(request, 'upload_job.html')
+
+
+def zwss_home(request):
+    return render(request, 'zhiweisousuo.html')
+
+
+def save_xinxi(request):
+    print(request.POST)
+    res = {'status': 200}
+    return JsonResponse(res)
 
 
 def email_phone_set(request):  # 查看数据库中是否存在该邮箱和电话
@@ -148,17 +174,18 @@ def email_phone_set(request):  # 查看数据库中是否存在该邮箱和电�
 
 def email_phone_reset(request):
     data = {}
+    user = request.GET.get('user')
     phone = request.GET.get('phone')
     email = request.GET.get('email')
-    user = request.GET.get('user')
     if user == 'user':
         user_company = Users.objects.filter(user_phone=phone, user_email=email)
     else:
         user_company = Companies.objects.filter(company_phone=phone, company_email=email)
+
     pwd = user_company[0].login_pwd
     name = user_company[0].login_name
-    text = '账号：{} 密码：{}'.format(name, pwd)
     try:
+        text = '账号：{} 密码：{}'.format(name, pwd)
         mail(your_user=email, content_text=text)
         data['status'] = 200
         data['show'] = '邮箱发送成功，请查收'

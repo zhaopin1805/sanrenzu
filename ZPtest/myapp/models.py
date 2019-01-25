@@ -68,6 +68,8 @@ class Resume(models.Model):  # 简历表
     project_suffer = models.CharField(max_length=100)
     resume_state = models.CharField(max_length=20)
     xueli = models.CharField(max_length=20)
+    resume_time = models.CharField(max_length=20)   # 刷新时间
+    resume_img = models.ImageField(upload_to='%Y-%m-%d')
 
     class Meta:
         db_table = 'resume'
@@ -97,11 +99,11 @@ class Job(models.Model):  # 职位表
     job_name = models.CharField(max_length=10)
     money = models.CharField(max_length=10)
     gwzz = models.TextField()  # 岗位职责
-    rzzz = models.TextField()
     job_city = models.CharField(max_length=15)
     work_year = models.CharField(max_length=15)
     xueli = models.CharField(max_length=10)
     state = models.CharField(max_length=10)
+    jon_time = models.CharField(max_length=20)
     collect = models.ForeignKey(Collect, on_delete=models.CASCADE)
     city = models.ForeignKey(City, on_delete=models.CASCADE)
 

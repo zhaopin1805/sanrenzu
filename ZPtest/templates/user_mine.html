@@ -30,22 +30,22 @@
 				      </div>
 				      <nav id="nav-menu-container">
 				        <ul class="nav-menu">
-				          <li class="menu-active"><a href="{% url "NB:go_company_mine" %}">我的主页</a></li>
-							<li class="menu-has-children" ><a href="">职位管理</a>
+				          <li class="menu-active"><a href="{% url "NB:go_user_mine" %}">我的主页</a></li>
+							<li class="menu-has-children" ><a href="">简历管理</a>
 							<ul>
-								<li><a href="{% url 'NB:upload_job_home' %}">职位发布</a></li>
-								<li><a href="{% url 'NB:go_company_zhiweisousuo' %}">查看发布岗位</a></li>
+								<li><a href="">简历浏览</a></li>
+                                <li><a href="{% url 'NB:upload_resume_home' %}">上传简历</a></li>
+								<li><a href="">简历刷新</a></li>
 				            </ul>
 						  </li>
-						  <li><a href="">邀约纪录</a></li>
-						  <li><a href="">职位搜索</a></li>
-				          <li><a href="{% url 'NB:go_cpmpany_shoujianxiang' %}">收件箱</a></li>
-				          <li><a href="">公司人才夹</a></li>
-				          <li><a href="">下载纪录</a></li>
+						  <li><a href="">投递进度</a></li>
+						  <li><a href="{% url 'NB:zwss_home' %}">职位搜索</a></li>
+				          <li><a href="">屏蔽公司</a></li>
+				          <li><a href="">职位收藏</a></li>
+				          <li><a href="">谁看过我</a></li>
 				          <li class="menu-has-children"><a href="">个人中心</a>
 				            <ul>
-								<li><a href="">修改公司基本信息</a></li>
-								<li><a href="">找回密码</a></li>
+								<li><a href="{% url 'NB:go_user_reset' %}">找回密码</a></li>
 								<li><a href="">会员信息</a></li>
 				            </ul>
 				          </li>
@@ -56,12 +56,13 @@
 			    	</div>
 			    </div>
 			  </header><!-- #header -->
+
 			<!-- start banner Area -->
 			<section class="banner-area relative" id="home">
 				<div class="overlay overlay-bg"></div>
 				<div class="container">
-					<div class="row fullscreen d-flex align-items-center justify-content-center">
-						<div class="banner-content col-lg-12" style="width: 800px">
+					<div class="row fullscreen d-flex align-items-center justify-content-center" >
+						<div class="banner-content col-lg-12" style="width: 800px; margin-top: 50px;">
 							<h1 class="text-white">
 								每天有超过<span>50万</span> 人在博纳人才找工作
 							</h1>
@@ -115,6 +116,15 @@
 										</div>
 									<div class="default-select" id="default-selects2">
 											<select>
+												<option value="1">行业</option>
+												<option value="2">Medical</option>
+												<option value="3">Technology</option>
+												<option value="4">Goverment</option>
+												<option value="5">Development</option>
+											</select>
+										</div>
+									<div class="default-select" id="default-selects2">
+											<select>
 												<option value="1">岗位</option>
 												<option value="2">Medical</option>
 												<option value="3">Technology</option>
@@ -131,63 +141,67 @@
 												<option value="5">Development</option>
 											</select>
 										</div>
-									<div class="default-select" id="default-selects2">
-											<select>
-												<option value="1">到岗时间</option>
-												<option value="2">Medical</option>
-												<option value="3">Technology</option>
-												<option value="4">Goverment</option>
-												<option value="5">Development</option>
-											</select>
-										</div>
 								</div>
 								<div class="">
 									    <button type="button" class="btn btn-info">
 									      <span class="lnr lnr-magnifier"></span> 搜索
 									    </button>
 								</div>
+                                <div style="float: right;">
+								<h3 style="text-align: center">客服</h3>
+								<p>
+								<div style="text-align: left;margin-left: 40px;height: 100px;font-size: 12px;color: black;">
+									<div style="height: 20px;"></div>
+									传真:   010-12345678<br>
+									联系qq:   123456<br>
+									联系邮箱:   bona123@163.com<br>
+									客服电话:   400-800-900
+								</div>
+								</p>
+							</div>
 							</form>
 						</div>
 					</div>
 				</div>
 			</section>
 			<!-- End banner Area -->
-
-			<!-- Start features Area -->
-			<section class="features-area">
-				<div class="container">
-					<div class="row" style="width: 1300px">
-						<div class="col-lg-3 col-md-6" >
-							<div class="single-feature" style="background: lightgoldenrodyellow;width:350px;height: 250px">
-								<h4 style="margin-top: 30px"><a href="" style="font-size: 40px;">职位发布</a></h4>
-								<div style="font-size: 20px;color: blue ;margin-top: 60px">
-									已发布{{ num }}个职位<br>
-									剩余发布量{{ num }}个岗位
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-3 col-md-6" style="margin-left: 100px">
-							<div class="single-feature" style="background: lightgoldenrodyellow;width:350px;height: 250px">
-								<h4 style="margin-top: 30px"><a href="" style="font-size: 40px">收件箱</a></h4>
-								<div style="font-size: 20px;color: blue;margin-top: 60px">
-									共收到{{ num }}份简历<br>
-									{{ num }}还未查看
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-3 col-md-6" style="margin-left: 100px">
-							<div class="single-feature" style="background: lightgoldenrodyellow;width:350px;height: 250px">
-								<h4 style="margin-top: 30px"><a href="" style="font-size: 40px">会员信息</a></h4>
-								<div style="font-size:20px;color: blue;margin-top: 60px">
-									剩余{{ num }}个岗位， {{ num }}个下载量<br>
-									剩余{{ num }}个邮件邀约
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>
+{#              <!-- Start features Area -->#}
+{#                <section class="features-area">#}
+{#                    <div class="container">#}
+{#                        <div class="row" style="width: 1300px">#}
+{#                            <div class="col-lg-3 col-md-6" >#}
+{#                                <div class="single-feature" style="background: lightgoldenrodyellow;width:350px;height: 250px">#}
+{#                                    <h4 style="margin-top: 30px"><a href="" style="font-size: 40px;">职位发布</a></h4>#}
+{#                                    <div style="font-size: 20px;color: blue ;margin-top: 60px">#}
+{#                                        已发布{{ num }}个职位<br>#}
+{#                                        剩余发布量{{ num }}个岗位#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <div class="col-lg-3 col-md-6" style="margin-left: 100px">#}
+{#                                <div class="single-feature" style="background: lightgoldenrodyellow;width:350px;height: 250px">#}
+{#                                    <h4 style="margin-top: 30px"><a href="" style="font-size: 40px">收件箱</a></h4>#}
+{#                                    <div style="font-size: 20px;color: blue;margin-top: 60px">#}
+{#                                        共收到{{ num }}份简历<br>#}
+{#                                        {{ num }}还未查看#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <div class="col-lg-3 col-md-6" style="margin-left: 100px">#}
+{#                                <div class="single-feature" style="background: lightgoldenrodyellow;width:350px;height: 250px">#}
+{#                                    <h4 style="margin-top: 30px"><a href="" style="font-size: 40px">会员信息</a></h4>#}
+{#                                    <div style="font-size:20px;color: blue;margin-top: 60px">#}
+{#                                        剩余{{ num }}个岗位， {{ num }}个下载量<br>#}
+{#                                        剩余{{ num }}个邮件邀约#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </section>#}
 			<!-- End features Area -->
+
+
 
 			<!-- Start popular-post Area -->
 			<!--<section class="popular-post-area pt-100">-->
@@ -343,126 +357,126 @@
 			<!--</section>-->
 			<!-- End feature-cat Area -->
 			<!-- Start post Area -->
-			<section class="post-area section-gap">
-				<div class="container">
-					<div class="row justify-content-center d-flex">
-						<div class="col-lg-8 post-list">
-							<!--<ul class="cat-list">-->
+{#			<section class="post-area section-gap">#}
+{#				<div class="container">#}
+{#					<div class="row justify-content-center d-flex">#}
+{#						<div class="col-lg-8 post-list">#}
+{#							<!--<ul class="cat-list">-->#}
 								<!--&lt;!&ndash;<li><a href="#">Recent</a></li>&ndash;&gt;-->
 								<!--&lt;!&ndash;<li><a href="#">Full Time</a></li>&ndash;&gt;-->
 								<!--&lt;!&ndash;<li><a href="#">Intern</a></li>&ndash;&gt;-->
 								<!--&lt;!&ndash;<li><a>近期收到的简历</a></li>&ndash;&gt;-->
 								<!---->
 							<!--</ul>-->
-							<div class="single-post d-flex flex-row">
-								<div class="thumb">
-									<img src="" alt="">
-									<ul class="tags">
-										<li>
-											<a href="">张三</a>
-										</li>
-									</ul>
-								</div>
-								<div class="details">
-									<div class="title d-flex flex-row justify-content-between">
-										<div class="titles">
-											<a href=""><h4>Java开发工程师</h4></a>
-											<h6>2019.1.31</h6>
-										</div>
-										<ul class="btns">
-											<li><a href="#">查看详细简历</a></li>
-										</ul>
-									</div>
-									<p>
-										三年Java开发经验，Java基础扎实，项目经验丰富。。。。。
-									</p>
-									<h5>离职状态，可随时到岗</h5>
-									<p class="address"><span class="lnr lnr-map"></span>西安</p>
-									<p class="address"><span class="lnr lnr-database"></span>期望薪资： 10k - 15k</p>
-								</div>
-							</div>
-							<div class="single-post d-flex flex-row">
-								<div class="thumb">
-									<img src="" alt="">
-									<ul class="tags">
-										<li>
-											<a href="#">李四</a>
-										</li>
-									</ul>
-								</div>
-								<div class="details">
-									<div class="title d-flex flex-row justify-content-between">
-										<div class="titles">
-											<a href=""><h4>python开发</h4></a>
-											<h6>2019.1.31</h6>
-										</div>
-										<ul class="btns">
-											<li><a href="#">查看详细简历</a></li>
-										</ul>
-									</div>
-									<p>
-										本人五年python后端开发经验，两年数据分析经验，精通各类web开发框架，熟悉数据分析工具。。。。。
-									</p>
-									<div style="margin-right: auto"><h5>在职，有合适机会会考虑</h5></div>
-									<p class="address"><span class="lnr lnr-map"></span>北京</p>
-									<p class="address"><span class="lnr lnr-database"></span> 15k - 25k</p>
-								</div>
-							</div>
-							<div class="single-post d-flex flex-row">
-								<div class="thumb">
-									<img src="" alt="">
-									<ul class="tags">
-										<li>
-											<a href="#">王五</a>
-										</li>
-
-									</ul>
-								</div>
-								<div class="details">
-									<div class="title d-flex flex-row justify-content-between">
-										<div class="titles">
-											<a href=""><h4>Java开发</h4></a>
-											<h6>2019.1.31</h6>
-										</div>
-										<ul class="btns">
-											<li><a href="#">查看详细简历</a></li>
-										</ul>
-									</div>
-									<p>
-										1年开发经验，能吃苦，愿意接受加班和出差。。。。。
-									</p>
-									<h5>离职，可随时到岗</h5>
-									<p class="address"><span class="lnr lnr-map"></span> 西安</p>
-									<p class="address"><span class="lnr lnr-database"></span> 6k - 10k</p>
-								</div>
-							</div>
-							<div class="single-post d-flex flex-row">
-								<div class="thumb">
-									<img src="" alt="">
-									<ul class="tags">
-										<li>
-											<a href="">李芳</a>
-										</li>
-									</ul>
-								</div>
-								<div class="details">
-									<div class="title d-flex flex-row justify-content-between">
-										<div class="titles">
-											<a href=""><h4>测试工程师</h4></a>
-											<h6>2019.1.29</h6>
-										</div>
-										<ul class="btns">
-											<li><a href="#">查看详细简历</a></li>
-										</ul>
-									</div>
-									<p>
-										211/985重本毕业，3年测试经验，熟悉web端和app端测试流程，熟悉各类测试工具。。。。。
-									</p>
-									<h5>在职，1个月内可到岗</h5>
-									<p class="address"><span class="lnr lnr-map"></span>西安</p>
-									<p class="address"><span class="lnr lnr-database"></span> 8k - 12k</p>
-								</div>
-							</div>
+{#							<div class="single-post d-flex flex-row">#}
+{#								<div class="thumb">#}
+{#									<img src="" alt="">#}
+{#									<ul class="tags">#}
+{#										<li>#}
+{#											<a href="">售后工程师</a>#}
+{#										</li>#}
+{#									</ul>#}
+{#								</div>#}
+{#								<div class="details">#}
+{#									<div class="title d-flex flex-row justify-content-between">#}
+{#										<div class="titles">#}
+{#											<a href=""><h4>xxx公司</h4></a>#}
+{#											<h6>2019.1.31</h6>#}
+{#										</div>#}
+{#										<ul class="btns">#}
+{#											<li><a href="#">查看详细简历</a></li>#}
+{#										</ul>#}
+{#									</div>#}
+{#									<p>#}
+{#										三年Java开发经验，Java基础扎实，项目经验丰富。。。。。#}
+{#									</p>#}
+{#									<h5>离职状态，可随时到岗</h5>#}
+{#									<p class="address"><span class="lnr lnr-map"></span>西安</p>#}
+{#									<p class="address"><span class="lnr lnr-database"></span>期望薪资： 10k - 15k</p>#}
+{#								</div>#}
+{#							</div>#}
+{#							<div class="single-post d-flex flex-row">#}
+{#								<div class="thumb">#}
+{#									<img src="" alt="">#}
+{#									<ul class="tags">#}
+{#										<li>#}
+{#											<a href="#">李四</a>#}
+{#										</li>#}
+{#									</ul>#}
+{#								</div>#}
+{#								<div class="details">#}
+{#									<div class="title d-flex flex-row justify-content-between">#}
+{#										<div class="titles">#}
+{#											<a href=""><h4>python开发</h4></a>#}
+{#											<h6>2019.1.31</h6>#}
+{#										</div>#}
+{#										<ul class="btns">#}
+{#											<li><a href="#">查看详细简历</a></li>#}
+{#										</ul>#}
+{#									</div>#}
+{#									<p>#}
+{#										本人五年python后端开发经验，两年数据分析经验，精通各类web开发框架，熟悉数据分析工具。。。。。#}
+{#									</p>#}
+{#									<div style="margin-right: auto"><h5>在职，有合适机会会考虑</h5></div>#}
+{#									<p class="address"><span class="lnr lnr-map"></span>北京</p>#}
+{#									<p class="address"><span class="lnr lnr-database"></span> 15k - 25k</p>#}
+{#								</div>#}
+{#							</div>#}
+{#							<div class="single-post d-flex flex-row">#}
+{#								<div class="thumb">#}
+{#									<img src="" alt="">#}
+{#									<ul class="tags">#}
+{#										<li>#}
+{#											<a href="#">王五</a>#}
+{#										</li>#}
+{##}
+{#									</ul>#}
+{#								</div>#}
+{#								<div class="details">#}
+{#									<div class="title d-flex flex-row justify-content-between">#}
+{#										<div class="titles">#}
+{#											<a href=""><h4>Java开发</h4></a>#}
+{#											<h6>2019.1.31</h6>#}
+{#										</div>#}
+{#										<ul class="btns">#}
+{#											<li><a href="#">查看详细简历</a></li>#}
+{#										</ul>#}
+{#									</div>#}
+{#									<p>#}
+{#										1年开发经验，能吃苦，愿意接受加班和出差。。。。。#}
+{#									</p>#}
+{#									<h5>离职，可随时到岗</h5>#}
+{#									<p class="address"><span class="lnr lnr-map"></span> 西安</p>#}
+{#									<p class="address"><span class="lnr lnr-database"></span> 6k - 10k</p>#}
+{#								</div>#}
+{#							</div>#}
+{#							<div class="single-post d-flex flex-row">#}
+{#								<div class="thumb">#}
+{#									<img src="" alt="">#}
+{#									<ul class="tags">#}
+{#										<li>#}
+{#											<a href="">李芳</a>#}
+{#										</li>#}
+{#									</ul>#}
+{#								</div>#}
+{#								<div class="details">#}
+{#									<div class="title d-flex flex-row justify-content-between">#}
+{#										<div class="titles">#}
+{#											<a href=""><h4>测试工程师</h4></a>#}
+{#											<h6>2019.1.29</h6>#}
+{#										</div>#}
+{#										<ul class="btns">#}
+{#											<li><a href="#">查看详细简历</a></li>#}
+{#										</ul>#}
+{#									</div>#}
+{#									<p>#}
+{#										211/985重本毕业，3年测试经验，熟悉web端和app端测试流程，熟悉各类测试工具。。。。。#}
+{#									</p>#}
+{#									<h5>在职，1个月内可到岗</h5>#}
+{#									<p class="address"><span class="lnr lnr-map"></span>西安</p>#}
+{#									<p class="address"><span class="lnr lnr-database"></span> 8k - 12k</p>#}
+{#								</div>#}
+{#							</div>#}
 							<!--<div class="single-post d-flex flex-row">-->
 								<!--<div class="thumb">-->
 									<!--<img src="img/post.png" alt="">-->
@@ -566,10 +580,10 @@
 								<!--</div>-->
 							<!--</div>-->
 
-							<a class="text-uppercase loadmore-btn mx-auto d-block" href="">查看更多简历</a>
-
-						</div>
-						<div class="col-lg-4 sidebar">
+{#							<a class="text-uppercase loadmore-btn mx-auto d-block" href="">查看更多简历</a>#}
+{##}
+{#						</div>#}
+{#						<div class="col-lg-4 sidebar">#}
 							<!--<div class="single-slidebar">-->
 								<!--<h4>Jobs by Location</h4>-->
 								<!--<ul class="cat-list">-->
@@ -583,47 +597,47 @@
 								<!--</ul>-->
 							<!--</div>-->
 
-							<div class="single-slidebar">
-								<h4>相似简历</h4>
-								<div class="active-relatedjob-carusel">
-									<div class="single-rated">
-										<img class="img-fluid" src="{% static 'img/r1.jpg' %}" alt="">
-										<a href=""><h4>开发工程师</h4></a>
-										<h6>李先生</h6>
-										<p>
-											三年Java开发经验，Java基础扎实，项目经验丰富。。。。。
-										</p>
-										<h5>离职：可随时到岗</h5>
-										<p class="address"><span class="lnr lnr-map"></span>西安</p>
-										<p class="address"><span class="lnr lnr-database"></span> 10k - 15k</p>
-										<a href="#" class="">下载简历</a>
-									</div>
-									<div class="single-rated">
-										<img class="img-fluid" src="{% static 'img/r1.jpg' %}" alt="">
-										<a href=""><h4>python开发</h4></a>
-										<h6>刘先生</h6>
-										<p>
-											三年Java开发经验，Java基础扎实，项目经验丰富。。。。。
-										</p>
-										<h5>离职，可随时到岗</h5>
-										<p class="address"><span class="lnr lnr-map"></span>西安</p>
-										<p class="address"><span class="lnr lnr-database"></span> 10k - 12k</p>
-										<a href="" class="">下载简历</a>
-									</div>
-									<div class="single-rated">
-										<img class="img-fluid" src="{% static 'img/r1.jpg' %}" alt="">
-										<a href="single.html"><h4>测试工程师</h4></a>
-										<h6>王女士</h6>
-										<p>
-											三年测试经验，项目经验丰富。。。。。
-										</p>
-										<h5>离职，可随时到岗</h5>
-										<p class="address"><span class="lnr lnr-map"></span>西安</p>
-										<p class="address"><span class="lnr lnr-database"></span> 6k - 8k</p>
-										<a href="" class="btns text-uppercase">下载简历</a>
-									</div>
-								</div>
-							</div>
+{#							<div class="single-slidebar">#}
+{#								<h4>相似简历</h4>#}
+{#								<div class="active-relatedjob-carusel">#}
+{#									<div class="single-rated">#}
+{#										<img class="img-fluid" src="{% static 'img/r1.jpg' %}" alt="">#}
+{#										<a href=""><h4>开发工程师</h4></a>#}
+{#										<h6>李先生</h6>#}
+{#										<p>#}
+{#											三年Java开发经验，Java基础扎实，项目经验丰富。。。。。#}
+{#										</p>#}
+{#										<h5>离职：可随时到岗</h5>#}
+{#										<p class="address"><span class="lnr lnr-map"></span>西安</p>#}
+{#										<p class="address"><span class="lnr lnr-database"></span> 10k - 15k</p>#}
+{#										<a href="#" class="">下载简历</a>#}
+{#									</div>#}
+{#									<div class="single-rated">#}
+{#										<img class="img-fluid" src="{% static 'img/r1.jpg' %}" alt="">#}
+{#										<a href=""><h4>python开发</h4></a>#}
+{#										<h6>刘先生</h6>#}
+{#										<p>#}
+{#											三年Java开发经验，Java基础扎实，项目经验丰富。。。。。#}
+{#										</p>#}
+{#										<h5>离职，可随时到岗</h5>#}
+{#										<p class="address"><span class="lnr lnr-map"></span>西安</p>#}
+{#										<p class="address"><span class="lnr lnr-database"></span> 10k - 12k</p>#}
+{#										<a href="" class="">下载简历</a>#}
+{#									</div>#}
+{#									<div class="single-rated">#}
+{#										<img class="img-fluid" src="{% static 'img/r1.jpg' %}" alt="">#}
+{#										<a href="single.html"><h4>测试工程师</h4></a>#}
+{#										<h6>王女士</h6>#}
+{#										<p>#}
+{#											三年测试经验，项目经验丰富。。。。。#}
+{#										</p>#}
+{#										<h5>离职，可随时到岗</h5>#}
+{#										<p class="address"><span class="lnr lnr-map"></span>西安</p>#}
+{#										<p class="address"><span class="lnr lnr-database"></span> 6k - 8k</p>#}
+{#										<a href="" class="btns text-uppercase">下载简历</a>#}
+{#									</div>#}
+{#								</div>#}
+{#							</div>#}
 
 							<!--<div class="single-slidebar">-->
 								<!--<h4>Jobs by Category</h4>-->
@@ -638,76 +652,65 @@
 								<!--</ul>-->
 							<!--</div>-->
 
-							<div class="single-slidebar">
-								<h4>会员套餐</h4>
-								<div class="blog-list">
-									<div class="single-blog " style="background:#000 url(../static/img/blog1.jpg);">
-										<h4>20个岗位发布<br>
-										1500份简历下载<br>
-										500封邮件邀请</h4>
-										<div class="meta justify-content-between d-flex">
-											<p>
-												<a href="" style="color: red">购买A套餐</a>
-											</p>
-											<p>
-												<span class=""></span>
-												￥
-												 <span class=""></span>
-												2500.00
-											</p>
-										</div>
-									</div>
-									<div class="single-blog " style="background:#000 url(../static/img/blog2.jpg);">
-										<h4>40个岗位发布<br>
-										3000份简历下载<br>
-										1000封邮件邀请</h4>
-										<div class="meta justify-content-between d-flex">
-											<p>
-												<a href="" style="color: red">购买B套餐</a>
-											</p>
-											<p>
-												<span class=""></span>
-												￥
-												 <span class=""></span>
-												4500.00
-											</p>
-										</div>
-									</div>
-									<div class="single-blog " style="background:#000 url(../static/img/blog1.jpg);">
-										<h4>80个岗位发布<br>
-										5000份简历下载<br>
-										1500封邮件邀请</h4>
-										<div class="meta justify-content-between d-flex">
-											<p>
-												<a href="" style="color: red">购买C套餐</a>
-											</p>
-											<p>
-												<span class=""></span>
-												￥
-												 <span class=""></span>
-												7500.00
-											</p>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="single-slidebar">
-								<h3 style="text-align: center">客服</h3>
-								<p>
-								<div style="text-align: left;margin-left: 40px;height: 100px;font-size: 12px;">
-									<div style="height: 20px"></div>
-									传真:   010-12345678<br>
-									联系qq:   123456<br>
-									联系邮箱:   bona123@163.com<br>
-									客服电话:   400-800-900
-								</div>
-								</p>
-							</div>
+{#							<div class="single-slidebar">#}
+{#								<h4>会员套餐</h4>#}
+{#								<div class="blog-list">#}
+{#									<div class="single-blog " style="background:#000 url(../static/img/blog1.jpg);">#}
+{#										<h4>20个岗位发布<br>#}
+{#										1500份简历下载<br>#}
+{#										500封邮件邀请</h4>#}
+{#										<div class="meta justify-content-between d-flex">#}
+{#											<p>#}
+{#												<a href="" style="color: red">购买A套餐</a>#}
+{#											</p>#}
+{#											<p>#}
+{#												<span class=""></span>#}
+{#												￥#}
+{#												 <span class=""></span>#}
+{#												2500.00#}
+{#											</p>#}
+{#										</div>#}
+{#									</div>#}
+{#									<div class="single-blog " style="background:#000 url(../static/img/blog2.jpg);">#}
+{#										<h4>40个岗位发布<br>#}
+{#										3000份简历下载<br>#}
+{#										1000封邮件邀请</h4>#}
+{#										<div class="meta justify-content-between d-flex">#}
+{#											<p>#}
+{#												<a href="" style="color: red">购买B套餐</a>#}
+{#											</p>#}
+{#											<p>#}
+{#												<span class=""></span>#}
+{#												￥#}
+{#												 <span class=""></span>#}
+{#												4500.00#}
+{#											</p>#}
+{#										</div>#}
+{#									</div>#}
+{#									<div class="single-blog " style="background:#000 url(../static/img/blog1.jpg);">#}
+{#										<h4>80个岗位发布<br>#}
+{#										5000份简历下载<br>#}
+{#										1500封邮件邀请</h4>#}
+{#										<div class="meta justify-content-between d-flex">#}
+{#											<p>#}
+{#												<a href="" style="color: red">购买C套餐</a>#}
+{#											</p>#}
+{#											<p>#}
+{#												<span class=""></span>#}
+{#												￥#}
+{#												 <span class=""></span>#}
+{#												7500.00#}
+{#											</p>#}
+{#										</div>#}
+{#									</div>#}
+{#								</div>#}
+{#							</div>#}
 
-						</div>
-					</div>
-				</div>
-			</section>
+{##}
+{#						</div>#}
+{#					</div>#}
+{#				</div>#}
+{#			</section>#}
 			<!-- End post Area -->
 
 

@@ -3,7 +3,7 @@
 <html>
 	<head>
 		<meta charset="utf-8" />
-		<title>智联招聘</title>
+		<title>博纳</title>
 		<link rel="stylesheet" type="text/css" href="{% static 'zhiweisousuo/group.css' %}"/>
 		<link rel="stylesheet" type="text/css" href="{% static 'zhiweisousuo/zlzp.css' %}"/>
 		<script type="text/javascript" src="{% static 'zhiweisousuo/jquery.js' %}"></script>
@@ -31,7 +31,7 @@
 				</div>
 				<div class="grzx-xsnav" style="display: none;">
 					<ul>
-						<li><a href="http://www.baidu.com">我的首页</a></li>
+						<li><a href="{% url 'NB:go_user_mine' %}">我的首页</a></li>
 						<li><a href="http://www.baidu.com">我的简历</a></li>
 						<li><a href="http://www.hao123.com">投递进度</a></li>
 					</ul>

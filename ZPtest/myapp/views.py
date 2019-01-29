@@ -100,11 +100,17 @@ def company_login(request):
 
 
 def go_user_reset(request):
-    return render(request, 'user_reset.html')
+    if request.session.get('user_id'):
+        return render(request, 'user_reset.html')
+    else:
+        return render(request, 'user_login.html')
 
 
 def go_company_reset(request):
-    return render(request, 'company_reset.html')
+    if request.session.get('company_id'):
+        return render(request, 'company_reset.html')
+    else:
+        return render(request, 'company_login.html')
 
 
 def go_company_mine(request):
@@ -122,29 +128,75 @@ def go_user_mine(request):
 
 
 def go_company_zhiweisousuo(request):
-    return render(request, 'company_zhiweilist.html')
+    if request.session.get('company_id'):
+        return render(request, 'company_zhiweilist.html')
+    else:
+        return render(request, 'company_login.html')
 
 
 def go_cpmpany_shoujianxiang(request):
-    return render(request, 'company_shoujianxiang.html')
+    if request.session.get('company_id'):
+        return render(request, 'company_shoujianxiang.html')
+    else:
+        return render(request, 'company_login.html')
 
 
-def upload_resume_home(request):
-    return render(request, 'upload_resume.html')
+def go_user_vip(request):
+    if request.session.get('user_id'):
+        return render(request, 'user_vip.html')
+    else:
+        return render(request, 'user_login.html')
 
 
-def upload_job_home(request):
-    return render(request, 'upload_job.html')
+def go_company_vip(request):
+    if request.session.get('company_id'):
+        return render(request, 'company_vip.html')
+    else:
+        return render(request, 'company_login.html')
 
 
-def zwss_home(request):
-    return render(request, 'zhiweisousuo.html')
+def go_company_recaija(request):
+    if request.session.get('company_id'):
+        return render(request, 'company_rencaijia.html')
+    else:
+        return render(request, 'company_login.html')
+
+
+def upload_resume_home(request):  # 上传简历
+    if request.session.get('user_id'):
+        return render(request, 'upload_resume.html')
+    else:
+        return render(request, 'user_login.html')
+
+
+def upload_job_home(request):  # 岗位发布
+    if request.session.get('company_id'):
+        return render(request, 'upload_job.html')
+    else:
+        return render(request, 'company_login.html')
+
+
+def zwss_home(request):  # 职位搜索
+    if request.session.get('user_id'):
+        return render(request, 'zhiweisousuo.html')
+    else:
+        return render(request, 'user_login.html')
 
 
 def save_xinxi(request):
-    print(request.POST)
-    res = {'status': 200}
-    return JsonResponse(res)
+    if request.session.get('user_id'):
+        users = request.POST
+        user_name = users['user_name']
+        sex = users['sex']
+        age = users['']
+        res = {'status': 200}
+        return JsonResponse(res)
+    else:
+        return render(request, 'user_login.html')
+
+
+def save_job(request):
+    pass
 
 
 def email_phone_set(request):  # 查看数据库中是否存在该邮箱和电话

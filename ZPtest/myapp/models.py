@@ -35,21 +35,11 @@ class Companies(models.Model):  # 企业表
         db_table = 'companys'
 
 
-class Talents(models.Model):  # 人才表
-    # talents_id = models.IntegerField(primary_key=True, auto_created=False)
-    company = models.OneToOneField(Companies, on_delete=models.CASCADE)  # 一方主动方关联企业表
-    classify = models.CharField(max_length=10, null=True)
-
-    class Meta:
-        db_table = 'talents'
-
-
 class Resume(models.Model):  # 简历表
     # resume_id = models.IntegerField(primary_key=True, auto_created=False)
     # 关联User表，一对多关系，简历表为多方表
     user = models.ForeignKey(Users, on_delete=models.CASCADE)
     # 关联Talents表，一对多关系，简历表为多方表
-    talents = models.ForeignKey(Talents, on_delete=models.CASCADE)
     user_name = models.CharField(max_length=20)
     sex = models.CharField(max_length=10)
     age = models.CharField(max_length=10)
@@ -68,11 +58,21 @@ class Resume(models.Model):  # 简历表
     project_suffer = models.CharField(max_length=100)
     resume_state = models.CharField(max_length=20)
     xueli = models.CharField(max_length=20)
-    resume_time = models.CharField(max_length=20)   # 刷新时间
+    resume_time = models.CharField(max_length=20)  # 刷新时间
     resume_img = models.ImageField(upload_to='%Y-%m-%d')
 
     class Meta:
         db_table = 'resume'
+
+
+class Talents(models.Model):  # 人才表
+    # talents_id = models.IntegerField(primary_key=True, auto_created=False)
+    company = models.OneToOneField(Companies, on_delete=models.CASCADE)  # 一方主动方关联企业表
+    resume = models.ForeignKey(Resume, on_delete=models.CASCADE)
+    classify = models.CharField(max_length=10, null=True)
+
+    class Meta:
+        db_table = 'talents'
 
 
 class Collect(models.Model):  # 职位收藏表

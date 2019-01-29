@@ -28,31 +28,31 @@
 </head>
 <body>
 <div id="root" class="zp">
-    <div class="zp-header clearfix">
-        <div class="zp-container">
-            <div class="zp-searchbar__wrapper">
-                <div class="zp-searchbar clearfix">
-                    <div class="clearfix">
-                        <div style="margin-top: 15px;">
-                            <el-input placeholder="请输入内容" v-model="input5" class="input-with-select">
-                                <el-select v-model="select" slot="prepend" placeholder="请选择">
-                                    <el-option label="职位" value="1"></el-option>
-                                    <el-option label="公司" value="2"></el-option>
-                                </el-select>
-                                <el-button slot="append" @click="onsearch" type="primary">搜索</el-button>
-                            </el-input>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    {#    <div class="zp-header clearfix">#}
+    {#        <div class="zp-container">#}
+    {#            <div class="zp-searchbar__wrapper">#}
+    {#                <div class="zp-searchbar clearfix">#}
+    {#                    <div class="clearfix">#}
+    {#                        <div style="margin-top: 15px;">#}
+    {#                            <el-input placeholder="请输入内容" v-model="input5" class="input-with-select">#}
+    {#                                <el-select v-model="select" slot="prepend" placeholder="请选择">#}
+    {#                                    <el-option label="职位" value="1"></el-option>#}
+    {#                                    <el-option label="公司" value="2"></el-option>#}
+    {#                                </el-select>#}
+    {#                                <el-button slot="append" @click="onsearch" type="primary">搜索</el-button>#}
+    {#                            </el-input>#}
+    {#                        </div>#}
+    {#                    </div>#}
+    {#                </div>#}
+    {#            </div>#}
+    {#        </div>#}
+    {#    </div>#}
     <div class="body">
         <p class="title">个人信息</p>
         <el-form ref="form" :rules="rules" :model="form" label-width="80px">
             <el-form-item label="姓名" style="width: 600px;" prop="user_name">
                 <el-input placeholder="请输入姓名" v-model="form.user_name"></el-input>
-           </el-form-item>
+            </el-form-item>
             <el-upload class="avatar-uploader" action="https://jsonplaceholder.typicode.com/posts/"
                        :show-file-list="false"
                        :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
@@ -66,71 +66,10 @@
                     <el-radio label="女"></el-radio>
                 </el-radio-group>
             </el-form-item>
-            <el-form-item label="出生年月" prop="datebirth">
-                <el-col :span="11">
-                    <el-date-picker type="date" placeholder="选择日期" v-model="form.datebirth"
-                                    style="width: 100%;"></el-date-picker>
-                </el-col>
+            <el-form-item label="年龄" style="width: 600px;" prop="age">
+                <el-input placeholder="请输入年龄" v-model="form.user_name"></el-input>
             </el-form-item>
-            <el-form-item label="户口所在地" prop="accountlocation">
-                <el-cascader v-model="form.accountlocation" :options="areajson" change-on-select></el-cascader>
-            </el-form-item>
-            <el-form-item label="现居地" prop="currentresidence">
-                <el-cascader v-model="form.currentresidence" :options="areajson" change-on-select></el-cascader>
-            </el-form-item>
-            <el-form-item label="联系方式" prop="phone">
-                <el-input type="tel" :maxlength="11" v-model="form.phone"></el-input>
-            </el-form-item>
-            <el-form-item label="电子邮箱" prop="email">
-                <el-input v-model="form.email"></el-input>
-            </el-form-item>
-            <el-form-item label="婚姻状况" prop="marital">
-                <el-select v-model="form.marital" filterable placeholder="请选择">
-                    <el-option label="未婚" :value="1"></el-option>
-                    <el-option label="已婚" :value="2"></el-option>
-                    <el-option label="离异" :value="3"></el-option>
-                </el-select>
-            </el-form-item>
-            <el-form-item label="政治面貌" prop="political">
-                <el-select v-model="form.political" filterable placeholder="请选择">
-                    <el-option label="中共党员" :value="1"></el-option>
-                    <el-option label="团员" :value="2"></el-option>
-                    <el-option label="群众" :value="3"></el-option>
-                    <el-option label="民主党派" :value="4"></el-option>
-                    <el-option label="无党派人士" :value="5"></el-option>
-                </el-select>
-            </el-form-item>
-            <p class="title title1">求职意向</p>
-            <el-form-item label="期望工作性质" prop="nature">
-                <el-radio-group v-model="form.nature">
-                    <el-radio label="全职"></el-radio>
-                    <el-radio label="兼职"></el-radio>
-                    <el-radio label="实习"></el-radio>
-                </el-radio-group>
-            </el-form-item>
-            <el-form-item label="期望工作地点" prop="workplace">
-                <!-- <el-cascader v-model="form.workplace" :options=areajson></el-cascader> -->
-                <el-select v-model="form.workplace" filterable placeholder="请选择">
-                    <el-option v-for="(item, index) in sheng" :key='index' :label="item" :value="item"></el-option>
-                </el-select>
-            </el-form-item>
-            <el-form-item label="期望从事行业" prop="engagedindustry">
-                <!-- <el-input v-model="form.engagedindustry"></el-input> -->
-                <el-cascader v-model="form.engagedindustry" :options="industry" change-on-select></el-cascader>
-            </el-form-item>
-            <el-form-item label="期望从事职业" prop="occupation">
-                <el-input v-model="form.occupation"></el-input>
-            </el-form-item>
-            <el-form-item label="税前期望月薪" prop="expectedmonthly">
-                <el-select v-model="form.expectedmonthly" filterable placeholder="请选择">
-                    <el-option label="3000元以下" :value="1"></el-option>
-                    <el-option label="3000-5000元/月" :value="2"></el-option>
-                    <el-option label="5000-10000元/月" :value="3"></el-option>
-                    <el-option label="10000-15000元/月" :value="4"></el-option>
-                    <el-option label="15000元以上" :value="5"></el-option>
-                </el-select>
-            </el-form-item>
-            <el-form-item label="求职状态" prop="jobsearchstatus">
+            <el-form-item label="求职状态" prop="state">
                 <el-select v-model="form.jobsearchstatus" filterable placeholder="请选择">
                     <el-option label="离职" :value="1"></el-option>
                     <el-option label="在职,可一个月内到岗" :value="2"></el-option>
@@ -139,60 +78,23 @@
                     <el-option label="应届毕业生" :value="5"></el-option>
                 </el-select>
             </el-form-item>
-            <p class="title title1">工作经验</p>
-            <div v-for="(item,index) in form.job" :key="index">
-                <el-form-item label="公司名称" prop="companyname">
-                    <el-input v-model="item.companyname"></el-input>
-                </el-form-item>
-                <el-form-item label="所属行业" prop="industry">
-                    <el-cascader v-model="item.industry" :options="industry" change-on-select></el-cascader>
-                </el-form-item>
-                <el-form-item label="职位名称" prop="positionname">
-                    <el-input v-model="item.positionname"></el-input>
-                </el-form-item>
-                <el-form-item label="职位类别" prop="jobcategories">
-                    <el-input v-model="item.jobcategories"></el-input>
-                </el-form-item>
-                <el-form-item label="在职时间" prop="workingtime">
-                    <el-date-picker v-model="item.workingtime" type="daterange" align="right" unlink-panels
-                                    range-separator="至"
-                                    start-placeholder="开始日期" end-placeholder="结束日期" :picker-options="pickerOptions2">
-                    </el-date-picker>
-                </el-form-item>
-                <el-form-item label="税前月薪" prop="monthlysalary">
-                    <el-select v-model="item.monthlysalary" filterable placeholder="请选择">
-                        <el-option label="3000元以下" :value="1"></el-option>
-                        <el-option label="3000-5000元/月" :value="2"></el-option>
-                        <el-option label="5000-10000元/月" :value="3"></el-option>
-                        <el-option label="10000-15000元/月" :value="4"></el-option>
-                        <el-option label="15000元以上" :value="5"></el-option>
-                    </el-select>
-                </el-form-item>
-                <el-form-item label="工作描述" prop="workdescription">
-                    <el-input type="textarea" v-model="item.workdescription"></el-input>
-                </el-form-item>
-                <br/><br/><br/>
-            </div>
-            <el-form-item label="公司名称">
-                <el-input v-model="form.companyname"></el-input>
+            <el-form-item label="电子邮箱" prop="email">
+                <el-input v-model="form.email"></el-input>
             </el-form-item>
-            <el-form-item label="所属行业">
-                <el-cascader v-model="form.industry" :options="industry" change-on-select></el-cascader>
+            <el-form-item label="联系方式" prop="phone">
+                <el-input type="tel" :maxlength="11" v-model="form.phone"></el-input>
             </el-form-item>
-            <el-form-item label="职位名称">
-                <el-input v-model="form.positionname"></el-input>
+            <el-form-item label="工作经验" prop="job_suffer">
+                <el-select v-model="form.expectedmonthly" filterable placeholder="请选择">
+                    <el-option label="无" :value="1"></el-option>
+                    <el-option label="1~3年" :value="2"></el-option>
+                    <el-option label="3年以上" :value="3"></el-option>
+                    <el-option label="5~8年" :value="4"></el-option>
+                    <el-option label="10年以上" :value="5"></el-option>
+                </el-select>
             </el-form-item>
-            <el-form-item label="职位类别">
-                <el-input v-model="form.jobcategories"></el-input>
-            </el-form-item>
-            <el-form-item label="在职时间">
-                <el-date-picker v-model="form.workingtime" type="daterange" align="right" unlink-panels
-                                range-separator="至"
-                                start-placeholder="开始日期" end-placeholder="结束日期" :picker-options="pickerOptions2">
-                </el-date-picker>
-            </el-form-item>
-            <el-form-item label="税前月薪">
-                <el-select v-model="form.monthlysalary" filterable placeholder="请选择">
+            <el-form-item label="月薪" prop="expectedmonthly">
+                <el-select v-model="form.expectedmonthly" filterable placeholder="请选择">
                     <el-option label="3000元以下" :value="1"></el-option>
                     <el-option label="3000-5000元/月" :value="2"></el-option>
                     <el-option label="5000-10000元/月" :value="3"></el-option>
@@ -200,105 +102,262 @@
                     <el-option label="15000元以上" :value="5"></el-option>
                 </el-select>
             </el-form-item>
-            <el-form-item label="工作描述">
-                <el-input type="textarea" v-model="form.workdescription"></el-input>
+            <el-form-item label="求职方向" prop="job_title">
+                <el-input type="tel" :maxlength="11" v-model="form.phone"></el-input>
             </el-form-item>
-            <el-form-item>
-                <el-button type="primary" @click="savejob" round>保存工作经验</el-button>
+            <el-form-item label="教育经历" prop="edu">
+                <el-input type="textarea" :rows="6" v-model="form.selfevaluation"></el-input>
             </el-form-item>
-            <p class="title title1">项目经验</p>
-            <div v-for="(item,index) in form.project" :key="index">
-                <el-form-item label="项目名称">
-                    <el-input v-model="item.name"></el-input>
-                </el-form-item>
-                <el-form-item label="项目时间">
-                    <el-date-picker v-model="item.time" type="daterange" align="right" unlink-panels range-separator="至"
-                                    start-placeholder="开始日期" end-placeholder="结束日期" :picker-options="pickerOptions2">
-                    </el-date-picker>
-                </el-form-item>
-                <el-form-item label="项目描述">
-                    <el-input type="textarea" :rows="5" v-model="item.desc"></el-input>
-                </el-form-item>
-                <el-form-item label="个人职责">
-                    <el-input type="textarea" :rows="5" v-model="item.responsibility"></el-input>
-                </el-form-item>
-                <el-form-item label="所属公司">
-                    <el-input v-model="item.ofcompany"></el-input>
-                </el-form-item>
-                <br/><br/><br/>
-            </div>
-            <el-form-item label="项目名称">
-                <el-input v-model="form.projectname"></el-input>
+            <el-form-item label="个人简介" prop="user_info">
+                <el-input type="textarea" :rows="6" v-model="form.selfevaluation"></el-input>
             </el-form-item>
-            <el-form-item label="项目时间">
-                <el-date-picker v-model="form.projecttime" type="daterange" align="right" unlink-panels
-                                range-separator="至"
-                                start-placeholder="开始日期" end-placeholder="结束日期" :picker-options="pickerOptions2">
-                </el-date-picker>
+            <el-form-item label="技能特长" prop="skill">
+                <el-input type="textarea" :rows="6" v-model="form.selfevaluation"></el-input>
             </el-form-item>
-            <el-form-item label="项目描述">
-                <el-input type="textarea" :rows="5" v-model="form.projectdesc"></el-input>
-            </el-form-item>
-            <el-form-item label="个人职责">
-                <el-input type="textarea" :rows="5" v-model="form.projectresponsibility"></el-input>
-            </el-form-item>
-            <el-form-item label="所属公司">
-                <el-input v-model="form.projectofcompany"></el-input>
-            </el-form-item>
-            <el-form-item>
-                <el-button type="primary" @click="saveproject" round>保存项目</el-button>
-            </el-form-item>
-            <p class="title title1">教育经历</p>
-            <el-form-item label="学校名称" prop="schoolname">
-                <el-input v-model="form.schoolname"></el-input>
-            </el-form-item>
-            <el-form-item label="就读时间" prop="readingtime">
-                <el-date-picker v-model="form.readingtime" type="daterange" align="right" unlink-panels
-                                range-separator="至"
-                                start-placeholder="开始日期" end-placeholder="结束日期" :picker-options="pickerOptions2">
-                </el-date-picker>
-            </el-form-item>
-            <el-form-item label="所学专业" prop="major">
-                <el-input v-model="form.major"></el-input>
-            </el-form-item>
-            <el-form-item label="是否统招" prop="iswhether">
-                <el-radio-group v-model="form.iswhether">
-                    <el-radio label="是"></el-radio>
-                    <el-radio label="否"></el-radio>
-                </el-radio-group>
-            </el-form-item>
-            <el-form-item label="学历" prop="education">
-                <el-select v-model="form.education" filterable placeholder="请选择">
-                    <el-option label="研究生" :value="1"></el-option>
-                    <el-option label="大学本科" :value="2"></el-option>
-                    <el-option label="大学专科和专科学校" :value="3"></el-option>
-                    <el-option label="中等专业学校或中等技术学校" :value="4"></el-option>
-                    <el-option label="其它" :value="5"></el-option>
-                </el-select>
-            </el-form-item>
-            <p class="title title1">专业技能</p>
-            <el-form-item label="技能名称" prop="skillname">
-                <el-input v-model="form.skillname"></el-input>
-            </el-form-item>
-            <el-form-item label="使用时长(月)" prop="lengthuse">
-                <el-input type="number" v-model="form.lengthuse"></el-input>
-            </el-form-item>
-            <el-form-item label="掌握程度" prop="mastery">
-                <el-radio-group v-model="form.mastery">
-                    <el-radio label="一般"></el-radio>
-                    <el-radio label="良好"></el-radio>
-                    <el-radio label="熟练"></el-radio>
-                    <el-radio label="精通"></el-radio>
-                </el-radio-group>
-            </el-form-item>
-            <p class="title title1">自我评价</p>
-            <el-form-item label="评价内容" prop="selfevaluation">
+            <el-form-item label="项目经验" prop="project_suffer">
                 <el-input type="textarea" :rows="6" v-model="form.selfevaluation"></el-input>
             </el-form-item>
             <el-form-item>
                 <el-button type="primary" @click="onSubmit('form')" round>保存并更新</el-button>
                 <el-button round @click="cancel">取消</el-button>
             </el-form-item>
+
+            {#            <el-form-item label="出生年月" prop="datebirth">#}
+            {#                <el-col :span="11">#}
+            {#                    <el-date-picker type="date" placeholder="选择日期" v-model="form.datebirth"#}
+            {#                                    style="width: 100%;"></el-date-picker>#}
+            {#                </el-col>#}
+            {#            </el-form-item>#}
+            {#            <el-form-item label="户口所在地" prop="accountlocation">#}
+            {#                <el-cascader v-model="form.accountlocation" :options="areajson" change-on-select></el-cascader>#}
+            {#            </el-form-item>#}
+            {#            <el-form-item label="现居地" prop="currentresidence">#}
+            {#                <el-cascader v-model="form.currentresidence" :options="areajson" change-on-select></el-cascader>#}
+            {#            </el-form-item>#}
+            {#            <el-form-item label="联系方式" prop="phone">#}
+            {#                <el-input type="tel" :maxlength="11" v-model="form.phone"></el-input>#}
+            {#            </el-form-item>#}
+            {#            <el-form-item label="电子邮箱" prop="email">#}
+            {#                <el-input v-model="form.email"></el-input>#}
+            {#            </el-form-item>#}
+            {#            <el-form-item label="求职方向" prop="job_title">#}
+            {#                <el-input type="tel" :maxlength="11" v-model="form.phone"></el-input>#}
+            {#            </el-form-item>#}
+            {#            <el-form-item label="婚姻状况" prop="marital">#}
+            {#                <el-select v-model="form.marital" filterable placeholder="请选择">#}
+            {#                    <el-option label="未婚" :value="1"></el-option>#}
+            {#                    <el-option label="已婚" :value="2"></el-option>#}
+            {#                    <el-option label="离异" :value="3"></el-option>#}
+            {#                </el-select>#}
+            {#            </el-form-item>#}
+            {#            <el-form-item label="政治面貌" prop="political">#}
+            {#                <el-select v-model="form.political" filterable placeholder="请选择">#}
+            {#                    <el-option label="中共党员" :value="1"></el-option>#}
+            {#                    <el-option label="团员" :value="2"></el-option>#}
+            {#                    <el-option label="群众" :value="3"></el-option>#}
+            {#                    <el-option label="民主党派" :value="4"></el-option>#}
+            {#                    <el-option label="无党派人士" :value="5"></el-option>#}
+            {#                </el-select>#}
+            {#            </el-form-item>#}
+            {#            <p class="title title1">求职意向</p>#}
+            {#            <el-form-item label="期望工作性质" prop="nature">#}
+            {#                <el-radio-group v-model="form.nature">#}
+            {#                    <el-radio label="全职"></el-radio>#}
+            {#                    <el-radio label="兼职"></el-radio>#}
+            {#                    <el-radio label="实习"></el-radio>#}
+            {#                </el-radio-group>#}
+            {#            </el-form-item>#}
+            {#            <el-form-item label="期望工作地点" prop="workplace">#}
+            {#                <!-- <el-cascader v-model="form.workplace" :options=areajson></el-cascader> -->#}
+            {#                <el-select v-model="form.workplace" filterable placeholder="请选择">#}
+            {#                    <el-option v-for="(item, index) in sheng" :key='index' :label="item" :value="item"></el-option>#}
+            {#                </el-select>#}
+            {#            </el-form-item>#}
+            {#            <el-form-item label="期望从事行业" prop="engagedindustry">#}
+            {#                <!-- <el-input v-model="form.engagedindustry"></el-input> -->#}
+            {#                <el-cascader v-model="form.engagedindustry" :options="industry" change-on-select></el-cascader>#}
+            {#            </el-form-item>#}
+            {#            <el-form-item label="期望从事职业" prop="occupation">#}
+            {#                <el-input v-model="form.occupation"></el-input>#}
+            {#            </el-form-item>#}
+            {#            <el-form-item label="税前期望月薪" prop="expectedmonthly">#}
+            {#                <el-select v-model="form.expectedmonthly" filterable placeholder="请选择">#}
+            {#                    <el-option label="3000元以下" :value="1"></el-option>#}
+            {#                    <el-option label="3000-5000元/月" :value="2"></el-option>#}
+            {#                    <el-option label="5000-10000元/月" :value="3"></el-option>#}
+            {#                    <el-option label="10000-15000元/月" :value="4"></el-option>#}
+            {#                    <el-option label="15000元以上" :value="5"></el-option>#}
+            {#                </el-select>#}
+            {#            </el-form-item>#}
+            {#            <el-form-item label="求职状态" prop="jobsearchstatus">#}
+            {#                <el-select v-model="form.jobsearchstatus" filterable placeholder="请选择">#}
+            {#                    <el-option label="离职" :value="1"></el-option>#}
+            {#                    <el-option label="在职,可一个月内到岗" :value="2"></el-option>#}
+            {#                    <el-option label="在职,考虑换工作" :value="3"></el-option>#}
+            {#                    <el-option label="在职,不想换工作" :value="4"></el-option>#}
+            {#                    <el-option label="应届毕业生" :value="5"></el-option>#}
+            {#                </el-select>#}
+            {#            </el-form-item>#}
+            {#            <p class="title title1">工作经验</p>#}
+            {#            <div v-for="(item,index) in form.job" :key="index">#}
+            {#                <el-form-item label="公司名称" prop="companyname">#}
+            {#                    <el-input v-model="item.companyname"></el-input>#}
+            {#                </el-form-item>#}
+            {#                <el-form-item label="所属行业" prop="industry">#}
+            {#                    <el-cascader v-model="item.industry" :options="industry" change-on-select></el-cascader>#}
+            {#                </el-form-item>#}
+            {#                <el-form-item label="职位名称" prop="positionname">#}
+            {#                    <el-input v-model="item.positionname"></el-input>#}
+            {#                </el-form-item>#}
+            {#                <el-form-item label="职位类别" prop="jobcategories">#}
+            {#                    <el-input v-model="item.jobcategories"></el-input>#}
+            {#                </el-form-item>#}
+            {#                <el-form-item label="在职时间" prop="workingtime">#}
+            {#                    <el-date-picker v-model="item.workingtime" type="daterange" align="right" unlink-panels#}
+            {#                                    range-separator="至"#}
+            {#                                    start-placeholder="开始日期" end-placeholder="结束日期" :picker-options="pickerOptions2">#}
+            {#                    </el-date-picker>#}
+            {#                </el-form-item>#}
+            {#                <el-form-item label="税前月薪" prop="monthlysalary">#}
+            {#                    <el-select v-model="item.monthlysalary" filterable placeholder="请选择">#}
+            {#                        <el-option label="3000元以下" :value="1"></el-option>#}
+            {#                        <el-option label="3000-5000元/月" :value="2"></el-option>#}
+            {#                        <el-option label="5000-10000元/月" :value="3"></el-option>#}
+            {#                        <el-option label="10000-15000元/月" :value="4"></el-option>#}
+            {#                        <el-option label="15000元以上" :value="5"></el-option>#}
+            {#                    </el-select>#}
+            {#                </el-form-item>#}
+            {#                <el-form-item label="工作描述" prop="workdescription">#}
+            {#                    <el-input type="textarea" v-model="item.workdescription"></el-input>#}
+            {#                </el-form-item>#}
+            {#                <br/><br/><br/>#}
+            {#            </div>#}
+            {#            <el-form-item label="公司名称">#}
+            {#                <el-input v-model="form.companyname"></el-input>#}
+            {#            </el-form-item>#}
+            {#            <el-form-item label="所属行业">#}
+            {#                <el-cascader v-model="form.industry" :options="industry" change-on-select></el-cascader>#}
+            {#            </el-form-item>#}
+            {#            <el-form-item label="职位名称">#}
+            {#                <el-input v-model="form.positionname"></el-input>#}
+            {#            </el-form-item>#}
+            {#            <el-form-item label="职位类别">#}
+            {#                <el-input v-model="form.jobcategories"></el-input>#}
+            {#            </el-form-item>#}
+            {#            <el-form-item label="在职时间">#}
+            {#                <el-date-picker v-model="form.workingtime" type="daterange" align="right" unlink-panels#}
+            {#                                range-separator="至"#}
+            {#                                start-placeholder="开始日期" end-placeholder="结束日期" :picker-options="pickerOptions2">#}
+            {#                </el-date-picker>#}
+            {#            </el-form-item>#}
+            {#            <el-form-item label="税前月薪">#}
+            {#                <el-select v-model="form.monthlysalary" filterable placeholder="请选择">#}
+            {#                    <el-option label="3000元以下" :value="1"></el-option>#}
+            {#                    <el-option label="3000-5000元/月" :value="2"></el-option>#}
+            {#                    <el-option label="5000-10000元/月" :value="3"></el-option>#}
+            {#                    <el-option label="10000-15000元/月" :value="4"></el-option>#}
+            {#                    <el-option label="15000元以上" :value="5"></el-option>#}
+            {#                </el-select>#}
+            {#            </el-form-item>#}
+            {#            <el-form-item label="工作描述">#}
+            {#                <el-input type="textarea" v-model="form.workdescription"></el-input>#}
+            {#            </el-form-item>#}
+            {#            <el-form-item>#}
+            {#                <el-button type="primary" @click="savejob" round>保存工作经验</el-button>#}
+            {#            </el-form-item>#}
+            {#            <p class="title title1">项目经验</p>#}
+            {#            <div v-for="(item,index) in form.project" :key="index">#}
+            {#                <el-form-item label="项目名称">#}
+            {#                    <el-input v-model="item.name"></el-input>#}
+            {#                </el-form-item>#}
+            {#                <el-form-item label="项目时间">#}
+            {#                    <el-date-picker v-model="item.time" type="daterange" align="right" unlink-panels range-separator="至"#}
+            {#                                    start-placeholder="开始日期" end-placeholder="结束日期" :picker-options="pickerOptions2">#}
+            {#                    </el-date-picker>#}
+            {#                </el-form-item>#}
+            {#                <el-form-item label="项目描述">#}
+            {#                    <el-input type="textarea" :rows="5" v-model="item.desc"></el-input>#}
+            {#                </el-form-item>#}
+            {#                <el-form-item label="个人职责">#}
+            {#                    <el-input type="textarea" :rows="5" v-model="item.responsibility"></el-input>#}
+            {#                </el-form-item>#}
+            {#                <el-form-item label="所属公司">#}
+            {#                    <el-input v-model="item.ofcompany"></el-input>#}
+            {#                </el-form-item>#}
+            {#                <br/><br/><br/>#}
+            {#            </div>#}
+            {#            <el-form-item label="项目名称">#}
+            {#                <el-input v-model="form.projectname"></el-input>#}
+            {#            </el-form-item>#}
+            {#            <el-form-item label="项目时间">#}
+            {#                <el-date-picker v-model="form.projecttime" type="daterange" align="right" unlink-panels#}
+            {#                                range-separator="至"#}
+            {#                                start-placeholder="开始日期" end-placeholder="结束日期" :picker-options="pickerOptions2">#}
+            {#                </el-date-picker>#}
+            {#            </el-form-item>#}
+            {#            <el-form-item label="项目描述">#}
+            {#                <el-input type="textarea" :rows="5" v-model="form.projectdesc"></el-input>#}
+            {#            </el-form-item>#}
+            {#            <el-form-item label="个人职责">#}
+            {#                <el-input type="textarea" :rows="5" v-model="form.projectresponsibility"></el-input>#}
+            {#            </el-form-item>#}
+            {#            <el-form-item label="所属公司">#}
+            {#                <el-input v-model="form.projectofcompany"></el-input>#}
+            {#            </el-form-item>#}
+            {#            <el-form-item>#}
+            {#                <el-button type="primary" @click="saveproject" round>保存项目</el-button>#}
+            {#            </el-form-item>#}
+            {#            <p class="title title1">教育经历</p>#}
+            {#            <el-form-item label="学校名称" prop="schoolname">#}
+            {#                <el-input v-model="form.schoolname"></el-input>#}
+            {#            </el-form-item>#}
+            {#            <el-form-item label="就读时间" prop="readingtime">#}
+            {#                <el-date-picker v-model="form.readingtime" type="daterange" align="right" unlink-panels#}
+            {#                                range-separator="至"#}
+            {#                                start-placeholder="开始日期" end-placeholder="结束日期" :picker-options="pickerOptions2">#}
+            {#                </el-date-picker>#}
+            {#            </el-form-item>#}
+            {#            <el-form-item label="所学专业" prop="major">#}
+            {#                <el-input v-model="form.major"></el-input>#}
+            {#            </el-form-item>#}
+            {#            <el-form-item label="是否统招" prop="iswhether">#}
+            {#                <el-radio-group v-model="form.iswhether">#}
+            {#                    <el-radio label="是"></el-radio>#}
+            {#                    <el-radio label="否"></el-radio>#}
+            {#                </el-radio-group>#}
+            {#            </el-form-item>#}
+            {#            <el-form-item label="学历" prop="education">#}
+            {#                <el-select v-model="form.education" filterable placeholder="请选择">#}
+            {#                    <el-option label="研究生" :value="1"></el-option>#}
+            {#                    <el-option label="大学本科" :value="2"></el-option>#}
+            {#                    <el-option label="大学专科和专科学校" :value="3"></el-option>#}
+            {#                    <el-option label="中等专业学校或中等技术学校" :value="4"></el-option>#}
+            {#                    <el-option label="其它" :value="5"></el-option>#}
+            {#                </el-select>#}
+            {#            </el-form-item>#}
+            {#            <p class="title title1">专业技能</p>#}
+            {#            <el-form-item label="技能名称" prop="skillname">#}
+            {#                <el-input v-model="form.skillname"></el-input>#}
+            {#            </el-form-item>#}
+            {#            <el-form-item label="使用时长(月)" prop="lengthuse">#}
+            {#                <el-input type="number" v-model="form.lengthuse"></el-input>#}
+            {#            </el-form-item>#}
+            {#            <el-form-item label="掌握程度" prop="mastery">#}
+            {#                <el-radio-group v-model="form.mastery">#}
+            {#                    <el-radio label="一般"></el-radio>#}
+            {#                    <el-radio label="良好"></el-radio>#}
+            {#                    <el-radio label="熟练"></el-radio>#}
+            {#                    <el-radio label="精通"></el-radio>#}
+            {#                </el-radio-group>#}
+            {#            </el-form-item>#}
+            {#            <p class="title title1">自我评价</p>#}
+            {#            <el-form-item label="评价内容" prop="selfevaluation">#}
+            {#                <el-input type="textarea" :rows="6" v-model="form.selfevaluation"></el-input>#}
+            {#            </el-form-item>#}
+            {#            <el-form-item>#}
+            {#                <el-button type="primary" @click="onSubmit('form')" round>保存并更新</el-button>#}
+            {#                <el-button round @click="cancel">取消</el-button>#}
+            {#            </el-form-item>#}
         </el-form>
     </div>
 
@@ -963,20 +1022,20 @@
                         console.log(this.form)
                         // 在下边进行数据请求
                         $.ajax({
-								type:'POST',
-								url:'/save_xinxi/',//写上你的接口就行
-								data:that.form,
-								success:function(res){
-									console.log(res)
-									if(JSON.parse(res.status) === 200){
-										that.$message({
-											showClose: true,
-											message: '简历保存成功！',
-											type: 'success'
-										});
-									}
-								}
-							})
+                            type: 'POST',
+                            url: '/save_xinxi/',//写上你的接口就行
+                            data: that.form,
+                            success: function (res) {
+                                console.log(res)
+                                if (JSON.parse(res.status) === 200) {
+                                    that.$message({
+                                        showClose: true,
+                                        message: '简历保存成功！',
+                                        type: 'success'
+                                    });
+                                }
+                            }
+                        })
                     } else {
                         this.$message({
                             showClose: true,
@@ -990,7 +1049,8 @@
             },
             // 取消
             cancel() {
-                window.location.href ={% url 'NB:go_user_mine' %}
+                window.location.href =
+                {% url 'NB:go_user_mine' %}
             },
             handleAvatarSuccess(res, file) {
                 this.imageUrl = URL.createObjectURL(file.raw);
@@ -1000,7 +1060,8 @@
             },
             // 搜索
             onsearch() {
-                window.location.href ={% url 'NB:zwss_home' %}//需要跳转到哪一页
+                window.location.href =
+                {% url 'NB:zwss_home' %}//需要跳转到哪一页
             },
 
             // 保存项目

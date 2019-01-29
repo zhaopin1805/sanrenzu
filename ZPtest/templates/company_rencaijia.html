@@ -37,7 +37,7 @@
 							<li class="menu-has-children" ><a href="">职位管理</a>
 							<ul>
 								<li><a href="">职位发布</a></li>
-								<li><a href="{% url 'NB:go_company_zhiweisousuo' %}">查看发布岗位</a></li>
+								<li><a href="">查看发布岗位</a></li>
 				            </ul>
 						  </li>
 						  <li><a href="">邀约纪录</a></li>
@@ -60,15 +60,22 @@
 			<section class="banner-area relative" id="home">
 
 				<div class="overlay overlay-bg" style="height: 723px">
-                    <div style="margin-left: 350px;margin-top: 100px;width:600px;height: 400px">
-                            <div style="float: left;width: 210px;height: 50px;">
-                                <p style="font-size: 70px;color: blue;margin-top: 16px">收件箱</p>
+                    <div style="margin-left: 200px;margin-top: 100px;width:600px;height: 400px">
+                            <div style="float: left;width: 280px;height: 50px;">
+                                <p style="font-size: 55px;color: blue;margin-top: 12px">我的人才夹</p>
                             </div>
-                            <div style="float: left;width: 240px;height: 10px">
-                            <img style="width:80px;height: 60px;" src="{% static 'img/e1.jpg' %}">
+                            <div style="float: left;width: 100px;height: 10px">
+                            <select style="height: 50px;font-size: 20px;background-color: #f0ad4e">
+                                <option>全部分类</option>
+                                <option>Java</option>
+                                <option>储备测试</option>
+                                <option>储备设计</option>
+                                <option>储备大数据</option>
+                                <option>添加分类➕  </option>
+                            </select>
                             </div>
                             <div style="width: 800px;height: 400px;">
-                                <div style="height: 65px"></div>
+                                <div style="height: 52px"></div>
                                 <div style="background-color:gray;width: 900px;height: 558px">
                                     <div style="width: 900px;height: 350px">
                                         <div class="plate-bottom" style="width: 700px;line-height: 45px">
@@ -245,12 +252,23 @@
                                         </div>
                                             </a>
                                         </div>
-                                        <div class="plate-bottom" style="width: 700px;height: 20px">
-                                        <div class="thead" style="width: 900px;line-height: 45px;height: 20px">
+                                        <div class="plate-bottom" style="width: 700px;height: 30px;">
+                                             <a href="">
+                                        <div class="thead" style="width: 900px;background-color: cornflowerblue">
+                                            <span class="thead-one">简历id</span>
+                                            <span class="thead-two">姓名</span>
+                                            <span class="thead-three">学历</span>
+                                            <span class="thead-four">城市</span>
+                                            <span class="thead-five">投递时间</span>
                                         </div>
-                                        </div >
+                                            </a>
+                                        </div>
+{#                                        <div class="plate-bottom" style="width: 700px;height: 20px">#}
+{#                                        <div class="thead" style="width: 900px;line-height: 45px;height: 20px">#}
+{#                                        </div>#}
+{#                                        </div >#}
                                         <div class="plate-bottom" style="width: 700px;height: 30px;background-color: gray">
-                                        <div class="thead" style="width: 900px;height: 30px;background-color: gray;line-height: 45px">
+                                        <div class="thead" style="width: 900px;height: 30px;background-color: gray;line-height: 35px">
                                             <span style="width: 40%">页码</span>
                                             <a><span style="width: 15%">首页</span></a>
                                             <a><span style="width: 5%">1</span></a>

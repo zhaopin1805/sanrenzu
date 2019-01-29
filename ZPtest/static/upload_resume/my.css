@@ -1,0 +1,96 @@
+body {
+	background: #F4F6F9;
+}
+.clearfix {
+	zoom: 1;
+	display: block;
+}
+
+.zp-header {
+	background-color: #fff;
+	padding-top: 0;
+}
+.title {
+	margin-top: -40px;
+    font-size: 24px;
+    color: #333;
+    letter-spacing: 0;
+    line-height: 96px;
+}
+.title1 {
+	margin-top: 0px;
+}
+.title1 button {
+	float: right;
+	margin-top: 28px;
+}
+.zp-container {
+	clear: both;
+	width: 1200px;
+	margin: 0 auto;
+	background: #fff;
+}
+.body{
+	width: 1200px;
+	height: auto;
+	background: #fff;
+	margin: 10px auto;
+	padding: 24px;
+}
+form {
+	position: relative;
+}
+.el-select .el-input {
+    width: 130px;
+  }
+  .input-with-select .el-input-group__prepend {
+    background-color: #fff;
+  }
+ .el-form-item__label {
+	 width:110px!important;
+ }
+ .el-form-item__content {
+	 margin-left: 110px!important;
+ }
+ .avatar-uploader {
+	 position: absolute;
+	 right: 24px;
+	 top: 6px;
+	 width: 100px;
+	 height: 100px;
+	 /* float: right; */
+ }
+ .avatar-uploader .el-upload {
+    border: 1px dashed #d9d9d9;
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  .avatar-uploader .el-upload:hover {
+    border-color: #409EFF;
+  }
+  .avatar-uploader-icon {
+    font-size: 28px;
+    color: #8c939d;
+    width: 100px;
+    height: 100px;
+    line-height: 100px;
+    text-align: center;
+  }
+  .avatar {
+    width: 100px;
+    height: 100px;
+	line-height: 100px;
+    display: block;
+  }
+  .el-icon-plus:before {
+    display: inline-block;
+    margin-top: 40px;
+ }
+ .el-cascader {
+	 width: 500px;
+ }
+ .el-select .el-input{
+	 width: 500px;
+ }

@@ -126,17 +126,18 @@
 </div>
 <div class="zhuce">
     <div class="login">
-        <h3 class="">重置密码</h3>
+        <h3 class="">用户找回密码</h3>
     </div>
 
     <div>
 
-        <form method="post" action="{% url 'NB:user_reset' %}">
+        {#        <form method="post" action="{% url 'NB:user_reset' %}">#}
+        <form>
             {% csrf_token %}
             <div class="username"><input type="text" id="phone" name="phone" placeholder="请输入手机号"></div>
             <div class="password"><input type="text" id="email" name="email" placeholder="请输入邮箱"></div>
             <p id="xinxi"></p>
-            <input type="submit" value="重置密码" class="btn"><br>
+            <input type="button" id="button" value="找回密码" class="btn"><br>
         </form>
 
     </div>
@@ -150,14 +151,43 @@
 <script type="text/javascript">
     $(function () {
         $('#email').blur(function () {
-            $.getJSON('/user_set/',{'phone':$('#phone').val(),'email':$('#email').val()},function (data) {
-                if (data['status'] == '200'){
+            $.getJSON('/user_set/', {
+                'user': 'user',
+                'phone': $('#phone').val(),
+                'email': $('#email').val()
+            }, function (data) {
+                if (data['status'] == '200') {
                     $('#xinxi').html('')
-                }
-                else {
+                } else {
                     $('#xinxi').html('<h5 style="color: red">***没有改电话邮箱的用户***</h5>')
                 }
             })
+        })
+    })
+    $(function () {
+        $('#button').click(function () {
+            var email = $('#email').val()
+            var phone = $('#phone').val()
+            var butn = $('.btn').attr('id')
+            if (email != '' || phone != '') {
+                if (butn == 'button') {
+                    $.getJSON('/user_reset/', {'user': 'user', 'email': email, 'phone': phone}, function (data) {
+                        if (data['status'] == 200) {
+                            $('#button').attr('value', data["show"])
+                            $('#button').attr('id', 'button2')
+                            $('#button').attr('disabled', true)
+                        } else {
+                            $('#button').attr('value', data["show"])
+                        }
+                    })
+                } else {
+                    $('#button2').click(function () {
+                        window.open({% url 'NB:go_user_mine' %})
+                    })
+                }
+            } else {
+                $('#xinxi').html('<h5 style="color: red">***电话和邮箱不能为空***</h5>')
+            }
         })
     })
 </script>

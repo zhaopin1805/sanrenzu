@@ -60,18 +60,20 @@
         <div class="col-md-6 col-md-offset-3">
             <form class="form-horizontal" method="post" action={% url 'NB:user_register' %}>
                 <div class="form-group">
-                    <label for="txtUsername"  class="col-sm-3 control-label">用户名：</label>
+                    <label for="txtUsername" class="col-sm-3 control-label">用户名：</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" id="txtUsername" name="user_name" placeholder="请输入用户名"><span
-                            id="userSpan"></span>
+                        <input type="text" class="form-control" id="txtUsername" name="user_name"
+                               placeholder="请输入用户名"><span
+                            id="usernameSpan"></span>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="userpass" class="col-sm-3 control-label">密 码：</label>
                     <div class="col-sm-9">
-                        <input type="password" class="form-control" id="userpass" name="user_pwd" placeholder="请输入密码"><span
-                            id="userSpan"></span>
+                        <input type="password" class="form-control" id="userpass" name="user_pwd"
+                               placeholder="请输入密码"><span
+                            id="userPass"></span>
                     </div>
                 </div>
                 <div class="form-group">
@@ -84,28 +86,29 @@
                 <div class="form-group">
                     <label for="checkuserpass" class="col-sm-3 control-label">邮箱：</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" id="checkuserpass" name="email" placeholder="请输入邮箱"><span
+                        <input type="text" class="form-control" id="checkuserpass" name="email"
+                               placeholder="请输入邮箱"><span
                             id="new_checkuserpass"></span>
                     </div>
                 </div>
-{#                <div class="form-group">#}
-{#                    <label for="checkuserpass" class="col-sm-3 control-label">性别：</label>#}
-{#                    <div class="col-sm-9">#}
-{#                        <label class="radio-inline">#}
-{#                            <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="男">男#}
-{#                        </label>#}
-{#                        <label class="radio-inline">#}
-{#                            <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="女" checked="checked">女#}
-{#                        </label>#}
-{#                    </div>#}
-{#                </div>#}
+                {#                <div class="form-group">#}
+                {#                    <label for="checkuserpass" class="col-sm-3 control-label">性别：</label>#}
+                {#                    <div class="col-sm-9">#}
+                {#                        <label class="radio-inline">#}
+                {#                            <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="男">男#}
+                {#                        </label>#}
+                {#                        <label class="radio-inline">#}
+                {#                            <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="女" checked="checked">女#}
+                {#                        </label>#}
+                {#                    </div>#}
+                {#                </div>#}
 
-{#                <div class="form-group">#}
-{#                    <label for="userage" class="col-sm-3 control-label">年龄：</label>#}
-{#                    <div class="col-sm-9">#}
-{#                        <input type="text" class="form-control" id="userage" name="age" placeholder="请输入年龄">#}
-{#                    </div>#}
-{#                </div>#}
+                {#                <div class="form-group">#}
+                {#                    <label for="userage" class="col-sm-3 control-label">年龄：</label>#}
+                {#                    <div class="col-sm-9">#}
+                {#                        <input type="text" class="form-control" id="userage" name="age" placeholder="请输入年龄">#}
+                {#                    </div>#}
+                {#                </div>#}
                 <div class="form-group">
                     <label for="userphone" class="col-sm-3 control-label">手机号码：</label>
                     <div class="col-sm-9">
@@ -128,32 +131,109 @@
 <script type="text/javascript" src={% static "/bootstrap.min.js" %}></script>
 <script type="text/javascript">
     $(function () {
-        $('#new_userpass').blur(function () {
-            if ($('#userpass').val() != $('#new_userpass').val()) {
-                $('#new_userSpan').html('<h5 style="color: red">***两次输入的密码不一致***</h5>')
+        $('#txtUsername').blur(function () {
+            if ($('#txtUsername').val() != '') {
+                if ($('#txtUsername').val().match(/^[a-zA-Z0-9_-]{4,16}$/)) {
+                    $('#usernameSpan').html('')
+                    $('#btnReg').attr('disabled', false)
+                } else {
+                    $('#usernameSpan').html('<h5 style="color: red">***用户名带有特殊字符或者少于4位***</h5>')
+                    $('#btnReg').attr('disabled', true)
+                }
             } else {
+                $('#usernameSpan').html('<h5 style="color: red">***用户名不能为空***</h5>')
+                $('#btnReg').attr('disabled', true)
+            }
+        })
+    })
+    $(function () {
+        $('#userpass').blur(function () {
+            if ($('#userpass').val() != '') {
+                $('#userPass').html('')
+                $('#btnReg').attr('disabled', false)
+            } else {
+                $('#userPass').html('<h5 style="color: red">***密码不能为空***</h5>')
+                $('#btnReg').attr('disabled', true)
+            }
+        })
+    })
+    $(function () {
+        $('#new_userpass').blur(function () {
+            var pwd = $('#new_userpass').val()
+            if (pwd != '') {
                 $('#new_userSpan').html('')
+                if ($('#userpass').val() != $('#new_userpass').val()) {
+                    $('#new_userSpan').html('<h5 style="color: red">***两次输入的密码不一致***</h5>')
+                    $('#btnReg').attr('disabled', true)
+                } else {
+                    $('#new_userSpan').html('')
+                    $('#btnReg').attr('disabled', false)
+                }
+            } else {
+                $('#new_userSpan').html('<h5 style="color: red">***请输入确认密码***</h5>')
+                $('#btnReg').attr('disabled', true)
             }
         })
     })
     $(function () {
         $('#userphone').blur(function () {
-            if ($('#userphone').val().length == 11) {
+            var phone = $('#userphone').val()
+            if (phone != '') {
                 $('#new_phone').html('')
+                if ($('#userphone').val().length == 11) {
+                    $.getJSON('/set_phone/', {'user': 'user', 'phone': phone}, function (data) {
+                        if (data['status'] == 200) {
+                            $('#new_phone').html('<h5 style="color: red">***' + data['title'] + '</h5>')
+                            $('#btnReg').attr('disabled', true)
+                        } else {
+                            $('#new_phone').html('')
+                            $('#btnReg').attr('disabled', false)
+                        }
+                    })
+                } else {
+                    $('#new_phone').html('<h5 style="color: red">***手机号应该是十一位***</h5>')
+                    $('#btnReg').attr('disabled', true)
+                }
             } else {
-                $('#new_phone').html('<h5 style="color: red">***手机号应该是十一位***</h5>')
+                $('#new_phone').html('<h5 style="color: red">***手机号不能为空***</h5>')
+                $('#btnReg').attr('disabled', true)
             }
         })
     })
     $(function () {
         $('#checkuserpass').blur(function () {
-            if (!$('#checkuserpass').val().match(/^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/)) {
-                $('#new_checkuserpass').html('<h5 style="color: red">***邮箱格式不对***</h5>')
-            } else {
+            var email = $('#checkuserpass').val()
+            if (email != '') {
                 $('#new_checkuserpass').html('')
+                $('#btnReg').attr('disabled', false)
+                if (!$('#checkuserpass').val().match(/^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/)) {
+                    $('#new_checkuserpass').html('<h5 style="color: red">***邮箱格式不对***</h5>')
+                    $('#btnReg').attr('disabled', true)
+                } else {
+                    $.getJSON('/set_email/', {'user': 'user', 'email': email}, function (data) {
+                        if (data['status'] == 200) {
+                            $('#new_checkuserpass').html('<h5 style="color: red">***' + data['title'] + '</h5>')
+                            $('#btnReg').attr('disabled', true)
+                        } else {
+                            $('#new_checkuserpass').html('')
+                            $('#btnReg').attr('disabled', false)
+                        }
+                    })
+
+                }
+            } else {
+                $('#new_checkuserpass').html('<h5 style="color: red">***邮箱不能为空***</h5>')
+                $('#btnReg').attr('disabled', true)
             }
         })
     })
-
-
+    $(function () {
+        $('#btnReg').mouseover(function () {
+            if ($('#txtUsername').val() != '' && $('#userpass').val() != '' && $('#new_userpass').val() != '' && $('#userphone').val() != '' && $('#checkuserpass').val() != '' && $('#company_name').val() != '' && $('#userage').val() != '') {
+                $('#btnReg').attr('disabled', false)
+            } else {
+                $('#btnReg').attr('disabled', true)
+            }
+        })
+    })
 </script>

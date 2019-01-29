@@ -78,13 +78,14 @@ WSGI_APPLICATION = 'ZPtest.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'nb_test',
+        'NAME': 'nb',
         'USER': 'root',
         'PASSWORD': '123456',
         'PORT': 3306,
         'HOST': 'localhost',
     }
 }
+
 
 
 # Password validation
@@ -127,3 +128,5 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
+
+MEDIA_ROOT = os.path.join(BASE_DIR,'static/uploads')

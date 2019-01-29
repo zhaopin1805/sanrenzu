@@ -33,16 +33,16 @@
             </div>
             <nav id="nav-menu-container">
                 <ul class="nav-menu">
-                    <li class="menu-active"><a href="{% url "NB:company_mine" %}">我的主页</a></li>
+                    <li class="menu-active"><a href="{% url "NB:go_company_mine" %}">我的主页</a></li>
                     <li class="menu-has-children"><a href="">职位管理</a>
                         <ul>
                             <li><a href="">职位发布</a></li>
-                            <li><a href="">查看发布岗位</a></li>
+                            <li><a href="{% url 'NB:go_company_zhiweisousuo' %}">查看发布岗位</a></li>
                         </ul>
                     </li>
                     <li><a href="">邀约纪录</a></li>
                     <li><a href="">职位搜索</a></li>
-                    <li><a href="">收件箱</a></li>
+                    <li><a href="{% url 'NB:go_cpmpany_shoujianxiang' %}">收件箱</a></li>
                     <li><a href="">公司人才夹</a></li>
                     <li class="menu-has-children"><a href="">个人中心</a>
                         <ul>
@@ -62,10 +62,10 @@
     <div class="overlay overlay-bg" style="height: 723px">
         <div style="margin-left: 350px;margin-top: 100px;width:600px;height: 400px">
             <div style="float: left;width: 210px;height: 50px;">
-                <p style="font-size: 70px;color: blue;margin-top: 16px">收件箱</p>
+                <p style="font-size: 70px;color: blue;margin-top: 16px"></p>
             </div>
             <div style="float: left;width: 240px;height: 10px">
-                <img style="width:80px;height: 60px;" src="{% static 'img/e1.jpg' %}">
+
             </div>
             <div style="width: 800px;height: 400px;">
                 <div style="height: 65px"></div>
@@ -73,9 +73,9 @@
                     <div style="width: 900px;height: 350px">
                         <div class="plate-bottom" style="width: 900px;line-height: 45px;">
                             <div class="thead" style="width: 900px;line-height: 45px;">
-                                <span class="thead-one" style="width: 20%">职位信息</span>
-                                <span class="thead-two" style="width: 60%">职位详情</span>
-                                <span class="thead-three" style="width: 10%">操作</span>
+                                <span class="thead-one" style="width: 30%;font-size: 30px"><b style="color: white">职位信息</b></span>
+                                <span class="thead-two" style="width: 58%"></span>
+                                <span class="thead-three" style="width: 10%;font-size: 30px"><b style="color: white">操作</b></span>
                             </div>
                             <div class="position-list">
                                 <div class="position" style="height: 135px">
@@ -83,8 +83,8 @@
                                         <input type="checkbox">
                                     </div>
                                     <div class="name fl" style="width: 53%;height: 25px">
-                                        <p><span>PHP高级工程师 </span>信息服务部</p>
-                                        <ul>
+                                        <p><span><b style="color: #005cbf">PHP高级工程师</b> </span></p>
+                                        <ul style="color: black">
                                             <li>武汉</li>
                                             <li>|</li>
                                             <li>1-3年工作经验</li>
@@ -94,25 +94,9 @@
                                             <li>4k-5k</li>
                                         </ul>
                                     </div>
-                                    <div class="number fl" style="width: 30%">
-                                        <ul class="clearfix">
-                                            <li>
-                                                <p>8</p>
-                                                <p>编制</p>
-                                            </li>
-                                            <li>
-                                                <p>2</p>
-                                                <p>在职</p>
-                                            </li>
-                                            <li>
-                                                <p class="CV">10</p>
-                                                <p>简历</p>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="edit fr" style="width: 12%">
-                                        <a class="open">下线</a>&nbsp;&nbsp;
-                                        <a>修改</a>
+                                    <div class="edit fr" style="width: 12%;color: crimson">
+                                        <a class="open" href="" style="color: crimson">下线</a>&nbsp;&nbsp;
+                                        <a href="" style="color: crimson">修改</a>
                                     </div>
                                 </div>
                                 <div class="position" style="height: 135px">
@@ -120,8 +104,8 @@
                                         <input type="checkbox">
                                     </div>
                                     <div class="name fl" style="width: 53%">
-                                        <p><span>PHP高级工程师 </span>信息服务部</p>
-                                        <ul>
+                                        <p><span><b style="color: #005cbf">PHP高级工程师</b> </span></p>
+                                        <ul style="color: black">
                                             <li>武汉</li>
                                             <li>|</li>
                                             <li>1-3年工作经验</li>
@@ -131,25 +115,9 @@
                                             <li>4k-5k</li>
                                         </ul>
                                     </div>
-                                    <div class="number fl" style="width: 30%">
-                                        <ul class="clearfix">
-                                            <li>
-                                                <p>8</p>
-                                                <p>编制</p>
-                                            </li>
-                                            <li>
-                                                <p>2</p>
-                                                <p>在职</p>
-                                            </li>
-                                            <li>
-                                                <p class="CV">10</p>
-                                                <p>简历</p>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="edit fr" style="width: 12%">
-                                        <a class="open">下线</a>&nbsp;&nbsp;
-                                        <a>修改</a>
+                                    <div class="edit fr" style="width: 12%;">
+                                        <a class="open" href="" style="color: crimson">下线</a>&nbsp;&nbsp;
+                                        <a href="" style="color: crimson">修改</a>
                                     </div>
                                 </div>
                                 <div class="position" style="height: 135px">
@@ -157,8 +125,8 @@
                                         <input type="checkbox">
                                     </div>
                                     <div class="name fl" style="width: 53%">
-                                        <p><span>PHP高级工程师 </span>信息服务部</p>
-                                        <ul>
+                                        <p><span><b style="color: #005cbf">PHP高级工程师</b> </span></p>
+                                        <ul style="color: black">
                                             <li>武汉</li>
                                             <li>|</li>
                                             <li>1-3年工作经验</li>
@@ -168,39 +136,23 @@
                                             <li>4k-5k</li>
                                         </ul>
                                     </div>
-                                    <div class="number fl" style="width: 30%">
-                                        <ul class="clearfix">
-                                            <li>
-                                                <p>8</p>
-                                                <p>编制</p>
-                                            </li>
-                                            <li>
-                                                <p>2</p>
-                                                <p>在职</p>
-                                            </li>
-                                            <li>
-                                                <p class="CV">10</p>
-                                                <p>简历</p>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="edit fr" style="width: 12%">
-                                        <a class="open">下线</a>&nbsp;&nbsp;
-                                        <a>修改</a>
+                                    <div class="edit fr" style="width: 12%;">
+                                        <a class="open" href="" style="color: crimson">下线</a>&nbsp;&nbsp;
+                                        <a href="" style="color: crimson">修改</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="plate-bottom" style="width: 900px;height: 30px;background-color: gray">
                             <div class="thead"
-                                 style="width: 900px;height: 30px;background-color: gray;line-height: 45px">
-                                <span style="width: 10%">页码</span>
-                                <a><span style="width: 5%">首页</span></a>
-                                <a><span style="width: 3%">1</span></a>
-                                <a><span style="width: 3%">2</span></a>
-                                <a><span style="width: 3%">3</span></a>
-                                <a><span style="width: 5%">.......</span></a>
-                                <a><span style="width: 5%">下一页</span></a>
+                                 style="width: 900px;height: 30px;background-color: gray;line-height: 70px;font-size: 15px">
+                                <span style="width: 5%"></span>
+                                <a href=""><span style="width: 10%">首页</span></a>
+                                <a href=""><span style="width: 3%">1</span></a>
+                                <a href=""><span style="width: 3%">2</span></a>
+                                <a href=""><span style="width: 3%">3</span></a>
+                                <a href=""><span style="width: 5%">.......</span></a>
+                                <a href=""><span style="width: 5%">下一页</span></a>
                             </div>
                         </div>
 

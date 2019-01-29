@@ -107,15 +107,15 @@
 </div>
 <div class="zhuce">
     <div class="login">
-        <div class="company"><a href={% url 'NB:company_home' %}>企业登录</a></div>
-        <div class="user"><a>用户登录</a></div>
+        <div class="company"><a style="text-decoration: none" href={% url 'NB:company_home' %}>企业登录</a></div>
+        <div class="user"><a style="text-decoration: none">用户登录</a></div>
     </div>
 
 <div>
 
-    <form method="post" action="">
-        <div class="username"><input type="text" name="username"  placeholder="请输入手机号/邮箱/用户名"></div>
-        <div class="password"><input type="password" name="psd" placeholder="请输入密码"></div>
+    <form method="post" action="{% url 'NB:user_login' %}">
+        <div class="username"><input type="text" name="user_name"  placeholder="请输入手机号/邮箱/用户名"></div>
+        <div class="password"><input type="password" name="user_pwd" placeholder="请输入密码"></div>
         <input type="submit" value="登录" class="btn"><br>
     </form>
 

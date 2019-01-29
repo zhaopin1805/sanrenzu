@@ -33,17 +33,17 @@
 				      </div>
 				      <nav id="nav-menu-container">
 				        <ul class="nav-menu">
-				          <li class="menu-active"><a href="{% url "NB:company_mine" %}">我的主页</a></li>
+				          <li class="menu-active"><a href="{% url "NB:go_company_mine" %}">我的主页</a></li>
 							<li class="menu-has-children" ><a href="">职位管理</a>
 							<ul>
 								<li><a href="">职位发布</a></li>
-								<li><a href="">查看发布岗位</a></li>
+								<li><a href="{% url 'NB:go_company_zhiweisousuo' %}">查看发布岗位</a></li>
 				            </ul>
 						  </li>
 						  <li><a href="">邀约纪录</a></li>
 						  <li><a href="">职位搜索</a></li>
-				          <li><a href="">收件箱</a></li>
-				          <li><a href="">公司人才夹</a></li>
+				          <li><a href="{% url 'NB:go_cpmpany_shoujianxiang' %}">收件箱</a></li>
+				          <li><a href="{% url 'NB:go_company_recaija' %}">公司人才夹</a></li>
 				          <li class="menu-has-children"><a href="">个人中心</a>
 				            <ul>
 								<li><a href="">修改公司基本信息</a></li>

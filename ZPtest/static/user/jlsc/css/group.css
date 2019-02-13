@@ -1,0 +1,114 @@
+@charset "utf-8";
+/*去掉下面一行注释,可使整个网站群页面变灰*/
+/*body{filter:gray}*/
+
+/*全局样式*/
+body {font-family: "微软雅黑",serif;; font-size:14px;}
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,blockquote,p{padding:0; margin:0; color:#2b2b2b;}
+table,td,tr,th{font-size:14px;}
+li{list-style-type:none;list-style:none;}
+table{ margin:0 auto;border-spacing:0; border-collapse:collapse; }
+img{border:0;}
+ol,ul {list-style:none;}
+caption,th {text-align:left;}
+h1,h2,h3,h4,h5,h6 {font-size:14px; font-weight:normal;}
+q:before,q:after {content:'';}   
+abbr,acronym {border:0;}
+address,caption,cite,code,dfn,em,th,var {font-weight:normal; font-style:normal;}   
+a {color:#2b2b2b;text-decoration:none;}
+a:hover {color:#ba2636;text-decoration:underline;}
+
+
+.fB{font-weight:bold;}
+.f12px{font-size:12px;}
+.f13px{font-size:13px;}
+.f14px{font-size:14px;}
+.f16px{font-size:16px;}
+.f13B{ font-size:13px; font-weight:bold; }
+.f14B{ font-size:14px; font-weight:bold; }
+.f16B{ font-size:16px; font-weight:bold; }
+.f_red{ color:#FC3804;}
+.f_yellow{ color:#FFEA00;}
+.f_fff{ color:#FFF;}
+.fff{ background:#fff;}
+
+.red{ border:1px solid red;}
+.blue{ border:1px solid blue;}
+.left{ float:left;}
+.right{ float:right;}
+.pointer{cursor:pointer;}
+.textLeft{ text-align:left;}
+.textRight{ text-align:right;}
+.textCenter{ text-align:center}
+.clearBoth{clear:both;}
+.relative{ position:relative;}
+
+/*横向间隔定义*/
+.blank1 {clear:both; height:1px; overflow:hidden; display:block;}
+.blank10 {clear:both; height:10px; overflow:hidden; display:block;}
+.blank20 {clear:both; height:20px; overflow:hidden; display:block;}
+.blank30 {clear:both; height:30px; overflow:hidden; display:block;}
+.blank100 {clear:both; height:100px; overflow:hidden; display:block;}
+.blank5 {clear:both; height:5px; overflow:hidden; display:block;}
+.blank6 {clear:both; height:6px; overflow:hidden; display:block;}
+.blank7 {clear:both; height:7px; overflow:hidden; display:block;}
+.blank8 {clear:both; height:8px; overflow:hidden; display:block;}
+.blank9 {clear:both; height:9px; overflow:hidden; display:block;}
+.blank12 {clear:both; height:12px; overflow:hidden; display:block;}
+.blank13 {clear:both; height:13px; overflow:hidden; display:block;}
+.blank15 {clear:both; height:15px; overflow:hidden; display:block;}
+.blank18 {clear:both; height:18px; overflow:hidden; display:block;}
+
+/*纵向间隔定义*/
+.space1{width:1em; display:inline-block;}
+.space2{width:2em; display:inline-block;}
+
+/*内容盒子，主要用于定位好后的Div内部*/
+.contentBox1{ padding:1px;}
+.contentBox2{ padding:2px;}
+.contentBox3{ padding:3px;}
+.contentBox4{ padding:4px;}
+.contentBox5{ padding:5px;}
+.contentBox6{ padding:6px;}
+.contentBox6{ padding:7px;}
+.contentBox6{ padding:8px;}
+.contentBox9{ padding:9px;}
+.contentBox12{ padding:12px;}
+.contentBox15{ padding:15px;}
+.contentBox18{ padding:18px;}
+
+/*文字缩进*/
+.textIndent2em{ text-indent:2em;}
+
+/*行高定义*/
+.lineHeight140{line-height:140%;}
+.lineHeight160{line-height:160%;}/*常用于新闻正文*/
+.lineHeight180{line-height:180%;}
+.lineHeight200{line-height:200%;}
+.lineHeight20px{ line-height:20px;}
+.lineHeight23px{ line-height:23px;}
+.lineHeight24px{ line-height:24px;}/*常用于新闻列表*/
+.lineHeight25px{ line-height:25px;}
+
+.hidden {display:none;}
+.display{display:block;}
+
+
+/*内容列表通用修饰符*/
+.commonList li{line-height:24px;}
+.commonList_dot li{line-height:24px; background:url(../images/ico_dot.gif) left no-repeat; text-indent:10px;}
+.commonList_video li{line-height:24px; background:url(../images/ico_video.gif) left no-repeat; text-indent:20px;}
+.commonList_round li{line-height:24px; background:url(../images/ico_round.gif) left no-repeat; text-indent:15px;}
+.commonList li span{ float:right; padding-right:6px;}
+.commonList_dot li span{ float:right; padding-right:6px;}
+.commonList_video li span{ float:right; padding-right:6px;}
+.commonList_round li span{ float:right; padding-right:6px;}
+.commonList li.line{clear:both; height:1px; overflow:hidden; display:block; background:url(../images/ico_line.gif) repeat-x;}
+.commonList_dot li.line{clear:both; height:1px; overflow:hidden; display:block; background:url(../images/ico_line.gif) repeat-x;}
+.commonList_video li.line{clear:both; height:1px; overflow:hidden; display:block; background:url(../images/ico_line.gif) repeat-x;}
+.commonList_round li.line{clear:both; height:1px; overflow:hidden; display:block; background:url(../images/ico_line.gif) repeat-x;}
+
+
+/*虚线隔行*/
+.line1px{clear:both; height:1px; overflow:hidden; display:block; background:url(../images/ico_line.gif) repeat-x; }
+.line2px{clear:both; height:2px; overflow:hidden; display:block; background:url(../images/ico_line.gif) repeat-x; }

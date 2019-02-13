@@ -3,4 +3,4 @@ from myapp.models import *
 
 # Register your models here.
 
-admin.site.register([Users, Companies, Talents, Resume, Collect, City, Job, Record, Shield, Vip, Checks])
+admin.site.register([Users, Companies, Resume, Collect, Job, Record, Shield, Vip, Checks])

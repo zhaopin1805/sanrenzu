@@ -1,0 +1,114 @@
+
+.mbox {
+	width: 1100px;
+	margin: 0 auto;
+	height: auto;
+	overflow: hidden;
+}
+
+.grzx {
+	width: 100%;
+	height: auto;
+}
+.grzx-nav {
+	width: 100%;
+	float: left;
+	position: relative;
+}
+.grzx-nav h1 {
+	float: left;
+	height: 50px;
+	line-height: 50px;
+	font-size: 18px;
+	font-weight: bold;
+}
+.grzx-from {
+	display: flex;
+	margin: 10px 0;
+}
+.grzx-from .ft-text {
+	width: 80px;
+	line-height: 32px;
+	font-size: 14px;
+	color: #000000;
+	text-align: right;
+}
+.rt-inp input {
+	width: 500px;
+	height: 32px;
+	line-height: 32px;
+	font-size: 14px;
+	color: #000000;
+	padding: 0 5px;
+	border: 1px solid #b1a5a5;
+}
+.rt-inp textarea {
+	width: 500px;
+	min-height: 100px;
+	border: 1px solid #b1a5a5;
+	padding: 5px;
+	font-size: 14px;
+	color: #000000;
+}
+.rt-inp select {
+	width: 512px;
+	height: 32px;
+	font-size: 14px;
+	color: #000000;
+	cursor: pointer;
+	border: 1px solid #b1a5a5;
+}
+.rt-inp input:focus {
+	border: 1px solid #0B7EF5;
+}
+.tj-btn {
+	margin-left: 200px;
+}
+.tj-btn ul li {
+	float: left;
+	margin-right: 20px;
+}
+.tj-btn ul li input {
+	width: 80px;
+	height: 40px;
+	border: 1px solid #409EFF;
+	border-radius: 8px;
+	cursor: pointer;
+}
+.tj-btn ul li input:hover {
+	background:  #54A7FE;
+}
+.tj-btn .btn-tj {
+	font-size: 16px;
+	color: #ffffff;
+	background: #409EFF;
+}
+.tj-btn .btn-qx {
+	font-size: 16px;
+	color:#7A7B66;
+	background: #ffffff;
+}
+.edit-xb {
+	height: 36px;
+	line-height: 36px;
+}
+.edit-xb ul li  {
+	float: left;
+	padding: 0 5px;
+}
+.edit-xb ul li input {
+	width: 10px;
+	cursor: pointer;
+}
+
+.grzx-img {
+	width: 200px;
+	height: 250px;
+	position: absolute;
+	right: 0;
+}
+.grzx-img img {
+	width: 200px;
+	height: 200px;
+	
+}

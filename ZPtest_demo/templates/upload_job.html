@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="{% static 'upload_resume/my.css' %}"/>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+        }
+    </style>
+    <link rel="stylesheet" href="{% static 'upload_resume/index.css' %}">
+    <script src="{% static 'upload_resume/vue.min.js' %}"></script>
+    <script src="{% static 'upload_resume/index.js' %}"></script>
+    <script src="{% static 'upload_resume/jquery.min.js' %}"></script>
+    <script src="{% static 'upload_resume/area.js' %}" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+<div id="root" class="zp">
+    {#    <div class="zp-header clearfix">#}
+    {#        <div class="zp-container">#}
+    {#            <div class="zp-searchbar__wrapper">#}
+    {#                <div class="zp-searchbar clearfix">#}
+    {#                    <div class="clearfix">#}
+    {#                        <div style="margin-top: 15px;">#}
+    {#                            <el-input placeholder="请输入内容" v-model="input5" class="input-with-select">#}
+    {#                                <el-select v-model="select" slot="prepend" placeholder="请选择">#}
+    {#                                    <el-option label="职位" value="1"></el-option>#}
+    {#                                    <el-option label="公司" value="2"></el-option>#}
+    {#                                </el-select>#}
+    {#                                <el-button slot="append" @click="onsearch" type="primary">搜索</el-button>#}
+    {#                            </el-input>#}
+    {#                        </div>#}
+    {#                    </div>#}
+    {#                </div>#}
+    {#            </div>#}
+    {#        </div>#}
+    {#    </div>#}
+    <div class="body">
+        <p class="title">岗位发布</p>
+        <el-form ref="form" :rules="rules" :model="form" label-width="80px">
+            <el-form-item label="岗位" style="width: 600px;" prop="user_name">
+                <el-input placeholder="请输入岗位名称" v-model="form.user_name"></el-input>
+            </el-form-item>
+            {#            <el-upload class="avatar-uploader" action="https://jsonplaceholder.typicode.com/posts/"#}
+            {#                       :show-file-list="false"#}
+            {#                       :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">#}
+            {#                <img v-if="imageUrl" :src="imageUrl" class="avatar">#}
+            {#                <i v-else class="el-icon-plus avatar-uploader-icon"></i>#}
+            {#            </el-upload>#}
+            <el-form-item label="薪资" style="width: 600px;" prop="money">
+                <el-input placeholder="请输入薪资" v-model="form.user_name"></el-input>
+            </el-form-item>
+            <el-form-item label="工作地点" prop="job_city1">
+                <el-cascader v-model="form.currentresidence" :options="areajson" change-on-select></el-cascader>
+            </el-form-item>
+            <el-form-item label="详细地址" style="width: 600px;" prop="job_city2">
+                <el-input placeholder="输入详细地址" v-model="form.user_name"></el-input>
+            </el-form-item>
+            <el-form-item label="工作经验" prop="work_year">
+                <el-select v-model="form.expectedmonthly" filterable placeholder="请选择">
+                    <el-option label="无" :value="1"></el-option>
+                    <el-option label="1~3年" :value="2"></el-option>
+                    <el-option label="3年以上" :value="3"></el-option>
+                    <el-option label="5~8年" :value="4"></el-option>
+                    <el-option label="10年以上" :value="5"></el-option>
+                </el-select>
+            </el-form-item>
+            <el-form-item label="学历" prop="academic">
+                <el-select v-model="form.education" filterable placeholder="请选择">
+                    <el-option label="研究生" :value="1"></el-option>
+                    <el-option label="大学本科" :value="2"></el-option>
+                    <el-option label="大学专科和专科学校" :value="3"></el-option>
+                    <el-option label="中等专业学校或中等技术学校" :value="4"></el-option>
+                    <el-option label="其它" :value="5"></el-option>
+                </el-select>
+            </el-form-item>
+            <el-form-item label="岗位职责" prop="statement">
+                <el-input type="textarea" :rows="6" v-model="form.selfevaluation"></el-input>
+            </el-form-item>
+            <el-form-item>
+                <el-button type="primary" @click="onSubmit('form')"round>保存并更新</el-button>
+                <el-button round @click="cancel">取消</el-button>
+            </el-form-item>
+            {#            <el-form-item label="性别" prop="sex">#}
+            {#                <el-radio-group v-model="form.sex">#}
+            {#                    <el-radio label="男"></el-radio>#}
+            {#                    <el-radio label="女"></el-radio>#}
+            {#                </el-radio-group>#}
+            {#            </el-form-item>#}
+            {#            <el-form-item label="出生年月" prop="datebirth">#}
+            {#                <el-col :span="11">#}
+            {#                    <el-date-picker type="date" placeholder="选择日期" v-model="form.datebirth"#}
+            {#                                    style="width: 100%;"></el-date-picker>#}
+            {#                </el-col>#}
+            {#            </el-form-item>#}
+            {#            <el-form-item label="户口所在地" prop="accountlocation">#}
+            {#                <el-cascader v-model="form.accountlocation" :options="areajson" change-on-select></el-cascader>#}
+            {#            </el-form-item>#}
+            {#            <el-form-item label="现居地" prop="currentresidence">#}
+            {#                <el-cascader v-model="form.currentresidence" :options="areajson" change-on-select></el-cascader>#}
+            {#            </el-form-item>#}
+            {#            <el-form-item label="联系方式" prop="phone">#}
+            {#                <el-input type="tel" :maxlength="11" v-model="form.phone"></el-input>#}
+            {#            </el-form-item>#}
+            {#            <el-form-item label="电子邮箱" prop="email">#}
+            {#                <el-input v-model="form.email"></el-input>#}
+            {#            </el-form-item>#}
+            {#            <el-form-item label="婚姻状况" prop="marital">#}
+            {#                <el-select v-model="form.marital" filterable placeholder="请选择">#}
+            {#                    <el-option label="未婚" :value="1"></el-option>#}
+            {#                    <el-option label="已婚" :value="2"></el-option>#}
+            {#                    <el-option label="离异" :value="3"></el-option>#}
+            {#                </el-select>#}
+            {#            </el-form-item>#}
+            {#            <el-form-item label="政治面貌" prop="political">#}
+            {#                <el-select v-model="form.political" filterable placeholder="请选择">#}
+            {#                    <el-option label="中共党员" :value="1"></el-option>#}
+            {#                    <el-option label="团员" :value="2"></el-option>#}
+            {#                    <el-option label="群众" :value="3"></el-option>#}
+            {#                    <el-option label="民主党派" :value="4"></el-option>#}
+            {#                    <el-option label="无党派人士" :value="5"></el-option>#}
+            {#                </el-select>#}
+            {#            </el-form-item>#}
+            {#            <p class="title title1">求职意向</p>#}
+            {#            <el-form-item label="期望工作性质" prop="nature">#}
+            {#                <el-radio-group v-model="form.nature">#}
+            {#                    <el-radio label="全职"></el-radio>#}
+            {#                    <el-radio label="兼职"></el-radio>#}
+            {#                    <el-radio label="实习"></el-radio>#}
+            {#                </el-radio-group>#}
+            {#            </el-form-item>#}
+            {#            <el-form-item label="期望工作地点" prop="workplace">#}
+            {#                <!-- <el-cascader v-model="form.workplace" :options=areajson></el-cascader> -->#}
+            {#                <el-select v-model="form.workplace" filterable placeholder="请选择">#}
+            {#                    <el-option v-for="(item, index) in sheng" :key='index' :label="item" :value="item"></el-option>#}
+            {#                </el-select>#}
+            {#            </el-form-item>#}
+            {#            <el-form-item label="期望从事行业" prop="engagedindustry">#}
+            {#                <!-- <el-input v-model="form.engagedindustry"></el-input> -->#}
+            {#                <el-cascader v-model="form.engagedindustry" :options="industry" change-on-select></el-cascader>#}
+            {#            </el-form-item>#}
+            {#            <el-form-item label="期望从事职业" prop="occupation">#}
+            {#                <el-input v-model="form.occupation"></el-input>#}
+            {#            </el-form-item>#}
+            {#            <el-form-item label="税前期望月薪" prop="expectedmonthly">#}
+            {#                <el-select v-model="form.expectedmonthly" filterable placeholder="请选择">#}
+            {#                    <el-option label="3000元以下" :value="1"></el-option>#}
+            {#                    <el-option label="3000-5000元/月" :value="2"></el-option>#}
+            {#                    <el-option label="5000-10000元/月" :value="3"></el-option>#}
+            {#                    <el-option label="10000-15000元/月" :value="4"></el-option>#}
+            {#                    <el-option label="15000元以上" :value="5"></el-option>#}
+            {#                </el-select>#}
+            {#            </el-form-item>#}
+            {#            <el-form-item label="求职状态" prop="jobsearchstatus">#}
+            {#                <el-select v-model="form.jobsearchstatus" filterable placeholder="请选择">#}
+            {#                    <el-option label="离职" :value="1"></el-option>#}
+            {#                    <el-option label="在职,可一个月内到岗" :value="2"></el-option>#}
+            {#                    <el-option label="在职,考虑换工作" :value="3"></el-option>#}
+            {#                    <el-option label="在职,不想换工作" :value="4"></el-option>#}
+            {#                    <el-option label="应届毕业生" :value="5"></el-option>#}
+            {#                </el-select>#}
+            {#            </el-form-item>#}
+            {#            <p class="title title1">工作经验</p>#}
+            {#            <div v-for="(item,index) in form.job" :key="index">#}
+            {#                <el-form-item label="公司名称" prop="companyname">#}
+            {#                    <el-input v-model="item.companyname"></el-input>#}
+            {#                </el-form-item>#}
+            {#                <el-form-item label="所属行业" prop="industry">#}
+            {#                    <el-cascader v-model="item.industry" :options="industry" change-on-select></el-cascader>#}
+            {#                </el-form-item>#}
+            {#                <el-form-item label="职位名称" prop="positionname">#}
+            {#                    <el-input v-model="item.positionname"></el-input>#}
+            {#                </el-form-item>#}
+            {#                <el-form-item label="职位类别" prop="jobcategories">#}
+            {#                    <el-input v-model="item.jobcategories"></el-input>#}
+            {#                </el-form-item>#}
+            {#                <el-form-item label="在职时间" prop="workingtime">#}
+            {#                    <el-date-picker v-model="item.workingtime" type="daterange" align="right" unlink-panels#}
+            {#                                    range-separator="至"#}
+            {#                                    start-placeholder="开始日期" end-placeholder="结束日期" :picker-options="pickerOptions2">#}
+            {#                    </el-date-picker>#}
+            {#                </el-form-item>#}
+            {#                <el-form-item label="税前月薪" prop="monthlysalary">#}
+            {#                    <el-select v-model="item.monthlysalary" filterable placeholder="请选择">#}
+            {#                        <el-option label="3000元以下" :value="1"></el-option>#}
+            {#                        <el-option label="3000-5000元/月" :value="2"></el-option>#}
+            {#                        <el-option label="5000-10000元/月" :value="3"></el-option>#}
+            {#                        <el-option label="10000-15000元/月" :value="4"></el-option>#}
+            {#                        <el-option label="15000元以上" :value="5"></el-option>#}
+            {#                    </el-select>#}
+            {#                </el-form-item>#}
+            {#                <el-form-item label="工作描述" prop="workdescription">#}
+            {#                    <el-input type="textarea" v-model="item.workdescription"></el-input>#}
+            {#                </el-form-item>#}
+            {#                <br/><br/><br/>#}
+            {#            </div>#}
+            {#            <el-form-item label="公司名称">#}
+            {#                <el-input v-model="form.companyname"></el-input>#}
+            {#            </el-form-item>#}
+            {#            <el-form-item label="所属行业">#}
+            {#                <el-cascader v-model="form.industry" :options="industry" change-on-select></el-cascader>#}
+            {#            </el-form-item>#}
+            {#            <el-form-item label="职位名称">#}
+            {#                <el-input v-model="form.positionname"></el-input>#}
+            {#            </el-form-item>#}
+            {#            <el-form-item label="职位类别">#}
+            {#                <el-input v-model="form.jobcategories"></el-input>#}
+            {#            </el-form-item>#}
+            {#            <el-form-item label="在职时间">#}
+            {#                <el-date-picker v-model="form.workingtime" type="daterange" align="right" unlink-panels#}
+            {#                                range-separator="至"#}
+            {#                                start-placeholder="开始日期" end-placeholder="结束日期" :picker-options="pickerOptions2">#}
+            {#                </el-date-picker>#}
+            {#            </el-form-item>#}
+            {#            <el-form-item label="税前月薪">#}
+            {#                <el-select v-model="form.monthlysalary" filterable placeholder="请选择">#}
+            {#                    <el-option label="3000元以下" :value="1"></el-option>#}
+            {#                    <el-option label="3000-5000元/月" :value="2"></el-option>#}
+            {#                    <el-option label="5000-10000元/月" :value="3"></el-option>#}
+            {#                    <el-option label="10000-15000元/月" :value="4"></el-option>#}
+            {#                    <el-option label="15000元以上" :value="5"></el-option>#}
+            {#                </el-select>#}
+            {#            </el-form-item>#}
+            {#            <el-form-item label="工作描述">#}
+            {#                <el-input type="textarea" v-model="form.workdescription"></el-input>#}
+            {#            </el-form-item>#}
+            {#            <el-form-item>#}
+            {#                <el-button type="primary" @click="savejob" round>保存工作经验</el-button>#}
+            {#            </el-form-item>#}
+            {#            <p class="title title1">项目经验</p>#}
+            {#            <div v-for="(item,index) in form.project" :key="index">#}
+            {#                <el-form-item label="项目名称">#}
+            {#                    <el-input v-model="item.name"></el-input>#}
+            {#                </el-form-item>#}
+            {#                <el-form-item label="项目时间">#}
+            {#                    <el-date-picker v-model="item.time" type="daterange" align="right" unlink-panels range-separator="至"#}
+            {#                                    start-placeholder="开始日期" end-placeholder="结束日期" :picker-options="pickerOptions2">#}
+            {#                    </el-date-picker>#}
+            {#                </el-form-item>#}
+            {#                <el-form-item label="项目描述">#}
+            {#                    <el-input type="textarea" :rows="5" v-model="item.desc"></el-input>#}
+            {#                </el-form-item>#}
+            {#                <el-form-item label="个人职责">#}
+            {#                    <el-input type="textarea" :rows="5" v-model="item.responsibility"></el-input>#}
+            {#                </el-form-item>#}
+            {#                <el-form-item label="所属公司">#}
+            {#                    <el-input v-model="item.ofcompany"></el-input>#}
+            {#                </el-form-item>#}
+            {#                <br/><br/><br/>#}
+            {#            </div>#}
+            {#            <el-form-item label="项目名称">#}
+            {#                <el-input v-model="form.projectname"></el-input>#}
+            {#            </el-form-item>#}
+            {#            <el-form-item label="项目时间">#}
+            {#                <el-date-picker v-model="form.projecttime" type="daterange" align="right" unlink-panels#}
+            {#                                range-separator="至"#}
+            {#                                start-placeholder="开始日期" end-placeholder="结束日期" :picker-options="pickerOptions2">#}
+            {#                </el-date-picker>#}
+            {#            </el-form-item>#}
+            {#            <el-form-item label="项目描述">#}
+            {#                <el-input type="textarea" :rows="5" v-model="form.projectdesc"></el-input>#}
+            {#            </el-form-item>#}
+            {#            <el-form-item label="个人职责">#}
+            {#                <el-input type="textarea" :rows="5" v-model="form.projectresponsibility"></el-input>#}
+            {#            </el-form-item>#}
+            {#            <el-form-item label="所属公司">#}
+            {#                <el-input v-model="form.projectofcompany"></el-input>#}
+            {#            </el-form-item>#}
+            {#            <el-form-item>#}
+            {#                <el-button type="primary" @click="saveproject" round>保存项目</el-button>#}
+            {#            </el-form-item>#}
+            {#            <p class="title title1">教育经历</p>#}
+            {#            <el-form-item label="学校名称" prop="schoolname">#}
+            {#                <el-input v-model="form.schoolname"></el-input>#}
+            {#            </el-form-item>#}
+            {#            <el-form-item label="就读时间" prop="readingtime">#}
+            {#                <el-date-picker v-model="form.readingtime" type="daterange" align="right" unlink-panels#}
+            {#                                range-separator="至"#}
+            {#                                start-placeholder="开始日期" end-placeholder="结束日期" :picker-options="pickerOptions2">#}
+            {#                </el-date-picker>#}
+            {#            </el-form-item>#}
+            {#            <el-form-item label="所学专业" prop="major">#}
+            {#                <el-input v-model="form.major"></el-input>#}
+            {#            </el-form-item>#}
+            {#            <el-form-item label="是否统招" prop="iswhether">#}
+            {#                <el-radio-group v-model="form.iswhether">#}
+            {#                    <el-radio label="是"></el-radio>#}
+            {#                    <el-radio label="否"></el-radio>#}
+            {#                </el-radio-group>#}
+            {#            </el-form-item>#}
+            {#            <el-form-item label="学历" prop="education">#}
+            {#                <el-select v-model="form.education" filterable placeholder="请选择">#}
+            {#                    <el-option label="研究生" :value="1"></el-option>#}
+            {#                    <el-option label="大学本科" :value="2"></el-option>#}
+            {#                    <el-option label="大学专科和专科学校" :value="3"></el-option>#}
+            {#                    <el-option label="中等专业学校或中等技术学校" :value="4"></el-option>#}
+            {#                    <el-option label="其它" :value="5"></el-option>#}
+            {#                </el-select>#}
+            {#            </el-form-item>#}
+            {#            <p class="title title1">专业技能</p>#}
+            {#            <el-form-item label="技能名称" prop="skillname">#}
+            {#                <el-input v-model="form.skillname"></el-input>#}
+            {#            </el-form-item>#}
+            {#            <el-form-item label="使用时长(月)" prop="lengthuse">#}
+            {#                <el-input type="number" v-model="form.lengthuse"></el-input>#}
+            {#            </el-form-item>#}
+            {#            <el-form-item label="掌握程度" prop="mastery">#}
+            {#                <el-radio-group v-model="form.mastery">#}
+            {#                    <el-radio label="一般"></el-radio>#}
+            {#                    <el-radio label="良好"></el-radio>#}
+            {#                    <el-radio label="熟练"></el-radio>#}
+            {#                    <el-radio label="精通"></el-radio>#}
+            {#                </el-radio-group>#}
+            {#            </el-form-item>#}
+            {#            <p class="title title1">自我评价</p>#}
+            {#            <el-form-item label="评价内容" prop="selfevaluation">#}
+            {#                <el-input type="textarea" :rows="6" v-model="form.selfevaluation"></el-input>#}
+            {#            </el-form-item>#}
+            {#            <el-form-item>#}
+            {#                <el-button type="primary" @click="onSubmit('form')" round>保存并更新</el-button>#}
+            {#                <el-button round @click="cancel">取消</el-button>#}
+            {#            </el-form-item>#}
+        </el-form>
+    </div>
+
+</div>
+</body>
+<script type="text/javascript">
+    new Vue({
+        el: "#root",
+        data: {
+            imageUrl: '',
+            input5: '',
+            select: '1',
+            form: {
+                job: [],
+                project: []
+            },
+            rules: {
+                user_name: {
+                    required: true,
+                    message: '该项不能为空！',
+                    trigger: 'blur'
+                },
+                sex: {
+                    required: true,
+                    message: '该项不能为空！',
+                    trigger: 'blur'
+                },
+                datebirth: {
+                    required: true,
+                    message: '该项不能为空！',
+                    trigger: 'blur'
+                },
+                accountlocation: {
+                    required: true,
+                    message: '该项不能为空！',
+                    trigger: 'blur'
+                },
+                currentresidence: {
+                    required: true,
+                    message: '该项不能为空！',
+                    trigger: 'blur'
+                },
+                phone: {
+                    required: true,
+                    message: '该项不能为空！',
+                    trigger: 'blur'
+                },
+                email: {
+                    required: true,
+                    message: '该项不能为空！',
+                    trigger: 'blur'
+                },
+                marital: {
+                    required: true,
+                    message: '该项不能为空！',
+                    trigger: 'blur'
+                },
+                political: {
+                    required: true,
+                    message: '该项不能为空！',
+                    trigger: 'blur'
+                },
+                nature: {
+                    required: true,
+                    message: '该项不能为空！',
+                    trigger: 'blur'
+                },
+                workplace: {
+                    required: true,
+                    message: '该项不能为空！',
+                    trigger: 'blur'
+                },
+                engagedindustry: {
+                    required: true,
+                    message: '该项不能为空！',
+                    trigger: 'blur'
+                },
+                occupation: {
+                    required: true,
+                    message: '该项不能为空！',
+                    trigger: 'blur'
+                },
+                expectedmonthly: {
+                    required: true,
+                    message: '该项不能为空！',
+                    trigger: 'blur'
+                },
+                jobsearchstatus: {
+                    required: true,
+                    message: '该项不能为空！',
+                    trigger: 'blur'
+                },
+                // companyname:{ required:true, message:'该项不能为空！', trigger:'blur' },
+                // industry:{ required:true, message:'该项不能为空！', trigger:'blur' },
+                // positionname:{ required:true, message:'该项不能为空！', trigger:'blur' },
+                // jobcategories:{ required:true, message:'该项不能为空！', trigger:'blur' },
+                // workingtime:{ required:true, message:'该项不能为空！', trigger:'blur' },
+                // monthlysalary:{ required:true, message:'该项不能为空！', trigger:'blur' },
+                // workdescription:{ required:true, message:'该项不能为空！', trigger:'blur' },
+                schoolname: {
+                    required: true,
+                    message: '该项不能为空！',
+                    trigger: 'blur'
+                },
+                readingtime: {
+                    required: true,
+                    message: '该项不能为空！',
+                    trigger: 'blur'
+                },
+                major: {
+                    required: true,
+                    message: '该项不能为空！',
+                    trigger: 'blur'
+                },
+                iswhether: {
+                    required: true,
+                    message: '该项不能为空！',
+                    trigger: 'blur'
+                },
+                education: {
+                    required: true,
+                    message: '该项不能为空！',
+                    trigger: 'blur'
+                },
+                skillname: {
+                    required: true,
+                    message: '该项不能为空！',
+                    trigger: 'blur'
+                },
+                lengthuse: {
+                    required: true,
+                    message: '该项不能为空！',
+                    trigger: 'blur'
+                },
+                mastery: {
+                    required: true,
+                    message: '该项不能为空！',
+                    trigger: 'blur'
+                },
+                selfevaluation: {
+                    required: true,
+                    message: '该项不能为空！',
+                    trigger: 'blur'
+                }
+            },
+            industry: [{
+                value: '1',
+                label: '农、林、牧、渔业',
+                children: [{
+                    value: '01',
+                    label: '农业'
+                },
+                    {
+                        value: '02',
+                        label: '林业'
+                    },
+                    {
+                        value: '03',
+                        label: '畜牧业'
+                    },
+                    {
+                        value: '04',
+                        label: '渔业'
+                    },
+                    {
+                        value: '05',
+                        label: '农、林、牧、渔服务业'
+                    }
+                ]
+            },
+                {
+                    value: '2',
+                    label: '采矿业',
+                    children: [{
+                        value: '06',
+                        label: '煤炭开采和洗选业'
+                    },
+                        {
+                            value: '07',
+                            label: '石油和天然气开采业'
+                        },
+                        {
+                            value: '08',
+                            label: '黑色金属矿采选业'
+                        },
+                        {
+                            value: '09',
+                            label: '有色金属矿采选业'
+                        },
+                        {
+                            value: '10',
+                            label: '非金属矿采选业'
+                        },
+                        {
+                            value: '11',
+                            label: '其他采矿业'
+                        }
+                    ]
+                },
+                {
+                    value: '3',
+                    label: '制造业',
+                    children: [{
+                        value: '13',
+                        label: '农副食品加工业'
+                    },
+                        {
+                            value: '14',
+                            label: '食品制造业'
+                        },
+                        {
+                            value: '15',
+                            label: '饮料制造业'
+                        },
+                        {
+                            value: '16',
+                            label: '烟草制品业'
+                        },
+                        {
+                            value: '17',
+                            label: '纺织业'
+                        },
+                        {
+                            value: '18',
+                            label: '纺织服装、鞋、帽制造业'
+                        },
+                        {
+                            value: '19',
+                            label: '皮革、毛皮、羽毛（绒）及其制品业'
+                        },
+                        {
+                            value: '20',
+                            label: '木材加工及木、竹、藤、棕、草制品业'
+                        },
+                        {
+                            value: '21',
+                            label: '家具制造业'
+                        },
+                        {
+                            value: '22',
+                            label: '造纸及纸制品业'
+                        },
+                        {
+                            value: '23',
+                            label: '印刷业和记录媒介的复制'
+                        },
+                        {
+                            value: '24',
+                            label: '文教体育用品制造业'
+                        },
+                        {
+                            value: '25',
+                            label: '石油加工、炼焦及核燃料加工业'
+                        },
+                        {
+                            value: '26',
+                            label: '化学原料及化学制品制造业'
+                        },
+                        {
+                            value: '27',
+                            label: '医药制造业'
+                        },
+                        {
+                            value: '28',
+                            label: '化学纤维制造业'
+                        },
+                        {
+                            value: '29',
+                            label: '橡胶制品业'
+                        },
+                        {
+                            value: '30',
+                            label: '塑料制品业'
+                        },
+                        {
+                            value: '31',
+                            label: '非金属矿物制品业'
+                        },
+                        {
+                            value: '32',
+                            label: '黑色金属冶炼及压延加工业'
+                        },
+                        {
+                            value: '33',
+                            label: '有色金属冶炼及压延加工业'
+                        },
+                        {
+                            value: '34',
+                            label: '金属制品业'
+                        },
+                        {
+                            value: '35',
+                            label: '通用设备制造业'
+                        },
+                        {
+                            value: '36',
+                            label: '专用设备制造业'
+                        },
+                        {
+                            value: '37',
+                            label: '交通运输设备制造业'
+                        },
+                        {
+                            value: '39',
+                            label: '电气机械及器材制造业'
+                        },
+                        {
+                            value: '40',
+                            label: '通信设备、计算机及其他电子设备制造业'
+                        },
+                        {
+                            value: '41',
+                            label: '仪器仪表及文化、办公用机械制造业'
+                        },
+                        {
+                            value: '42',
+                            label: '工艺品及其他制造业'
+                        },
+                        {
+                            value: '43',
+                            label: '废弃资源和废旧材料回收加工业'
+                        }
+                    ]
+                },
+                {
+                    value: '4',
+                    label: '电力、煤气及水的生产和供应业',
+                    children: [{
+                        value: '44',
+                        label: '电力、热力的生产和供应业'
+                    },
+                        {
+                            value: '45',
+                            label: '煤气生产和供应业'
+                        },
+                        {
+                            value: '46',
+                            label: '水的生产和供应业'
+                        }
+                    ]
+                },
+                {
+                    value: '5',
+                    label: '建筑业',
+                    children: [{
+                        value: '47',
+                        label: '房屋和土木工程建筑业'
+                    },
+                        {
+                            value: '48',
+                            label: '建筑安装业'
+                        },
+                        {
+                            value: '49',
+                            label: '建筑装饰业'
+                        },
+                        {
+                            value: '50',
+                            label: '其他建筑业'
+                        }
+                    ]
+                },
+                {
+                    value: '6',
+                    label: '交通运输、仓储及邮政业',
+                    children: [{
+                        value: '51',
+                        label: '铁路运输业'
+                    },
+                        {
+                            value: '52',
+                            label: '道路运输业'
+                        },
+                        {
+                            value: '53',
+                            label: '城市公共交通业'
+                        },
+                        {
+                            value: '54',
+                            label: '水上运输业'
+                        },
+                        {
+                            value: '55',
+                            label: '航空运输业'
+                        },
+                        {
+                            value: '56',
+                            label: '管道运输业'
+                        },
+                        {
+                            value: '57',
+                            label: '装卸搬运和其他运输服务业'
+                        },
+                        {
+                            value: '58',
+                            label: '仓储业'
+                        },
+                        {
+                            value: '59',
+                            label: '邮政业'
+                        }
+                    ]
+                },
+                {
+                    value: '7',
+                    label: '信息传输、计算机服务和软件业',
+                    children: [{
+                        value: '60',
+                        label: '电信和其他信息传输服务业'
+                    },
+                        {
+                            value: '61',
+                            label: '计算机服务业'
+                        },
+                        {
+                            value: '62',
+                            label: '软件业'
+                        }
+                    ]
+                },
+                {
+                    value: '8',
+                    label: '批发和零售业',
+                    children: [{
+                        value: '63',
+                        label: '批发业'
+                    },
+                        {
+                            value: '65',
+                            label: '零售业'
+                        }
+                    ]
+                },
+                {
+                    value: '9',
+                    label: '住宿和餐饮业',
+                    children: [{
+                        value: '66',
+                        label: '住宿业'
+                    },
+                        {
+                            value: '67',
+                            label: '餐饮业'
+                        }
+                    ]
+                },
+                {
+                    value: '10',
+                    label: '金融业',
+                    children: [{
+                        value: '68',
+                        label: '银行业'
+                    },
+                        {
+                            value: '69',
+                            label: '证券业'
+                        },
+                        {
+                            value: '70',
+                            label: '保险业'
+                        },
+                        {
+                            value: '71',
+                            label: '其他金融活动'
+                        }
+                    ]
+                },
+                {
+                    value: '11',
+                    label: '房地产业',
+                    children: [{
+                        value: '72',
+                        label: '房地产业'
+                    }]
+                },
+                {
+                    value: '12',
+                    label: '租赁和商务服务业',
+                    children: [{
+                        value: '73',
+                        label: '租赁业'
+                    },
+                        {
+                            value: '74',
+                            label: '商务服务业'
+                        }
+                    ]
+                },
+                {
+                    value: '13',
+                    label: '科学研究、技术服务和地质勘查业',
+                    children: [{
+                        value: '75',
+                        label: '研究与试验发展'
+                    },
+                        {
+                            value: '76',
+                            label: '专业技术服务业'
+                        },
+                        {
+                            value: '77',
+                            label: '科技交流和推广服务业'
+                        },
+                        {
+                            value: '78',
+                            label: '地质勘查业'
+                        }
+                    ]
+                },
+                {
+                    value: '14',
+                    label: '水利、环境和公共设施管理业',
+                    children: [{
+                        value: '79',
+                        label: '水利管理业'
+                    },
+                        {
+                            value: '80',
+                            label: '环境管理业'
+                        },
+                        {
+                            value: '81',
+                            label: '公共设施管理业'
+                        }
+                    ]
+                },
+                {
+                    value: '15',
+                    label: '居民服务和其他服务业',
+                    children: [{
+                        value: '82',
+                        label: '居民服务业'
+                    },
+                        {
+                            value: '83',
+                            label: '其他服务业'
+                        }
+                    ]
+                },
+                {
+                    value: '16',
+                    label: '教育业',
+                    children: [{
+                        value: '84',
+                        label: '教育业'
+                    }]
+                },
+                {
+                    value: '17',
+                    label: '卫生、社会保障和社会福利业',
+                    children: [{
+                        value: '85',
+                        label: '卫生'
+                    },
+                        {
+                            value: '86',
+                            label: '社会保障业'
+                        },
+                        {
+                            value: '87',
+                            label: '社会福利业'
+                        }
+                    ]
+                },
+                {
+                    value: '18',
+                    label: '文化、体育和娱乐业',
+                    children: [{
+                        value: '88',
+                        label: '新闻出版业'
+                    },
+                        {
+                            value: '89',
+                            label: '广播、电视、电影和音像业'
+                        },
+                        {
+                            value: '90',
+                            label: '文化艺术业'
+                        },
+                        {
+                            value: '91',
+                            label: '体育'
+                        },
+                        {
+                            value: '92',
+                            label: '娱乐业'
+                        }
+                    ]
+                },
+                {
+                    value: '19',
+                    label: '公共管理和社会组织',
+                    children: [{
+                        value: '93',
+                        label: '中国共产党机关'
+                    },
+                        {
+                            value: '94',
+                            label: '国家机构'
+                        },
+                        {
+                            value: '95',
+                            label: '人民政协和民主党派'
+                        },
+                        {
+                            value: '96',
+                            label: '群众团体、社会团体和宗教组织'
+                        },
+                        {
+                            value: '97',
+                            label: '基层群众自治组织'
+                        }
+                    ]
+                },
+                {
+                    value: '20',
+                    label: '国际组织',
+                    children: [{
+                        value: '98',
+                        label: '国际组织'
+                    },
+                        {
+                            value: '99',
+                            label: '使领馆'
+                        }
+                    ]
+                }
+            ],
+            pickerOptions2: {
+                shortcuts: [{
+                    text: '最近一周',
+                    onClick(picker) {
+                        const end = new Date();
+                        const start = new Date();
+                        start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
+                        picker.$emit('pick', [start, end]);
+                    }
+                }, {
+                    text: '最近一个月',
+                    onClick(picker) {
+                        const end = new Date();
+                        const start = new Date();
+                        start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
+                        picker.$emit('pick', [start, end]);
+                    }
+                }, {
+                    text: '最近三个月',
+                    onClick(picker) {
+                        const end = new Date();
+                        const start = new Date();
+                        start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
+                        picker.$emit('pick', [start, end]);
+                    }
+                }]
+            }
+        },
+        methods: {
+            onSubmit(name) {
+                var that = this
+                this.$refs[name].validate((valid) => {
+                    if (valid) {
+                        console.log(this.form)
+                        // 在下边进行数据请求
+                        $.ajax({
+                            type: 'POST',
+                            url: '/save_job/',//写上你的接口就行
+                            data: that.form,
+                            success: function (res) {
+                                console.log(res)
+                                if (JSON.parse(res.status) === 200) {
+                                    that.$message({
+                                        showClose: true,
+                                        message: '岗位上传成功！',
+                                        type: 'success'
+                                    });
+                                }
+                            }
+                        })
+                    } else {
+                        this.$message({
+                            showClose: true,
+                            message: '必填项不能为空！',
+                            type: 'error'
+                        });
+                        console.log('error submit!!');
+                        return false;
+                    }
+                });
+            },
+            // 取消
+            cancel() {
+                window.location.href =
+                {% url 'NB:go_user_mine' %}
+            },
+            handleAvatarSuccess(res, file) {
+                this.imageUrl = URL.createObjectURL(file.raw);
+            },
+            beforeAvatarUpload(file) {
+
+            },
+            // 搜索
+            onsearch() {
+                window.location.href =
+                {% url 'NB:zwss_home' %}//需要跳转到哪一页
+            },
+
+            // 保存项目
+            saveproject() {
+                console.log(this.form)
+                var pro = {
+                    name: this.form.projectname,
+                    desc: this.form.projectdesc,
+                    time: this.form.projecttime,
+                    ofcompany: this.form.projectofcompany,
+                    responsibility: this.form.projectresponsibility
+                }
+                this.form.project.push(pro)
+                this.form.projectname = "",
+                    this.form.projectdesc = "",
+                    this.form.projecttime = "",
+                    this.form.projectofcompany = "",
+                    this.form.projectresponsibility = ""
+            },
+            // 保存工作经验
+            savejob() {
+                console.log(this.form)
+                var jobwork = {
+                    companyname: this.form.companyname,
+                    jobcategories: this.form.jobcategories,
+                    workingtime: this.form.workingtime,
+                    workdescription: this.form.workdescription,
+                    positionname: this.form.positionname,
+                    monthlysalary: this.form.monthlysalary,
+                    industry: this.form.industry
+                }
+                this.form.job.push(jobwork)
+                this.form.companyname = "",
+                    this.form.jobcategories = "",
+                    this.form.workingtime = "",
+                    this.form.workdescription = "",
+                    this.form.positionname = "",
+                    this.form.monthlysalary = "",
+                    this.form.industry = []
+            }
+        }
+    })
+</script>
+</html>

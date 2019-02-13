@@ -58,7 +58,8 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
-            <form class="form-horizontal" method="post" action={% url 'NB:company_register' %}>
+            <form class="form-horizontal" method="post" enctype="multipart/form-data" action={% url 'NB:company_register' %}>
+                {%csrf_token%}
                 <div class="form-group">
                     <label for="txtUsername" class="col-sm-3 control-label">用户名：</label>
                     <div class="col-sm-9">
@@ -108,6 +109,12 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <label for="userphone" class="col-sm-3 control-label">营业执照</label>
+                    <div class="col-sm-9">
+                        <input type="file" name="image_name" id="company_image"><span></span>
+                    </div>
+                </div>
+                <div class="form-group">
                     <label for="userage" class="col-sm-3 control-label">公司简介：</label>
                     <div class="col-sm-9">
                         <textarea cols="100" rows="5" class="form-control" id="userage"
@@ -132,11 +139,18 @@
     $(function () {
         $('#txtUsername').blur(function () {
             if ($('#txtUsername').val() != '') {
-                if ($('#txtUsername').val().match(/^[a-zA-Z0-9_-]{4,16}$/)){
+                if ($('#txtUsername').val().match(/^[a-zA-Z0-9_-]{4,16}$/)) {
                     $('#usernameSpan').html('')
                     $('#btnReg').attr('disabled', false)
-                }
-                else {
+                    $.getJSON('/company_user_name/', {'shenfen': 'company','name':$('#txtUsername').val()},function (data) {
+                        if (data['status'] == 404){
+                            $('#usernameSpan').html('')
+                            $('#btnReg').attr('disabled', false)
+                        }else {
+                            $('#usernameSpan').html('<h5 style="color: red">***用户名已存在***</h5>')
+                        }
+                    })
+                } else {
                     $('#usernameSpan').html('<h5 style="color: red">***用户名带有特殊字符或者少于4位***</h5>')
                     $('#btnReg').attr('disabled', true)
                 }
@@ -231,6 +245,15 @@
             if ($('#company_name').val() != '') {
                 $('#company_name_span').html('')
                 $('#btnReg').attr('disabled', false)
+                $.getJSON('/company_name/', {'name':$('#company_name').val()},function (data) {
+                    if (data['status'] == 404){
+                         $('#company_name_span').html('')
+                         $('#btnReg').attr('disabled', false)
+                    }else {
+                        $('#company_name_span').html('<h5 style="color: red">***该企业已经被注册过了***</h5>')
+                        $('#btnReg').attr('disabled', true)
+                    }
+                })
             } else {
                 $('#company_name_span').html('<h5 style="color: red">***企业名称不能为空***</h5>')
                 $('#btnReg').attr('disabled', true)
@@ -250,11 +273,26 @@
     })
     $(function () {
         $('#btnReg').mouseover(function () {
-            if ($('#txtUsername').val() != '' && $('#userpass').val() != '' && $('#new_userpass').val() != '' && $('#userphone').val() != '' && $('#checkuserpass').val() != '' && $('#company_name').val() != '' && $('#userage').val() != '') {
+            if ($('#txtUsername').val() != '' && $('#userpass').val() != '' && $('#new_userpass').val() != '' && $('#userphone').val() != '' && $('#checkuserpass').val() != '' && $('#company_name').val() != '' && $('#userage').val() != '' && $('#company_image').val() != '') {
                 $('#btnReg').attr('disabled', false)
             } else {
                 $('#btnReg').attr('disabled', true)
             }
+        })
+    })
+    $(function () {
+        $('#company_image').mouseout(function () {
+            var name = $('#company_image').val()
+            var hou = name.toLowerCase().split('.')
+            if (name==''){
+                $('#image_span').html('<h5 style="color: red">文件不能为空</h5>')
+            }if (hou[1]!="png" && hou[1]!="jpg"){
+                $('#image_span').html('')
+            }
+            else {
+                $('#image_span').html('<h5 style="color: red">上传的文件只能是PNG格式或者JPG格式</h5>')
+            }
+
         })
     })
 </script>

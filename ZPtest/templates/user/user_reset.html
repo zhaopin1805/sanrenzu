@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>欢迎访问博纳人才网</title>
+    <style type="text/css">
+        body {
+            background: url(../../static/user/login/bg.jpg) no-repeat;
+            background-size: cover;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .title {
+            font-size: 80px;
+            line-height: 200px;
+        }
+
+        .titlediv {
+            width: 1000px;
+            height: 200px;
+            margin: 0 auto;
+        }
+
+        img {
+            width: 200px;
+            height: 200px;
+            float: left;
+        }
+
+        .zhuce {
+            width: 300px;
+            height: 200px;
+            margin: 90px auto 0;
+        }
+
+        .login {
+            border: 0px solid gray;
+            text-align: center;
+            width: 300px;
+            height: 35px;
+        }
+
+        /* .login a{
+             display: inline-block;
+             font-size: 26px;
+         }*/
+        .company {
+
+            width: 150px;
+            float: left;
+        }
+
+        .user {
+            background: skyblue;
+            display: inline-block;
+            width: 150px;
+        }
+
+        .company a {
+            line-height: 35px;
+            display: inline-block;
+            height: 35px;
+        }
+
+        .user a {
+            line-height: 35px;
+            display: inline-block;
+            height: 35px;
+        }
+
+        .btn {
+            width: 300px;
+            height: 35px;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        form {
+            position: relative;
+        }
+
+        .username {
+            margin: 15px auto 2px;
+        }
+
+        input {
+            width: 300px;
+            height: 28px;
+            border: 1px solid gray;
+        }
+
+        .reg {
+            margin-top: 17px;
+            text-align: center;
+        }
+
+        .reg a:nth-child(1) {
+            margin-right: 30px;
+        }
+
+        .reg a {
+            text-decoration: none;
+            color: black;
+            font-size: 18px;
+        }
+
+        .reg a:hover {
+            color: blue;
+        }
+
+        .reg a:action {
+            color: gray;
+        }
+    </style>
+</head>
+<body>
+<div class="titlediv">
+    <img src="{% static 'user/login/icon.jpg' %}">
+    <h1 class="title">欢迎光临博纳人才网</h1>
+</div>
+<div class="zhuce">
+    <div class="login">
+        <h3 class="">用户找回密码</h3>
+    </div>
+
+    <div>
+
+        {#        <form method="post" action="{% url 'NB:user_reset' %}">#}
+        <form>
+            {% csrf_token %}
+            <div class="username"><input type="text" id="phone" name="phone" placeholder="请输入手机号"></div>
+            <div class="password"><input type="text" id="email" name="email" placeholder="请输入邮箱"></div>
+            <p id="xinxi"></p>
+            <input type="button" id="button" value="找回密码" class="btn"><br>
+        </form>
+
+    </div>
+    <div class="reg">
+    </div>
+</div>
+</body>
+</html>
+<script type="text/javascript" src={% static "user/regrster/jquery-1.8.3.js" %}></script>
+<script type="text/javascript" src={% static "user/regrster/bootstrap.min.js" %}></script>
+<script type="text/javascript">
+    $(function () {
+        $('#email').blur(function () {
+            $.getJSON('/user_set/', {
+                'user': 'user',
+                'phone': $('#phone').val(),
+                'email': $('#email').val()
+            }, function (data) {
+                if (data['status'] == '200') {
+                    $('#xinxi').html('')
+                } else {
+                    $('#xinxi').html('<h5 style="color: red">***没有该电话邮箱的用户***</h5>')
+                }
+            })
+        })
+    })
+    $(function () {
+        $('#button').click(function () {
+            var email = $('#email').val()
+            var phone = $('#phone').val()
+            var butn = $('.btn').attr('id')
+            if (email != '' || phone != '') {
+                if (butn == 'button') {
+                    $.getJSON('/user_reset/', {'user': 'user', 'email': email, 'phone': phone}, function (data) {
+                        if (data['status'] == 200) {
+                            $('#button').attr('value', data["show"])
+                            $('#button').attr('id', 'button2')
+                            $('#button').attr('disabled', true)
+                        } else {
+                            $('#button').attr('value', data["show"])
+                        }
+                    })
+                } else {
+                    $('#button2').click(function () {
+                        window.open({% url 'NB:go_user_mine' %})
+                    })
+                }
+            } else {
+                $('#xinxi').html('<h5 style="color: red">***电话和邮箱不能为空***</h5>')
+            }
+        })
+    })
+</script>

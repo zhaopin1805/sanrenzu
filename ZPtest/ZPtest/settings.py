@@ -75,26 +75,17 @@ WSGI_APPLICATION = 'ZPtest.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'NB_test',
-#         'USER': 'root',
-#         'PASSWORD': 'python1805',
-#         'PORT': 3306,
-#         'HOST': '118.25.209.213',
-#     }
-# }
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'NB_test',
+        'NAME': 'nb',
         'USER': 'root',
-        'PASSWORD': 'Liaofan33',
+        'PASSWORD': 'python1805',
         'PORT': 3306,
-        'HOST': 'localhost',
+        'HOST': '118.25.209.213',
     }
 }
+
 
 
 # Password validation
@@ -137,3 +128,5 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
+
+MEDIA_ROOT = os.path.join(BASE_DIR,'static/user/resume_img')

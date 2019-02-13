@@ -36,19 +36,19 @@
                     <li class="menu-active"><a href="{% url "NB:go_company_mine" %}">我的主页</a></li>
                     <li class="menu-has-children"><a href="">职位管理</a>
                         <ul>
-                            <li><a href="">职位发布</a></li>
-                            <li><a href="">查看发布岗位</a></li>
+                            <li><a href="{% url 'NB:upload_job_home' %}">职位发布</a></li>
+                            <li><a href="{% url 'NB:go_company_zhiweisousuo' 1 %}">查看发布岗位</a></li>
                         </ul>
                     </li>
-                    <li><a href="">邀约纪录</a></li>
                     <li><a href="">职位搜索</a></li>
-                    <li><a href="{% url 'NB:go_cpmpany_shoujianxiang' %}">收件箱</a></li>
-                    <li><a href="{% url 'NB:go_company_recaija' %}">公司人才夹</a></li>
+                    <li><a href="{% url 'NB:go_cpmpany_shoujianxiang' 1 %}">收件箱</a></li>
+                    <li><a href="{% url 'NB:go_company_recaijia' 1 %}">公司人才夹</a></li>
                     <li class="menu-has-children"><a href="">个人中心</a>
                         <ul>
-                            <li><a href="">修改公司基本信息</a></li>
-                            <li><a href="{% url 'NB:go_user_reset' %}">修改密码</a></li>
-                            <li><a href="">会员信息</a></li>
+                            <li><a href="{% url 'NB:change_company' %}">修改公司基本信息</a></li>
+                            <li><a href="{% url 'NB:go_company_reset' %}">找回密码</a></li>
+                            <li><a href="{% url 'NB:go_company_vip' %}">会员信息</a></li>
+                            <li><a href="{% url 'NB:quit_login' %}">用户注销</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -82,7 +82,6 @@
                                 <p style="font-size: 20px;height: 15%"><b style="color:red;">1500</b>份简历下载</p>
                                 <p style="font-size: 20px;height: 15%"><b style="color:red;">500</b>封邮件邀请</p>
                                 <div style="height: 8%"></div>
-                                <input type="checkbox" style="text-align: right;width: 20px;height: 20px">
                             </div>
                             <div style="width:30%;float: left;text-align: center;vertical-align: center;height: 100%;border: 1px solid black">
                                 <div style="height: 10%"></div>
@@ -94,7 +93,6 @@
                                 <p style="font-size: 20px;height: 15%"><b style="color:red;">3000</b>份简历下载</p>
                                 <p style="font-size: 20px;height: 15%"><b style="color:red;">1000</b>封邮件邀请</p>
                                 <div style="height: 8%"></div>
-                                <input type="checkbox" style="text-align: right;width: 20px;height: 20px">
                             </div>
                             <div style="width:30%;float: left;text-align: center;vertical-align: center;height: 100%;border: 1px solid black">
                                 <div style="height: 10%"></div>
@@ -106,13 +104,16 @@
                                 <p style="font-size: 20px;height: 15%"><b style="color:red;">3000</b>份简历下载</p>
                                 <p style="font-size: 20px;height: 15%"><b style="color:red;">1000</b>封邮件邀请</p>
                                 <div style="height: 8%"></div>
-                                <input type="checkbox" style="text-align: right;width: 20px;height: 20px">
                             </div>
-
+                            <select style="width: 90%;height: 15%;text-align:center;background: #269abc">
+                                    <option>请选择套餐</option>
+                                    <option class="taocan" value=1>套餐一</option>
+                                    <option class="taocan" value=2>套餐二</option>
+                                    <option class="taocan" value=3>套餐三</option>
+                            </select>
                         </div>
                         <div style="margin-top: 10%;margin-left: 40%">
-                            <button href=""><b style="color: red">点击购买</b></button>
-                            <button href="" style="margin-left: 10%"><b style="color: black">取消</b></button>
+                            <button id="goumai"><b style="color: red">点击购买</b></button>
                         </div>
                     </div>
 
@@ -140,7 +141,6 @@
         </div>
     </div>
 </footer>
-<!-- End footer Area -->
 
 <script src="{% static 'company/jquery-2.2.4.min.js' %}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
@@ -161,6 +161,21 @@
 <script src="{% static 'company/main.js' %}"></script>
 </body>
 </html>
+<script type="text/javascript" src={% static "/jquery-1.8.3.js" %}></script>
+<script type="text/javascript">
+    $(function () {
+            $("#goumai").click(function () {
+                var num =$(".taocan").attr("value");
+                $.getJSON("/goumai_vip/", {"num": num}, function (data) {
+                    if (data['status'] == "200") {
+                        alert("购买成功");
+                        window.open("/go_company_mine/",target="_self")
+                    }
+                })
+
+            })
+        })
+</script>
 
 
 

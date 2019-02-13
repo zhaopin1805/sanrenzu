@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="zxx" class="no-js">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" href="">
+    <meta name="author" content="codepixer">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta charset="UTF-8">
+    <title>欢迎登录博纳人才网</title>
+
+    <link href="{% static 'user/mine/css.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'user/mine/linearicons.css' %}">
+    <link rel="stylesheet" href="{% static 'user/mine/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'user/mine/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'user/mine/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'user/mine/nice-select.css' %}">
+    <link rel="stylesheet" href="{% static 'user/mine/animate.min.css' %}">
+    <link rel="stylesheet" href="{% static 'user/mine/owl.carousel.css' %}">
+    <link rel="stylesheet" href="{% static 'user/mine/main.css' %}">
+    <link rel="stylesheet" href="{% static 'user/mine/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'user/mine/public.css' %}">
+    <link rel="stylesheet" href="{% static 'user/mine/recruitmenting.css' %}">
+</head>
+<body>
+
+<header id="header" id="home">
+    <div class="container">
+        <div class="row align-items-center justify-content-between d-flex">
+            <div id="logo">
+                <a style="font-size: 30px">博纳人才网</a>
+            </div>
+            <nav id="nav-menu-container">
+                <ul class="nav-menu">
+                    <li class="menu-active"><a href="{% url "NB:go_user_mine" %}">我的主页</a></li>
+                    <li class="menu-has-children"><a href="#">简历管理</a>
+                        <ul>
+                            <li><a href="{% url 'NB:find_resume' %}">简历浏览</a></li>
+                            <li><a href="{% url 'NB:find_resume' %}">上传简历</a></li>
+                            <li><a class="resume_refresh" href="#">简历刷新</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="{% url 'NB:user_tdjd' 1 %}">投递进度</a></li>
+{#                    <li><a href="{% url 'NB:zwss_home' 1 %}">职位搜索</a></li>#}
+                    <li><a href="{% url 'NB:user_pbgs' 1 %}">屏蔽公司</a></li>
+                    <li><a href="{% url 'NB:user_zwsc' 1 %}">职位收藏</a></li>
+                    <li><a href="{% url 'NB:user_skgw' 1 %}">谁看过我</a></li>
+                    <li class="menu-has-children"><a href="#">个人中心</a>
+                        <ul>
+                            <li><a href="{% url 'NB:go_user_reset' %}">找回密码</a></li>
+                            <li><a href="{% url 'NB:go_user_vip' %}">会员信息</a></li>
+                            <li><a href="{% url 'NB:quit_login' %}">用户注销</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<section class="banner-area relative" id="home">
+
+    <div class="overlay overlay-bg" style="height: 723px">
+        <div style="margin-left: 350px;margin-top: 100px;width:600px;height: 400px">
+            <div style="float: left;width: 210px;height: 50px;">
+                <p style="font-size: 70px;color: blue;margin-top: 16px"></p>
+            </div>
+            <div style="float: left;width: 240px;height: 10px">
+
+            </div>
+            <div style="width: 800px;height: 400px;">
+                <div style="height: 65px"></div>
+                <div style="background-color:gray;width: 900px;height: 558px">
+                    <div style="width: 900px;height: 350px">
+                        <div class="plate-bottom" style="width: 900px;line-height: 45px;">
+                            <div class="thead" style="width: 900px;line-height: 45px;">
+                                <span class="thead-one" style="width: 30%;font-size: 30px"><b style="color: white">屏蔽公司</b></span>
+                                <span class="thead-two" style="width: 58%"></span>
+                                <span class="thead-three" style="width: 10%;font-size: 30px"><b style="color: white">操作</b></span>
+                            </div>
+                            <div class="position-list">
+                                {% for i in page %}
+                                    <div class="position" style="height: 135px">
+                                        <div class="select fl">
+                                            <input type="checkbox">
+                                        </div>
+                                        <div class="name fl" style="width: 53%;height: 25px">
+                                            <p><span><b style="color: #005cbf">{{ i.company_name }}</b> </span></p>
+                                        </div>
+                                        <div class="edit fr" style="width: 12%;color: crimson">
+                                            <a class="open" href="{% url 'NB:cancel_pingbi' i.company_name %}" style="color: crimson">取消屏蔽</a>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="plate-bottom" style="width: 900px;height: 30px;background-color: gray">
+                            <div class="thead"
+                                 style="width: 900px;height: 30px;background-color: gray;line-height: 70px;font-size: 15px">
+                                <span style="width: 5%"></span>
+                                    <a href="{% url 'NB:user_pbgs' 1 %}"><span style="width: 10%">首页</span></a>
+                                {% if page.has_previous %}
+                                    <a href="{% url 'NB:user_pbgs' page.previous_page_number %}"><span style="width: 5%">上一页</span></a>
+                                {% else %}
+                                    <a href="{% url 'NB:user_pbgs' 1 %}"><span style="width: 5%">上一页</span></a>
+                                {% endif %}
+                                {% if page.has_next %}
+                                    <a href="{% url 'NB:user_pbgs' page.next_page_number %}"><span style="width: 5%">下一页</span></a>
+                                {% else %}
+                                    <a href="{% url 'NB:user_pbgs' paginator.num_pages %}"><span
+                                            style="width: 5%">下一页</span></a>
+                                {% endif %}
+                                <a href="{% url 'NB:user_pbgs' paginator.num_pages %}"><span
+                                        style="width: 10%">尾页</span></a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="row fullscreen d-flex align-items-center justify-content-center">
+    </div>
+</section>
+<footer class="footer-area section-gap" style="height: 250px">
+    <div class="container" style="height: 100px">
+        <div class="row" style="margin-left: 300px">
+            <p>
+                <a href="#">关 于 我 们</a>---<a href="#">广 告 合 作 </a>---<a href="#">联 系 我 们 </a>---<a href="#">免 责 声 明 </a>---<a
+                    href="#">在 线 投 稿 </a>---<a href="#">投 诉 建 议 </a>
+            </p>
+        </div>
+
+        <div class="row footer-bottom d-flex justify-content-between" style="margin-left: 305px">
+
+            Copyright &copy;<script>document.write(new Date().getFullYear());</script>
+            python1805 NB 0.1 QUAN ZHAN SAN REN PRODUCT. 版权所有
+        </div>
+    </div>
+</footer>
+<!-- End footer Area -->
+
+<script src="{% static 'user/mine/jquery-2.2.4.min.js' %}"></script>
+<script src="{% static 'user/mine/popper.min.js' %}"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="{% static 'user/mine/bootstrap.min.js' %}"></script>
+
+<script src="{% static 'user/mine/easing.min.js' %}"></script>
+<script src="{% static 'user/mine/hoverIntent.js' %}"></script>
+<script src="{% static 'user/mine/superfish.min.js' %}"></script>
+<script src="{% static 'user/mine/jquery.ajaxchimp.min.js' %}"></script>
+<script src="{% static 'user/mine/jquery.magnific-popup.min.js' %}"></script>
+<script src="{% static 'user/mine/owl.carousel.min.js' %}"></script>
+<script src="{% static 'user/mine/jquery.sticky.js' %}"></script>
+<script src="{% static 'user/mine/jquery.nice-select.min.js' %}"></script>
+<script src="{% static 'user/mine/parallax.min.js' %}"></script>
+<script src="{% static 'user/mine/mail-script.js' %}"></script>
+<script src="{% static 'user/mine/main.js' %}"></script>
+</body>
+</html>
+<script>
+    $(function() {
+        $('.resume_refresh').click(function () {
+            $.getJSON('/resume_refresh/', function (data) {
+                if (data['status'] == '200'){
+                    alert('简历刷新成功')
+                }
+                if (data['status'] == '900'){
+                    alert('简历刷新失败，请上传简历')
+                }
+            })
+
+        })
+
+    })
+</script>

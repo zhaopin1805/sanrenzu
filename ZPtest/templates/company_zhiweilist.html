@@ -36,19 +36,19 @@
                     <li class="menu-active"><a href="{% url "NB:go_company_mine" %}">我的主页</a></li>
                     <li class="menu-has-children"><a href="">职位管理</a>
                         <ul>
-                            <li><a href="">职位发布</a></li>
-                            <li><a href="{% url 'NB:go_company_zhiweisousuo' %}">查看发布岗位</a></li>
+                            <li><a href="{% url 'NB:upload_job_home' %}">职位发布</a></li>
+                            <li><a href="{% url 'NB:go_company_zhiweisousuo' 1 %}">查看发布岗位</a></li>
                         </ul>
                     </li>
-                    <li><a href="">邀约纪录</a></li>
-                    <li><a href="">职位搜索</a></li>
-                    <li><a href="{% url 'NB:go_cpmpany_shoujianxiang' %}">收件箱</a></li>
-                    <li><a href="">公司人才夹</a></li>
+                    <li><a href="">简历搜索</a></li>
+                    <li><a href="{% url 'NB:go_cpmpany_shoujianxiang' 1 %}">收件箱</a></li>
+                    <li><a href="{% url 'NB:go_company_recaijia' 1 %}">公司人才夹</a></li>
                     <li class="menu-has-children"><a href="">个人中心</a>
                         <ul>
-                            <li><a href="">修改公司基本信息</a></li>
-                            <li><a href="{% url 'NB:go_user_reset' %}">修改密码</a></li>
-                            <li><a href="">会员信息</a></li>
+                            <li><a href="{% url 'NB:change_company' %}">修改公司基本信息</a></li>
+                            <li><a href="{% url 'NB:go_company_reset' %}">找回密码</a></li>
+                            <li><a href="{% url 'NB:go_company_vip' %}">会员信息</a></li>
+                            <li><a href="{% url 'NB:quit_login' %}">用户注销</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -73,86 +73,58 @@
                     <div style="width: 900px;height: 350px">
                         <div class="plate-bottom" style="width: 900px;line-height: 45px;">
                             <div class="thead" style="width: 900px;line-height: 45px;">
-                                <span class="thead-one" style="width: 30%;font-size: 30px"><b style="color: white">职位信息</b></span>
+                                <span class="thead-one" style="width: 30%;font-size: 30px"><b
+                                        style="color: white">职位信息</b></span>
                                 <span class="thead-two" style="width: 58%"></span>
-                                <span class="thead-three" style="width: 10%;font-size: 30px"><b style="color: white">操作</b></span>
+                                <span class="thead-three" style="width: 10%;font-size: 30px"><b
+                                        style="color: white">操作</b></span>
                             </div>
                             <div class="position-list">
-                                <div class="position" style="height: 135px">
-                                    <div class="select fl">
-                                        <input type="checkbox">
+                                {% for job in page %}
+
+                                    <div class="position" style="height: 135px">
+                                        <div class="select fl">
+                                            <input type="checkbox" disabled>
+                                        </div>
+                                        <div class="name fl" style="width: 53%;height: 25px">
+                                            <p><span><b style="color: #005cbf">{{ job.job_name }}</b> </span></p>
+                                            <ul style="color: black">
+                                                <li>{{ job.job_city }}</li>
+                                                <li>|</li>
+                                                <li>{{ job.work_year }}</li>
+                                                <li>|</li>
+                                                <li>{{ job.xueli }}</li>
+                                                <li>|</li>
+                                                <li>{{ job.money }}</li>
+                                            </ul>
+                                        </div>
+                                        <div class="edit fr" style="width: 12%;color: crimson">
+                                            <a class="open" href="{% url 'NB:xia_xian' 1 %}" style="color: crimson">下线</a>&nbsp;&nbsp;
+                                        </div>
                                     </div>
-                                    <div class="name fl" style="width: 53%;height: 25px">
-                                        <p><span><b style="color: #005cbf">PHP高级工程师</b> </span></p>
-                                        <ul style="color: black">
-                                            <li>武汉</li>
-                                            <li>|</li>
-                                            <li>1-3年工作经验</li>
-                                            <li>|</li>
-                                            <li>本科学历</li>
-                                            <li>|</li>
-                                            <li>4k-5k</li>
-                                        </ul>
-                                    </div>
-                                    <div class="edit fr" style="width: 12%;color: crimson">
-                                        <a class="open" href="" style="color: crimson">下线</a>&nbsp;&nbsp;
-                                        <a href="" style="color: crimson">修改</a>
-                                    </div>
-                                </div>
-                                <div class="position" style="height: 135px">
-                                    <div class="select fl">
-                                        <input type="checkbox">
-                                    </div>
-                                    <div class="name fl" style="width: 53%">
-                                        <p><span><b style="color: #005cbf">PHP高级工程师</b> </span></p>
-                                        <ul style="color: black">
-                                            <li>武汉</li>
-                                            <li>|</li>
-                                            <li>1-3年工作经验</li>
-                                            <li>|</li>
-                                            <li>本科学历</li>
-                                            <li>|</li>
-                                            <li>4k-5k</li>
-                                        </ul>
-                                    </div>
-                                    <div class="edit fr" style="width: 12%;">
-                                        <a class="open" href="" style="color: crimson">下线</a>&nbsp;&nbsp;
-                                        <a href="" style="color: crimson">修改</a>
-                                    </div>
-                                </div>
-                                <div class="position" style="height: 135px">
-                                    <div class="select fl">
-                                        <input type="checkbox">
-                                    </div>
-                                    <div class="name fl" style="width: 53%">
-                                        <p><span><b style="color: #005cbf">PHP高级工程师</b> </span></p>
-                                        <ul style="color: black">
-                                            <li>武汉</li>
-                                            <li>|</li>
-                                            <li>1-3年工作经验</li>
-                                            <li>|</li>
-                                            <li>本科学历</li>
-                                            <li>|</li>
-                                            <li>4k-5k</li>
-                                        </ul>
-                                    </div>
-                                    <div class="edit fr" style="width: 12%;">
-                                        <a class="open" href="" style="color: crimson">下线</a>&nbsp;&nbsp;
-                                        <a href="" style="color: crimson">修改</a>
-                                    </div>
-                                </div>
+                                {% endfor %}
                             </div>
                         </div>
                         <div class="plate-bottom" style="width: 900px;height: 30px;background-color: gray">
                             <div class="thead"
                                  style="width: 900px;height: 30px;background-color: gray;line-height: 70px;font-size: 15px">
                                 <span style="width: 5%"></span>
-                                <a href=""><span style="width: 10%">首页</span></a>
-                                <a href=""><span style="width: 3%">1</span></a>
-                                <a href=""><span style="width: 3%">2</span></a>
-                                <a href=""><span style="width: 3%">3</span></a>
-                                <a href=""><span style="width: 5%">.......</span></a>
-                                <a href=""><span style="width: 5%">下一页</span></a>
+                                <a href="{% url 'NB:go_company_zhiweisousuo' 1 %}"><span style="width: 10%">首页</span></a>
+                                {% if page.has_previous %}
+                                    <a href="{% url 'NB:go_company_zhiweisousuo' page.previous_page_number %}"><span
+                                            style="width: 5%">上一页</span></a>
+                                {% else %}
+                                    <a href="{% url 'NB:go_company_zhiweisousuo' 1 %}"><span style="width: 5%">上一页</span></a>
+                                {% endif %}
+                                {% if page.has_next %}
+                                    <a href="{% url 'NB:go_company_zhiweisousuo' page.next_page_number %}"><span
+                                            style="width: 5%">下一页</span></a>
+                                {% else %}
+                                    <a href="{% url 'NB:go_company_zhiweisousuo' paginator.num_pages %}"><span
+                                            style="width: 5%">下一页</span></a>
+                                {% endif %}
+                                <a href="{% url 'NB:go_company_zhiweisousuo' paginator.num_pages %}"><span
+                                        style="width: 10%">尾页</span></a>
                             </div>
                         </div>
 

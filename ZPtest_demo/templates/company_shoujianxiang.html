@@ -1,0 +1,308 @@
+	<!DOCTYPE html>
+    {% load static %}
+	<html lang="zxx" class="no-js">
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<link rel="shortcut icon" href="img/fav.png">
+		<meta name="author" content="codepixer">
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<meta charset="UTF-8">
+		<title>欢迎登录博纳人才网</title>
+
+		<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
+			<link rel="stylesheet" href="{% static 'company/linearicons.css' %}">
+			<link rel="stylesheet" href="{% static 'company/font-awesome.min.css' %}">
+			<link rel="stylesheet" href="{% static 'company/bootstrap.css' %}">
+			<link rel="stylesheet" href="{% static 'company/magnific-popup.css' %}">
+			<link rel="stylesheet" href="{% static 'company/nice-select.css' %}">
+			<link rel="stylesheet" href="{% static 'company/animate.min.css' %}">
+			<link rel="stylesheet" href="{% static 'company/owl.carousel.css' %}">
+			<link rel="stylesheet" href="{% static 'company/main.css' %}">
+            <link rel="stylesheet" href="{% static 'list_yemian/reset.css' %}">
+            <link rel="stylesheet" href="{% static 'list_yemian/public.css' %}">
+            <link rel="stylesheet" href="{% static 'list_yemian/recruitmenting.css' %}">
+		</head>
+		<body>
+
+			  <header id="header" id="home">
+			    <div class="container">
+			    	<div class="row align-items-center justify-content-between d-flex">
+				      <div id="logo">
+				        <a style="font-size: 30px">博纳人才网</a>
+				      </div>
+				      <nav id="nav-menu-container">
+				        <ul class="nav-menu">
+				          <li class="menu-active"><a href="{% url "NB:go_company_mine" %}">我的主页</a></li>
+							<li class="menu-has-children" ><a href="">职位管理</a>
+							<ul>
+								<li><a href="">职位发布</a></li>
+								<li><a href="{% url 'NB:go_company_zhiweisousuo' %}">查看发布岗位</a></li>
+				            </ul>
+						  </li>
+						  <li><a href="">邀约纪录</a></li>
+						  <li><a href="">职位搜索</a></li>
+				          <li><a href="{% url 'NB:go_cpmpany_shoujianxiang' %}">收件箱</a></li>
+				          <li><a href="{% url 'NB:go_company_recaija' %}">公司人才夹</a></li>
+				          <li class="menu-has-children"><a href="">个人中心</a>
+				            <ul>
+								<li><a href="">修改公司基本信息</a></li>
+								<li><a href="{% url 'NB:go_user_reset' %}">修改密码</a></li>
+								<li><a href="">会员信息</a></li>
+				            </ul>
+				          </li>
+				        </ul>
+				      </nav>
+			    	</div>
+			    </div>
+			  </header>
+
+			<section class="banner-area relative" id="home">
+
+				<div class="overlay overlay-bg" style="height: 723px">
+                    <div style="margin-left: 350px;margin-top: 100px;width:600px;height: 400px">
+                            <div style="float: left;width: 210px;height: 50px;">
+                                <p style="font-size: 70px;color: blue;margin-top: 16px">收件箱</p>
+                            </div>
+                            <div style="float: left;width: 240px;height: 10px">
+                            <img style="width:80px;height: 60px;" src="{% static 'img/e1.jpg' %}">
+                            </div>
+                            <div style="width: 800px;height: 400px;">
+                                <div style="height: 65px"></div>
+                                <div style="background-color:gray;width: 900px;height: 558px">
+                                    <div style="width: 900px;height: 350px">
+                                        <div class="plate-bottom" style="width: 700px;line-height: 45px">
+                                        <div class="thead" style="width: 900px;line-height: 45px">
+                                            <span class="thead-one">简历id</span>
+                                            <span class="thead-two">姓名</span>
+                                            <span class="thead-three">学历</span>
+                                            <span class="thead-four">城市</span>
+                                            <span class="thead-five">投递时间</span>
+                                        </div>
+                                        </div>
+                                        <div class="plate-bottom" style="width: 700px;height: 30px;">
+                                            <a href="">
+                                        <div class="thead" style="width: 900px;background-color: cornflowerblue">
+                                            <span class="thead-one">简历id</span>
+                                            <span class="thead-two">姓名</span>
+                                            <span class="thead-three">学历</span>
+                                            <span class="thead-four">城市</span>
+                                            <span class="thead-five">投递时间</span>
+                                        </div>
+                                            </a>
+                                        </div>
+                                         <div class="plate-bottom" style="width: 700px;height: 30px;">
+                                             <a href="">
+                                        <div class="thead" style="width: 900px;background-color: cornflowerblue">
+                                            <span class="thead-one">简历id</span>
+                                            <span class="thead-two">姓名</span>
+                                            <span class="thead-three">学历</span>
+                                            <span class="thead-four">城市</span>
+                                            <span class="thead-five">投递时间</span>
+                                        </div>
+                                            </a>
+                                        </div>
+                                         <div class="plate-bottom" style="width: 700px;height: 30px;">
+                                             <a href="">
+                                        <div class="thead" style="width: 900px;background-color: cornflowerblue">
+                                            <span class="thead-one">简历id</span>
+                                            <span class="thead-two">姓名</span>
+                                            <span class="thead-three">学历</span>
+                                            <span class="thead-four">城市</span>
+                                            <span class="thead-five">投递时间</span>
+                                        </div>
+                                            </a>
+                                        </div>
+                                         <div class="plate-bottom" style="width: 700px;height: 30px;">
+                                             <a href="">
+                                        <div class="thead" style="width: 900px;background-color: cornflowerblue">
+                                            <span class="thead-one">简历id</span>
+                                            <span class="thead-two">姓名</span>
+                                            <span class="thead-three">学历</span>
+                                            <span class="thead-four">城市</span>
+                                            <span class="thead-five">投递时间</span>
+                                        </div>
+                                            </a>
+                                        </div>
+                                         <div class="plate-bottom" style="width: 700px;height: 30px;">
+                                             <a href="">
+                                        <div class="thead" style="width: 900px;background-color: cornflowerblue">
+                                            <span class="thead-one">简历id</span>
+                                            <span class="thead-two">姓名</span>
+                                            <span class="thead-three">学历</span>
+                                            <span class="thead-four">城市</span>
+                                            <span class="thead-five">投递时间</span>
+                                        </div>
+                                            </a>
+                                        </div>
+                                         <div class="plate-bottom" style="width: 700px;height: 30px;">
+                                             <a href="">
+                                        <div class="thead" style="width: 900px;background-color: cornflowerblue">
+                                            <span class="thead-one">简历id</span>
+                                            <span class="thead-two">姓名</span>
+                                            <span class="thead-three">学历</span>
+                                            <span class="thead-four">城市</span>
+                                            <span class="thead-five">投递时间</span>
+                                        </div>
+                                            </a>
+                                        </div>
+                                         <div class="plate-bottom" style="width: 700px;height: 30px;">
+                                             <a href="">
+                                        <div class="thead" style="width: 900px;background-color: cornflowerblue">
+                                            <span class="thead-one">简历id</span>
+                                            <span class="thead-two">姓名</span>
+                                            <span class="thead-three">学历</span>
+                                            <span class="thead-four">城市</span>
+                                            <span class="thead-five">投递时间</span>
+                                        </div>
+                                            </a>
+                                        </div>
+                                         <div class="plate-bottom" style="width: 700px;height: 30px;">
+                                             <a href="">
+                                        <div class="thead" style="width: 900px;background-color: cornflowerblue">
+                                            <span class="thead-one">简历id</span>
+                                            <span class="thead-two">姓名</span>
+                                            <span class="thead-three">学历</span>
+                                            <span class="thead-four">城市</span>
+                                            <span class="thead-five">投递时间</span>
+                                        </div>
+                                            </a>
+                                        </div>
+                                         <div class="plate-bottom" style="width: 700px;height: 30px;">
+                                             <a href="">
+                                        <div class="thead" style="width: 900px;background-color: cornflowerblue">
+                                            <span class="thead-one">简历id</span>
+                                            <span class="thead-two">姓名</span>
+                                            <span class="thead-three">学历</span>
+                                            <span class="thead-four">城市</span>
+                                            <span class="thead-five">投递时间</span>
+                                        </div>
+                                            </a>
+                                        </div>
+                                         <div class="plate-bottom" style="width: 700px;height: 30px;">
+                                             <a href="">
+                                        <div class="thead" style="width: 900px;background-color: cornflowerblue">
+                                            <span class="thead-one">简历id</span>
+                                            <span class="thead-two">姓名</span>
+                                            <span class="thead-three">学历</span>
+                                            <span class="thead-four">城市</span>
+                                            <span class="thead-five">投递时间</span>
+                                        </div>
+                                            </a>
+                                        </div>
+                                         <div class="plate-bottom" style="width: 700px;height: 30px;">
+                                             <a href="">
+                                        <div class="thead" style="width: 900px;background-color: cornflowerblue">
+                                            <span class="thead-one">简历id</span>
+                                            <span class="thead-two">姓名</span>
+                                            <span class="thead-three">学历</span>
+                                            <span class="thead-four">城市</span>
+                                            <span class="thead-five">投递时间</span>
+                                        </div>
+                                            </a>
+                                        </div>
+                                         <div class="plate-bottom" style="width: 700px;height: 30px;">
+                                             <a href="">
+                                        <div class="thead" style="width: 900px;background-color: cornflowerblue">
+                                            <span class="thead-one">简历id</span>
+                                            <span class="thead-two">姓名</span>
+                                            <span class="thead-three">学历</span>
+                                            <span class="thead-four">城市</span>
+                                            <span class="thead-five">投递时间</span>
+                                        </div>
+                                            </a>
+                                        </div>
+                                         <div class="plate-bottom" style="width: 700px;height: 30px;">
+                                             <a href="">
+                                        <div class="thead" style="width: 900px;background-color: cornflowerblue">
+                                            <span class="thead-one">简历id</span>
+                                            <span class="thead-two">姓名</span>
+                                            <span class="thead-three">学历</span>
+                                            <span class="thead-four">城市</span>
+                                            <span class="thead-five">投递时间</span>
+                                        </div>
+                                            </a>
+                                        </div>
+                                         <div class="plate-bottom" style="width: 700px;height: 30px;">
+                                             <a href="">
+                                        <div class="thead" style="width: 900px;background-color: cornflowerblue">
+                                            <span class="thead-one">简历id</span>
+                                            <span class="thead-two">姓名</span>
+                                            <span class="thead-three">学历</span>
+                                            <span class="thead-four">城市</span>
+                                            <span class="thead-five">投递时间</span>
+                                        </div>
+                                            </a>
+                                        </div>
+                                         <div class="plate-bottom" style="width: 700px;height: 30px;">
+                                             <a href="">
+                                        <div class="thead" style="width: 900px;background-color: cornflowerblue">
+                                            <span class="thead-one">简历id</span>
+                                            <span class="thead-two">姓名</span>
+                                            <span class="thead-three">学历</span>
+                                            <span class="thead-four">城市</span>
+                                            <span class="thead-five">投递时间</span>
+                                        </div>
+                                            </a>
+                                        </div>
+                                        <div class="plate-bottom" style="width: 700px;height: 20px">
+                                        <div class="thead" style="width: 900px;line-height: 45px;height: 20px">
+                                        </div>
+                                        </div >
+                                        <div class="plate-bottom" style="width: 700px;height: 30px;background-color: gray">
+                                        <div class="thead" style="width: 900px;height: 30px;background-color: gray;line-height: 45px">
+                                            <span style="width: 40%">页码</span>
+                                            <a><span style="width: 15%">首页</span></a>
+                                            <a><span style="width: 5%">1</span></a>
+                                            <a><span style="width: 5%">2</span></a>
+                                            <a><span style="width: 5%">3</span></a>
+                                            <a><span style="width: 10%">.......</span></a>
+                                            <a><span style="width: 15%">下一页</span></a>
+                                        </div>
+                                        </div>
+
+                                </div>
+                            </div>
+
+                            </div>
+                    </div>
+                </div>
+					<div class="row fullscreen d-flex align-items-center justify-content-center">
+					</div>
+			</section>
+			<footer class="footer-area section-gap" style="height: 250px">
+				<div class="container" style="height: 100px">
+					<div class="row" style="margin-left: 300px">
+						<p >
+							<a href="#">关 于 我 们</a>---<a href="#">广 告 合 作  </a>---<a href="#">联 系 我 们  </a>---<a href="#">免 责 声 明  </a>---<a href="#">在 线 投 稿  </a>---<a href="#">投 诉 建 议  </a>
+						</p>
+					</div>
+
+					<div class="row footer-bottom d-flex justify-content-between" style="margin-left: 305px">
+
+							Copyright &copy;<script>document.write(new Date().getFullYear());</script>    python1805 NB 0.1 QUAN  ZHAN SAN  REN PRODUCT. 版权所有
+					</div>
+				</div>
+			</footer>
+			<!-- End footer Area -->
+
+			<script src="{% static 'company/jquery-2.2.4.min.js' %}"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+			<script src="{% static 'company/bootstrap.min.js' %}"></script>
+
+  			<script src="{% static 'company/easing.min.js' %}"></script>
+			<script src="{% static 'company/hoverIntent.js' %}"></script>
+			<script src="{% static 'company/superfish.min.js' %}"></script>
+			<script src="{% static 'company/jquery.ajaxchimp.min.js' %}"></script>
+			<script src="{% static 'company/jquery.magnific-popup.min.js' %}"></script>
+			<script src="{% static 'company/owl.carousel.min.js' %}"></script>
+			<script src="{% static 'company/jquery.sticky.js' %}"></script>
+			<script src="{% static 'company/jquery.nice-select.min.js' %}"></script>
+			<script src="{% static 'company/parallax.min.js' %}"></script>
+			<script src="{% static 'company/mail-script.js' %}"></script>
+			<script src="{% static 'company/main.js' %}"></script>
+		</body>
+	</html>
+
+
+

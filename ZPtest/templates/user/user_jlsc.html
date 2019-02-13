@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="{% static 'user/jlsc/css/group.css' %}"/>
+		<link rel="stylesheet" type="text/css" href="{% static 'user/jlsc/css/grzx.css' %}">
+	</head>
+	<body>
+		<div class="grzx">
+			<div class="mbox">
+				<div class="grzx-nav">
+					<h1>简历上传</h1>
+					<div class="blank1"></div>
+					<form action="{% url 'NB:save_xinxi' %}" method="post" enctype="multipart/form-data">
+						<div class="grzx-img">
+							<img src="/static/user/resume_img/resume_add.jpg" id="preImg" style="border: 1px solid red; padding: 5px; width: 80%"
+                                onclick="selector.click()"/>
+							<br />
+							<input type="file" id="selector" name="resume_img" style="display: none"
+                                onchange="upload_img(this.files[0])"/>
+						</div>
+						<div class="grzx-from">
+							<div class="ft-text">姓名：</div>
+							<div class="rt-inp"><input type="text" placeholder="请输入" name="username"/></div>
+						</div>
+						<div class="grzx-from">
+							<div class="ft-text">性别：</div>
+							<div class="edit-xb">
+								<ul>
+									<li>
+										<input name="sex"  type="radio" value="男"/>&nbsp;男
+									</li>
+									<li>
+										<input name="sex"  type="radio" value="女"/>&nbsp;女
+									</li>
+								</ul>
+							</div>	
+						</div>
+						<div class="grzx-from">
+							<div class="ft-text">年龄：</div>
+							<div class="rt-inp"><input type="text" placeholder="请输入" name="age"/></div>
+						</div>
+                        <div class="grzx-from">
+							<div class="ft-text">学历：</div>
+							<div class="rt-inp">
+								<select name="xueli">
+									<option>请选择</option>
+									<option>大专以下</option>
+									<option>大专</option>
+									<option>本科</option>
+                                    <option>研究生</option>
+                                    <option>研究生以上</option>
+								</select>
+							</div>
+						</div>
+						<div class="grzx-from">
+							<div class="ft-text">求职状态：</div>
+							<div class="rt-inp">
+								<select name="job_status">
+									<option>请选择</option>
+									<option>离职</option>
+									<option>在职，可一个月到岗</option>
+									<option>在职，考虑换工作</option>
+								</select>
+							</div>	
+						</div>
+						<div class="grzx-from">
+							<div class="ft-text">电子邮箱：</div>
+							<div class="rt-inp"><input type="text" name="email" placeholder="请输入" /></div>
+						</div>
+						<div class="grzx-from">
+							<div class="ft-text">联系方式：</div>
+							<div class="rt-inp"><input type="text" name="phone" placeholder="请输入" /></div>
+						</div>
+                        <div class="grzx-from">
+							<div class="ft-text">期望城市：</div>
+							<div class="rt-inp">
+								<select name="city">
+									<option>不限</option>
+									<option>北京</option>
+									<option>上海</option>
+                                    <option>广州</option>
+                                    <option>西安</option>
+								</select>
+							</div>
+						</div>
+						<div class="grzx-from">
+							<div class="ft-text">工作时间：</div>
+							<div class="rt-inp">
+								<select name="job_suffer">
+									<option>无</option>
+									<option>1-3年</option>
+									<option>3-5年</option>
+                                    <option>5年以上</option>
+								</select>
+							</div>	
+						</div>
+						<div class="grzx-from">
+							<div class="ft-text">期望月薪：</div>
+							<div class="rt-inp">
+								<select name="month_money">
+									<option>请选择</option>
+									<option>3000以下</option>
+                                    <option>3000-5000</option>
+                                    <option>5000-8000</option>
+                                    <option>8000-10000</option>
+                                    <option>10000-12000</option>
+                                    <option>12000-15000</option>
+                                    <option>15000以上</option>
+								</select>
+							</div>
+						</div>
+						<div class="grzx-from">
+							<div class="ft-text">求职方向：</div>
+							<div class="rt-inp">
+								<select name="job_direction">
+                                    <option>请选择</option>
+									<option>python开发工程师</option>
+									<option>java开发工程师</option>
+									<option>php开发工程师</option>
+									<option>h5开发工程师</option>
+								</select>
+							</div>	
+						</div>
+						<div class="grzx-from">
+							<div class="ft-text">教育经历：</div>
+							<div class="rt-inp"><textarea name="edu"></textarea></div>
+						</div>
+						<div class="grzx-from">
+							<div class="ft-text">个人简介：</div>
+							<div class="rt-inp"><textarea name="resume"></textarea></div>
+						</div>
+						<div class="grzx-from">
+							<div class="ft-text">技能特长：</div>
+							<div class="rt-inp"><textarea name="skill"></textarea></div>
+						</div>
+						<div class="grzx-from">
+							<div class="ft-text">项目经验：</div>
+							<div class="rt-inp"><textarea name="object"></textarea></div>
+						</div>
+                        <div class="grzx-from">
+							<div class="ft-text">工作经验：</div>
+							<div class="rt-inp"><textarea name="job"></textarea></div>
+						</div>
+                        <div class="grzx-from">
+							<div class="ft-text">简历状态：</div>
+							<div class="edit-xb">
+								<ul>
+									<li>
+										<input name="resume_status"  type="radio" value="公开"/>&nbsp;公开
+									</li>
+									<li>
+										<input name="resume_status"  type="radio" value="保密"/>&nbsp;保密
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="blank20"></div>
+						<div class="grzx-from tj-btn">
+							<ul>
+								<li><input type="submit" value="提交" class="btn-tj" /></li>
+{#								<li><input type="submit" value="取消" class="btn-qx"  /></li>#}
+							</ul>
+						</div>
+					</form>
+				</div>
+				<div class="blank100"></div>
+			</div>
+		</div>
+	</body>
+</html>
+<script type="text/javascript" src={% static "user/jlsc/js/jquery-form.js" %}></script>
+<script type="text/javascript" src={% static "user/jlsc/js/jquery.js" %}></script>
+<script type="text/javascript">
+    function upload_img(file) {
+        var request = new XMLHttpRequest()
+        url = '{% url 'NB:img' %}'
+        request.open('POST', url, true)
+        request.onload = function () {
+            if (request.status == 200 && request.readyState ==4){
+                {#alert(request.responseText)#}
+                data = JSON.parse(request.responseText)
+                if(data.msg == 1){
+                    $('#preImg').attr('src', '/static/' + data.path)
+                }
+            }
+        }
+        var formdata = new FormData()
+        formdata.append('photo', file)
+        formdata.append('username', 'lby')
+        request.send(formdata)
+    }
+</script>

@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="zxx" class="no-js">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" href="">
+    <meta name="author" content="codepixer">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta charset="UTF-8">
+    <title>欢迎登录博纳人才网</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'user/mine/linearicons.css' %}">
+    <link rel="stylesheet" href="{% static 'user/mine/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'user/mine/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'user/mine/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'user/mine/nice-select.css' %}">
+    <link rel="stylesheet" href="{% static 'user/mine/animate.min.css' %}">
+    <link rel="stylesheet" href="{% static 'user/mine/owl.carousel.css' %}">
+    <link rel="stylesheet" href="{% static 'user/mine/main.css' %}">
+</head>
+<body>
+
+<header id="header" id="home">
+    <div class="container">
+        <div class="row align-items-center justify-content-between d-flex">
+            <div id="logo">
+                <a style="font-size: 30px"><img src="" alt="" title=""/>博纳人才网</a>
+            </div>
+            <nav id="nav-menu-container">
+                <ul class="nav-menu">
+                    <li class="menu-active"><a href="{% url "NB:go_user_mine" %}">我的主页</a></li>
+                    <li class="menu-has-children"><a href="#">简历管理</a>
+                        <ul>
+                            <li><a href="{% url 'NB:find_resume' %}">简历浏览</a></li>
+                            <li><a href="{% url 'NB:find_resume' %}">上传简历</a></li>
+                            <li><a class="resume_refresh" href="#">简历刷新</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="{% url 'NB:user_tdjd' 1 %}">投递进度</a></li>
+{#                    <li><a href="{% url 'NB:zwss_home' 1 %}">职位搜索</a></li>#}
+                    <li><a href="{% url 'NB:user_pbgs' 1 %}">屏蔽公司</a></li>
+                    <li><a href="{% url 'NB:user_zwsc' 1 %}">职位收藏</a></li>
+                    <li><a href="{% url 'NB:user_skgw' 1 %}">谁看过我</a></li>
+                    <li class="menu-has-children"><a href="#">个人中心</a>
+                        <ul>
+                            <li><a href="{% url 'NB:go_user_reset' %}">找回密码</a></li>
+                            <li><a href="{% url 'NB:go_user_vip' %}">会员信息</a></li>
+                            <li><a href="{% url 'NB:quit_login' %}">用户注销</a></li>
+                        </ul>
+                    </li>
+                    <!--<li><a class="ticker-btn" href="#">Signup</a></li>-->
+                    <!--<li><a class="ticker-btn" href="#">Login</a></li>				          				          -->
+                </ul>
+            </nav><!-- #nav-menu-container -->
+        </div>
+    </div>
+</header><!-- #header -->
+
+<!-- start banner Area -->
+<section class="banner-area relative" id="home">
+    <div class="overlay overlay-bg"></div>
+    <div class="container">
+        <div class="row fullscreen d-flex align-items-center justify-content-center">
+            <div class="banner-content col-lg-12" style="width: 800px; margin-top: 50px;">
+                <h1 class="text-white">
+                    每天有超过<span>50万</span> 人在博纳人才找工作
+                </h1>
+                <form action="{% url 'NB:zwss_home' 1 %}" class="serach-form-area" method="post">
+                    <div class="row justify-content-center form-wrap">
+                        <div style="width: 800px">
+                            <input style="width: 800px" type="text" class="form-control" name="guanjianzi"
+                                   placeholder="请输入关键字，例如Java、python、销售代表、行政助理等">
+                        </div>
+
+                        <!--<div class="col-lg-2 form-cols">-->
+                        <!--<button type="button" class="btn btn-info">-->
+                        <!--<span class="lnr lnr-magnifier"></span> 关键字搜索-->
+                        <!--</button>-->
+                        <!--</div>-->
+                    </div>
+                    <!--</form>-->
+                    <p class="text-white" style="font-size: 20px"><span><b>搜索纪录:</b></span><b style="color: black">
+                        python开发工程师, Java开发工程师, 爬虫工程师, H5......</b></p>
+                    <!--<form action="" class="serach-form-area">-->
+                    <div class="row justify-content-center form-wrap">
+                        <div class="default-select" id="default-selects">
+                            <select name="xueli">
+                                <option>学历</option>
+                                <option>大专以下</option>
+                                <option>大专</option>
+                                <option>本科</option>
+                                <option>研究生</option>
+                                <option>研究生以上</option>
+                            </select>
+                        </div>
+                        <div class="default-select" id="default-selects2">
+                            <select name="time">
+                                <option>工作时间</option>
+                                <option>无</option>
+                                <option>1-3年</option>
+                                <option>3-5年</option>
+                                <option>5年以上</option>
+                            </select>
+                        </div>
+                        <div class="default-select" id="default-selects2">
+                            <select name="money">
+                                <option>薪资要求</option>
+                                <option>3000以下</option>
+                                <option>3000-5000</option>
+                                <option>5000-8000</option>
+                                <option>8000-10000</option>
+                                <option>10000-12000</option>
+                                <option>12000-15000</option>
+                                <option>15000以上</option>
+                            </select>
+                        </div>
+{#                        <div class="default-select" id="default-selects2">#}
+{#                            <select>#}
+{#                                <option value="1">行业</option>#}
+{#                                <option value="2">Medical</option>#}
+{#                                <option value="3">Technology</option>#}
+{#                                <option value="4">Goverment</option>#}
+{#                                <option value="5">Development</option>#}
+{#                            </select>#}
+{#                        </div>#}
+                        <div class="default-select" id="default-selects2">
+                            <select name="job">
+                                <option>岗位</option>
+                                <option>python开发工程师</option>
+                                <option>java开发工程师</option>
+                                <option>php开发工程师</option>
+                                <option>h5开发工程师</option>
+                            </select>
+                        </div>
+                        <div class="default-select" id="default-selects2">
+                            <select name="city">
+                                <option>期望工作地点</option>
+                                <option>北京</option>
+                                <option>上海</option>
+                                <option>广州</option>
+                                <option>西安</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="sousuo">
+                        <input type="submit" value="搜索" class="btn"><br>
+                    </div>
+                    <div style="float: right;">
+                        <h3 style="text-align: center">客服</h3>
+                        <p>
+                        <div style="text-align: left;margin-left: 40px;height: 100px;font-size: 12px;color: black;">
+                            <div style="height: 20px;"></div>
+                            传真: 010-12345678<br>
+                            联系qq: 123456<br>
+                            联系邮箱: bona123@163.com<br>
+                            客服电话: 400-800-900
+                        </div>
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End banner Area -->
+{#              <!-- Start features Area -->#}
+{#                <section class="features-area">#}
+{#                    <div class="container">#}
+{#                        <div class="row" style="width: 1300px">#}
+{#                            <div class="col-lg-3 col-md-6" >#}
+{#                                <div class="single-feature" style="background: lightgoldenrodyellow;width:350px;height: 250px">#}
+{#                                    <h4 style="margin-top: 30px"><a href="" style="font-size: 40px;">职位发布</a></h4>#}
+{#                                    <div style="font-size: 20px;color: blue ;margin-top: 60px">#}
+{#                                        已发布{{ num }}个职位<br>#}
+{#                                        剩余发布量{{ num }}个岗位#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <div class="col-lg-3 col-md-6" style="margin-left: 100px">#}
+{#                                <div class="single-feature" style="background: lightgoldenrodyellow;width:350px;height: 250px">#}
+{#                                    <h4 style="margin-top: 30px"><a href="" style="font-size: 40px">收件箱</a></h4>#}
+{#                                    <div style="font-size: 20px;color: blue;margin-top: 60px">#}
+{#                                        共收到{{ num }}份简历<br>#}
+{#                                        {{ num }}还未查看#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <div class="col-lg-3 col-md-6" style="margin-left: 100px">#}
+{#                                <div class="single-feature" style="background: lightgoldenrodyellow;width:350px;height: 250px">#}
+{#                                    <h4 style="margin-top: 30px"><a href="" style="font-size: 40px">会员信息</a></h4>#}
+{#                                    <div style="font-size:20px;color: blue;margin-top: 60px">#}
+{#                                        剩余{{ num }}个岗位， {{ num }}个下载量<br>#}
+{#                                        剩余{{ num }}个邮件邀约#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </section>#}
+<!-- End features Area -->
+
+
+<!-- Start popular-post Area -->
+<!--<section class="popular-post-area pt-100">-->
+<!--<div class="container">-->
+<!--<div class="row align-items-center">-->
+<!--<div class="active-popular-post-carusel">-->
+<!--<div class="single-popular-post d-flex flex-row">-->
+<!--<div class="thumb">-->
+<!--<img class="img-fluid" src="img/p1.png" alt="">-->
+<!--<a class="btns text-uppercase" href="#">view job post</a>-->
+<!--</div>-->
+<!--<div class="details">-->
+<!--<a href="#"><h4>Creative Designer</h4></a>-->
+<!--<h6>Los Angeles</h6>-->
+<!--<p>-->
+<!--Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod temporinc ididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis.-->
+<!--</p>-->
+<!--</div>-->
+<!--</div>	-->
+<!--<div class="single-popular-post d-flex flex-row">-->
+<!--<div class="thumb">-->
+<!--<img src="img/p2.png" alt="">-->
+<!--<a class="btns text-uppercase" href="#">view job post</a>-->
+<!--</div>-->
+<!--<div class="details">-->
+<!--<a href="#"><h4>Creative Designer</h4></a>-->
+<!--<h6>Los Angeles</h6>-->
+<!--<p>-->
+<!--Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod temporinc ididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis.-->
+<!--</p>-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="single-popular-post d-flex flex-row">-->
+<!--<div class="thumb">-->
+<!--<img src="img/p1.png" alt="">-->
+<!--<a class="btns text-uppercase" href="#">view job post</a>-->
+<!--</div>-->
+<!--<div class="details">-->
+<!--<a href="#"><h4>Creative Designer</h4></a>-->
+<!--<h6>Los Angeles</h6>-->
+<!--<p>-->
+<!--Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod temporinc ididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis.-->
+<!--</p>-->
+<!--</div>-->
+<!--</div>	-->
+<!--<div class="single-popular-post d-flex flex-row">-->
+<!--<div class="thumb">-->
+<!--<img src="img/p2.png" alt="">-->
+<!--<a class="btns text-uppercase" href="#">view job post</a>-->
+<!--</div>-->
+<!--<div class="details">-->
+<!--<a href="#"><h4>Creative Designer</h4></a>-->
+<!--<h6>Los Angeles</h6>-->
+<!--<p>-->
+<!--Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod temporinc ididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis.-->
+<!--</p>-->
+<!--</div>-->
+<!--</div>	-->
+<!--<div class="single-popular-post d-flex flex-row">-->
+<!--<div class="thumb">-->
+<!--<img src="img/p1.png" alt="">-->
+<!--<a class="btns text-uppercase" href="#">view job post</a>-->
+<!--</div>-->
+<!--<div class="details">-->
+<!--<a href="#"><h4>Creative Designer</h4></a>-->
+<!--<h6>Los Angeles</h6>-->
+<!--<p>-->
+<!--Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod temporinc ididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis.-->
+<!--</p>-->
+<!--</div>-->
+<!--</div>	-->
+<!--<div class="single-popular-post d-flex flex-row">-->
+<!--<div class="thumb">-->
+<!--<img src="img/p2.png" alt="">-->
+<!--<a class="btns text-uppercase" href="#">view job post</a>-->
+<!--</div>-->
+<!--<div class="details">-->
+<!--<a href="#"><h4>Creative Designer</h4></a>-->
+<!--<h6>Los Angeles</h6>-->
+<!--<p>-->
+<!--Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod temporinc ididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis.-->
+<!--</p>-->
+<!--</div>-->
+<!--</div>																																							-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>	-->
+<!--</section>-->
+<!-- End popular-post Area -->
+
+<!-- Start feature-cat Area -->
+<!--<section class="feature-cat-area pt-100" id="category">-->
+<!--<div class="container">-->
+<!--<div class="row d-flex justify-content-center">-->
+<!--<div class="menu-content pb-60 col-lg-10">-->
+<!--<div class="title text-center">-->
+<!--<h1 class="mb-10">Featured Job Categories</h1>-->
+<!--<p>Who are in extremely love with eco friendly system.</p>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>						-->
+<!--<div class="row">-->
+<!--<div class="col-lg-2 col-md-4 col-sm-6">-->
+<!--<div class="single-fcat">-->
+<!--<a href="category.html">-->
+<!--<img src="img/o1.png" alt="">-->
+<!--</a>-->
+<!--<p>Accounting</p>-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="col-lg-2 col-md-4 col-sm-6">-->
+<!--<div class="single-fcat">-->
+<!--<a href="category.html">-->
+<!--<img src="img/o2.png" alt="">-->
+<!--</a>-->
+<!--<p>Development</p>-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="col-lg-2 col-md-4 col-sm-6">-->
+<!--<div class="single-fcat">-->
+<!--<a href="category.html">-->
+<!--<img src="img/o3.png" alt="">-->
+<!--</a>-->
+<!--<p>Technology</p>-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="col-lg-2 col-md-4 col-sm-6">-->
+<!--<div class="single-fcat">-->
+<!--<a href="category.html">-->
+<!--<img src="img/o4.png" alt="">-->
+<!--</a>-->
+<!--<p>Media & News</p>-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="col-lg-2 col-md-4 col-sm-6">-->
+<!--<div class="single-fcat">-->
+<!--<a href="category.html">-->
+<!--<img src="img/o5.png" alt="">-->
+<!--</a>-->
+<!--<p>Medical</p>-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="col-lg-2 col-md-4 col-sm-6">-->
+<!--<div class="single-fcat">-->
+<!--<a href="category.html">-->
+<!--<img src="img/o6.png" alt="">-->
+<!--</a>-->
+<!--<p>Goverment</p>-->
+<!--</div>			-->
+<!--</div>																											-->
+<!--</div>-->
+<!--</div>	-->
+<!--</section>-->
+<!-- End feature-cat Area -->
+<!-- Start post Area -->
+{#			<section class="post-area section-gap">#}
+{#				<div class="container">#}
+{#					<div class="row justify-content-center d-flex">#}
+{#						<div class="col-lg-8 post-list">#}
+{#							<!--<ul class="cat-list">-->#}
+<!--&lt;!&ndash;<li><a href="#">Recent</a></li>&ndash;&gt;-->
+<!--&lt;!&ndash;<li><a href="#">Full Time</a></li>&ndash;&gt;-->
+<!--&lt;!&ndash;<li><a href="#">Intern</a></li>&ndash;&gt;-->
+<!--&lt;!&ndash;<li><a>近期收到的简历</a></li>&ndash;&gt;-->
+<!---->
+<!--</ul>-->
+{#							<div class="single-post d-flex flex-row">#}
+{#								<div class="thumb">#}
+{#									<img src="" alt="">#}
+{#									<ul class="tags">#}
+{#										<li>#}
+{#											<a href="">售后工程师</a>#}
+{#										</li>#}
+{#									</ul>#}
+{#								</div>#}
+{#								<div class="details">#}
+{#									<div class="title d-flex flex-row justify-content-between">#}
+{#										<div class="titles">#}
+{#											<a href=""><h4>xxx公司</h4></a>#}
+{#											<h6>2019.1.31</h6>#}
+{#										</div>#}
+{#										<ul class="btns">#}
+{#											<li><a href="#">查看详细简历</a></li>#}
+{#										</ul>#}
+{#									</div>#}
+{#									<p>#}
+{#										三年Java开发经验，Java基础扎实，项目经验丰富。。。。。#}
+{#									</p>#}
+{#									<h5>离职状态，可随时到岗</h5>#}
+{#									<p class="address"><span class="lnr lnr-map"></span>西安</p>#}
+{#									<p class="address"><span class="lnr lnr-database"></span>期望薪资： 10k - 15k</p>#}
+{#								</div>#}
+{#							</div>#}
+{#							<div class="single-post d-flex flex-row">#}
+{#								<div class="thumb">#}
+{#									<img src="" alt="">#}
+{#									<ul class="tags">#}
+{#										<li>#}
+{#											<a href="#">李四</a>#}
+{#										</li>#}
+{#									</ul>#}
+{#								</div>#}
+{#								<div class="details">#}
+{#									<div class="title d-flex flex-row justify-content-between">#}
+{#										<div class="titles">#}
+{#											<a href=""><h4>python开发</h4></a>#}
+{#											<h6>2019.1.31</h6>#}
+{#										</div>#}
+{#										<ul class="btns">#}
+{#											<li><a href="#">查看详细简历</a></li>#}
+{#										</ul>#}
+{#									</div>#}
+{#									<p>#}
+{#										本人五年python后端开发经验，两年数据分析经验，精通各类web开发框架，熟悉数据分析工具。。。。。#}
+{#									</p>#}
+{#									<div style="margin-right: auto"><h5>在职，有合适机会会考虑</h5></div>#}
+{#									<p class="address"><span class="lnr lnr-map"></span>北京</p>#}
+{#									<p class="address"><span class="lnr lnr-database"></span> 15k - 25k</p>#}
+{#								</div>#}
+{#							</div>#}
+{#							<div class="single-post d-flex flex-row">#}
+{#								<div class="thumb">#}
+{#									<img src="" alt="">#}
+{#									<ul class="tags">#}
+{#										<li>#}
+{#											<a href="#">王五</a>#}
+{#										</li>#}
+{##}
+{#									</ul>#}
+{#								</div>#}
+{#								<div class="details">#}
+{#									<div class="title d-flex flex-row justify-content-between">#}
+{#										<div class="titles">#}
+{#											<a href=""><h4>Java开发</h4></a>#}
+{#											<h6>2019.1.31</h6>#}
+{#										</div>#}
+{#										<ul class="btns">#}
+{#											<li><a href="#">查看详细简历</a></li>#}
+{#										</ul>#}
+{#									</div>#}
+{#									<p>#}
+{#										1年开发经验，能吃苦，愿意接受加班和出差。。。。。#}
+{#									</p>#}
+{#									<h5>离职，可随时到岗</h5>#}
+{#									<p class="address"><span class="lnr lnr-map"></span> 西安</p>#}
+{#									<p class="address"><span class="lnr lnr-database"></span> 6k - 10k</p>#}
+{#								</div>#}
+{#							</div>#}
+{#							<div class="single-post d-flex flex-row">#}
+{#								<div class="thumb">#}
+{#									<img src="" alt="">#}
+{#									<ul class="tags">#}
+{#										<li>#}
+{#											<a href="">李芳</a>#}
+{#										</li>#}
+{#									</ul>#}
+{#								</div>#}
+{#								<div class="details">#}
+{#									<div class="title d-flex flex-row justify-content-between">#}
+{#										<div class="titles">#}
+{#											<a href=""><h4>测试工程师</h4></a>#}
+{#											<h6>2019.1.29</h6>#}
+{#										</div>#}
+{#										<ul class="btns">#}
+{#											<li><a href="#">查看详细简历</a></li>#}
+{#										</ul>#}
+{#									</div>#}
+{#									<p>#}
+{#										211/985重本毕业，3年测试经验，熟悉web端和app端测试流程，熟悉各类测试工具。。。。。#}
+{#									</p>#}
+{#									<h5>在职，1个月内可到岗</h5>#}
+{#									<p class="address"><span class="lnr lnr-map"></span>西安</p>#}
+{#									<p class="address"><span class="lnr lnr-database"></span> 8k - 12k</p>#}
+{#								</div>#}
+{#							</div>#}
+<!--<div class="single-post d-flex flex-row">-->
+<!--<div class="thumb">-->
+<!--<img src="img/post.png" alt="">-->
+<!--<ul class="tags">-->
+<!--<li>-->
+<!--<a href="#">Art</a>-->
+<!--</li>-->
+<!--<li>-->
+<!--<a href="#">Media</a>-->
+<!--</li>-->
+<!--<li>-->
+<!--<a href="#">Design</a>-->
+<!--</li>-->
+<!--</ul>-->
+<!--</div>-->
+<!--<div class="details">-->
+<!--<div class="title d-flex flex-row justify-content-between">-->
+<!--<div class="titles">-->
+<!--<a href="single.html"><h4>Creative Art Designer</h4></a>-->
+<!--<h6>Premium Labels Limited</h6>-->
+<!--</div>-->
+<!--<ul class="btns">-->
+<!--<li><a href="#"><span class="lnr lnr-heart"></span></a></li>-->
+<!--<li><a href="#">Apply</a></li>-->
+<!--</ul>-->
+<!--</div>-->
+<!--<p>-->
+<!--Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod temporinc ididunt ut dolore magna aliqua.-->
+<!--</p>-->
+<!--<h5>Job Nature: Full time</h5>-->
+<!--<p class="address"><span class="lnr lnr-map"></span> 56/8, Panthapath Dhanmondi Dhaka</p>-->
+<!--<p class="address"><span class="lnr lnr-database"></span> 15k - 25k</p>-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="single-post d-flex flex-row">-->
+<!--<div class="thumb">-->
+<!--<img src="img/post.png" alt="">-->
+<!--<ul class="tags">-->
+<!--<li>-->
+<!--<a href="#">Art</a>-->
+<!--</li>-->
+<!--<li>-->
+<!--<a href="#">Media</a>-->
+<!--</li>-->
+<!--<li>-->
+<!--<a href="#">Design</a>-->
+<!--</li>-->
+<!--</ul>-->
+<!--</div>-->
+<!--<div class="details">-->
+<!--<div class="title d-flex flex-row justify-content-between">-->
+<!--<div class="titles">-->
+<!--<a href="single.html"><h4>Creative Art Designer</h4></a>-->
+<!--<h6>Premium Labels Limited</h6>-->
+<!--</div>-->
+<!--<ul class="btns">-->
+<!--<li><a href="#"><span class="lnr lnr-heart"></span></a></li>-->
+<!--<li><a href="#">Apply</a></li>-->
+<!--</ul>-->
+<!--</div>-->
+<!--<p>-->
+<!--Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod temporinc ididunt ut dolore magna aliqua.-->
+<!--</p>-->
+<!--<h5>Job Nature: Full time</h5>-->
+<!--<p class="address"><span class="lnr lnr-map"></span> 56/8, Panthapath Dhanmondi Dhaka</p>-->
+<!--<p class="address"><span class="lnr lnr-database"></span> 15k - 25k</p>-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="single-post d-flex flex-row">-->
+<!--<div class="thumb">-->
+<!--<img src="img/post.png" alt="">-->
+<!--<ul class="tags">-->
+<!--<li>-->
+<!--<a href="#">Art</a>-->
+<!--</li>-->
+<!--<li>-->
+<!--<a href="#">Media</a>-->
+<!--</li>-->
+<!--<li>-->
+<!--<a href="#">Design</a>-->
+<!--</li>-->
+<!--</ul>-->
+<!--</div>-->
+<!--<div class="details">-->
+<!--<div class="title d-flex flex-row justify-content-between">-->
+<!--<div class="titles">-->
+<!--<a href="single.html"><h4>Creative Art Designer</h4></a>-->
+<!--<h6>Premium Labels Limited</h6>-->
+<!--</div>-->
+<!--<ul class="btns">-->
+<!--<li><a href="#"><span class="lnr lnr-heart"></span></a></li>-->
+<!--<li><a href="#">Apply</a></li>-->
+<!--</ul>-->
+<!--</div>-->
+<!--<p>-->
+<!--Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod temporinc ididunt ut dolore magna aliqua.-->
+<!--</p>-->
+<!--<h5>Job Nature: Full time</h5>-->
+<!--<p class="address"><span class="lnr lnr-map"></span> 56/8, Panthapath Dhanmondi Dhaka</p>-->
+<!--<p class="address"><span class="lnr lnr-database"></span> 15k - 25k</p>-->
+<!--</div>-->
+<!--</div>-->
+
+{#							<a class="text-uppercase loadmore-btn mx-auto d-block" href="">查看更多简历</a>#}
+{##}
+{#						</div>#}
+{#						<div class="col-lg-4 sidebar">#}
+<!--<div class="single-slidebar">-->
+<!--<h4>Jobs by Location</h4>-->
+<!--<ul class="cat-list">-->
+<!--<li><a class="justify-content-between d-flex" href="category.html"><p>New York</p><span>37</span></a></li>-->
+<!--<li><a class="justify-content-between d-flex" href="category.html"><p>Park Montana</p><span>57</span></a></li>-->
+<!--<li><a class="justify-content-between d-flex" href="category.html"><p>Atlanta</p><span>33</span></a></li>-->
+<!--<li><a class="justify-content-between d-flex" href="category.html"><p>Arizona</p><span>36</span></a></li>-->
+<!--<li><a class="justify-content-between d-flex" href="category.html"><p>Florida</p><span>47</span></a></li>-->
+<!--<li><a class="justify-content-between d-flex" href="category.html"><p>Rocky Beach</p><span>27</span></a></li>-->
+<!--<li><a class="justify-content-between d-flex" href="category.html"><p>Chicago</p><span>17</span></a></li>-->
+<!--</ul>-->
+<!--</div>-->
+
+{#							<div class="single-slidebar">#}
+{#								<h4>相似简历</h4>#}
+{#								<div class="active-relatedjob-carusel">#}
+{#									<div class="single-rated">#}
+{#										<img class="img-fluid" src="{% static 'img/r1.jpg' %}" alt="">#}
+{#										<a href=""><h4>开发工程师</h4></a>#}
+{#										<h6>李先生</h6>#}
+{#										<p>#}
+{#											三年Java开发经验，Java基础扎实，项目经验丰富。。。。。#}
+{#										</p>#}
+{#										<h5>离职：可随时到岗</h5>#}
+{#										<p class="address"><span class="lnr lnr-map"></span>西安</p>#}
+{#										<p class="address"><span class="lnr lnr-database"></span> 10k - 15k</p>#}
+{#										<a href="#" class="">下载简历</a>#}
+{#									</div>#}
+{#									<div class="single-rated">#}
+{#										<img class="img-fluid" src="{% static 'img/r1.jpg' %}" alt="">#}
+{#										<a href=""><h4>python开发</h4></a>#}
+{#										<h6>刘先生</h6>#}
+{#										<p>#}
+{#											三年Java开发经验，Java基础扎实，项目经验丰富。。。。。#}
+{#										</p>#}
+{#										<h5>离职，可随时到岗</h5>#}
+{#										<p class="address"><span class="lnr lnr-map"></span>西安</p>#}
+{#										<p class="address"><span class="lnr lnr-database"></span> 10k - 12k</p>#}
+{#										<a href="" class="">下载简历</a>#}
+{#									</div>#}
+{#									<div class="single-rated">#}
+{#										<img class="img-fluid" src="{% static 'img/r1.jpg' %}" alt="">#}
+{#										<a href="single.html"><h4>测试工程师</h4></a>#}
+{#										<h6>王女士</h6>#}
+{#										<p>#}
+{#											三年测试经验，项目经验丰富。。。。。#}
+{#										</p>#}
+{#										<h5>离职，可随时到岗</h5>#}
+{#										<p class="address"><span class="lnr lnr-map"></span>西安</p>#}
+{#										<p class="address"><span class="lnr lnr-database"></span> 6k - 8k</p>#}
+{#										<a href="" class="btns text-uppercase">下载简历</a>#}
+{#									</div>#}
+{#								</div>#}
+{#							</div>#}
+
+<!--<div class="single-slidebar">-->
+<!--<h4>Jobs by Category</h4>-->
+<!--<ul class="cat-list">-->
+<!--<li><a class="justify-content-between d-flex" href="category.html"><p>Technology</p><span>37</span></a></li>-->
+<!--<li><a class="justify-content-between d-flex" href="category.html"><p>Media & News</p><span>57</span></a></li>-->
+<!--<li><a class="justify-content-between d-flex" href="category.html"><p>Goverment</p><span>33</span></a></li>-->
+<!--<li><a class="justify-content-between d-flex" href="category.html"><p>Medical</p><span>36</span></a></li>-->
+<!--<li><a class="justify-content-between d-flex" href="category.html"><p>Restaurants</p><span>47</span></a></li>-->
+<!--<li><a class="justify-content-between d-flex" href="category.html"><p>Developer</p><span>27</span></a></li>-->
+<!--<li><a class="justify-content-between d-flex" href="category.html"><p>Accounting</p><span>17</span></a></li>-->
+<!--</ul>-->
+<!--</div>-->
+
+{#							<div class="single-slidebar">#}
+{#								<h4>会员套餐</h4>#}
+{#								<div class="blog-list">#}
+{#									<div class="single-blog " style="background:#000 url(../static/img/blog1.jpg);">#}
+{#										<h4>20个岗位发布<br>#}
+{#										1500份简历下载<br>#}
+{#										500封邮件邀请</h4>#}
+{#										<div class="meta justify-content-between d-flex">#}
+{#											<p>#}
+{#												<a href="" style="color: red">购买A套餐</a>#}
+{#											</p>#}
+{#											<p>#}
+{#												<span class=""></span>#}
+{#												￥#}
+{#												 <span class=""></span>#}
+{#												2500.00#}
+{#											</p>#}
+{#										</div>#}
+{#									</div>#}
+{#									<div class="single-blog " style="background:#000 url(../static/img/blog2.jpg);">#}
+{#										<h4>40个岗位发布<br>#}
+{#										3000份简历下载<br>#}
+{#										1000封邮件邀请</h4>#}
+{#										<div class="meta justify-content-between d-flex">#}
+{#											<p>#}
+{#												<a href="" style="color: red">购买B套餐</a>#}
+{#											</p>#}
+{#											<p>#}
+{#												<span class=""></span>#}
+{#												￥#}
+{#												 <span class=""></span>#}
+{#												4500.00#}
+{#											</p>#}
+{#										</div>#}
+{#									</div>#}
+{#									<div class="single-blog " style="background:#000 url(../static/img/blog1.jpg);">#}
+{#										<h4>80个岗位发布<br>#}
+{#										5000份简历下载<br>#}
+{#										1500封邮件邀请</h4>#}
+{#										<div class="meta justify-content-between d-flex">#}
+{#											<p>#}
+{#												<a href="" style="color: red">购买C套餐</a>#}
+{#											</p>#}
+{#											<p>#}
+{#												<span class=""></span>#}
+{#												￥#}
+{#												 <span class=""></span>#}
+{#												7500.00#}
+{#											</p>#}
+{#										</div>#}
+{#									</div>#}
+{#								</div>#}
+{#							</div>#}
+
+{##}
+{#						</div>#}
+{#					</div>#}
+{#				</div>#}
+{#			</section>#}
+<!-- End post Area -->
+
+
+<!-- Start callto-action Area -->
+<!--<section class="" id="join" style="height: 200px;">-->
+<!--&lt;!&ndash;<div class="container" style="margin-bottom: 10px">&ndash;&gt;-->
+<!--&lt;!&ndash;<div class="" style="height: 200px;">&ndash;&gt;-->
+<!--&lt;!&ndash;<div class="menu-content col-lg-9" style="margin-top: 10px">&ndash;&gt;-->
+<!--&lt;!&ndash;<div class="title text-center" style="margin-top: 10px">&ndash;&gt;-->
+<!--<h1 class="mb-10 text-white" style="margin-top: auto">加 入 我 们</h1>-->
+<!--<p class="text-white">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore  et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>-->
+<!--<a class="primary-btn" href="#">I am a Candidate</a>-->
+<!--<a class="primary-btn" href="#">Request Free Demo</a>-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+<!--&lt;!&ndash;</div>	&ndash;&gt;-->
+<!--</section>-->
+<!-- End calto-action Area -->
+
+<!-- Start download Area -->
+<!--<section class="download-area section-gap" id="app">-->
+<!--<div class="container">-->
+<!--<div class="row">-->
+<!--<div class="col-lg-6 download-left">-->
+<!--<img class="img-fluid" src="img/d1.png" alt="">-->
+<!--</div>-->
+<!--<div class="col-lg-6 download-right">-->
+<!--<h1>Download the <br>-->
+<!--Job Listing App Today!</h1>-->
+<!--<p class="subs">-->
+<!--It won’t be a bigger problem to find one video game lover in your neighbor. Since the introduction of Virtual Game, it has been achieving great heights so far as its popularity and technological advancement are concerned.-->
+<!--</p>-->
+<!--<div class="d-flex flex-row">-->
+<!--<div class="buttons">-->
+<!--<i class="fa fa-apple" aria-hidden="true"></i>-->
+<!--<div class="desc">-->
+<!--<a href="#">-->
+<!--<p>-->
+<!--<span>Available</span> <br>-->
+<!--on App Store-->
+<!--</p>-->
+<!--</a>-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="buttons">-->
+<!--<i class="fa fa-android" aria-hidden="true"></i>-->
+<!--<div class="desc">-->
+<!--<a href="#">-->
+<!--<p>-->
+<!--<span>Available</span> <br>-->
+<!--on Play Store-->
+<!--</p>-->
+<!--</a>-->
+<!--</div>-->
+<!--</div>									-->
+<!--</div>						-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>	-->
+<!--</section>-->
+<!-- End download Area -->
+
+<!-- start footer Area -->
+<footer class="footer-area section-gap" style="height: 250px">
+    <div class="container" style="height: 100px">
+        <div class="row" style="margin-left: 300px">
+            <p>
+                <a href="#">关 于 我 们</a>---<a href="#">广 告 合 作 </a>---<a href="#">联 系 我 们 </a>---<a href="#">免 责 声 明 </a>---<a
+                    href="#">在 线 投 稿 </a>---<a href="#">投 诉 建 议 </a>
+            </p>
+        </div>
+
+        <div class="row footer-bottom d-flex justify-content-between" style="margin-left: 305px">
+
+            Copyright &copy;<script>document.write(new Date().getFullYear());</script>
+            python1805 NB 0.1 QUAN ZHAN SAN REN PRODUCT. 版权所有
+        </div>
+    </div>
+</footer>
+<!-- End footer Area -->
+
+<script src="{% static 'user/mine/jquery-2.2.4.min.js' %}"></script>
+<script src="{% static 'user/mine/popper.min.js' %}"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="{% static 'user/mine/bootstrap.min.js' %}"></script>
+
+<script src="{% static 'user/mine/easing.min.js' %}"></script>
+<script src="{% static 'user/mine/hoverIntent.js' %}"></script>
+<script src="{% static 'user/mine/superfish.min.js' %}"></script>
+<script src="{% static 'user/mine/jquery.ajaxchimp.min.js' %}"></script>
+<script src="{% static 'user/mine/jquery.magnific-popup.min.js' %}"></script>
+<script src="{% static 'user/mine/owl.carousel.min.js' %}"></script>
+<script src="{% static 'user/mine/jquery.sticky.js' %}"></script>
+<script src="{% static 'user/mine/jquery.nice-select.min.js' %}"></script>
+<script src="{% static 'user/mine/parallax.min.js' %}"></script>
+<script src="{% static 'user/mine/mail-script.js' %}"></script>
+<script src="{% static 'user/mine/main.js' %}"></script>
+</body>
+</html>
+<script>
+    $(function() {
+        $('.resume_refresh').click(function () {
+            $.getJSON('/resume_refresh/', function (data) {
+                if (data['status'] == '200'){
+                    alert('简历刷新成功')
+                }
+                if (data['status'] == '900'){
+                    alert('简历刷新失败，请上传简历')
+                }
+            })
+
+        })
+
+    })
+</script>
+
+

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="{% static 'user/jlsc/css/group.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'user/jlsc/css/grzx.css' %}">
+</head>
+<body>
+<div class="grzx">
+    <div class="mbox">
+        <div class="grzx-nav">
+            <h1>简历浏览</h1>
+            <div class="blank1"></div>
+            <div id="resumeForm">
+                <div class="grzx-img">
+                    <img src="/static/user/resume_img/{{ img }}" id="preImg"
+                         style="border: 1px solid red; padding: 5px; width: 80%"
+                    />
+                    <br/>
+                </div>
+                <div class="grzx-from">
+                    <div class="ft-text">姓名：</div>
+                    <div class="rt-inp"><input id="xingming" type="text" name="username" value="XXX" disabled/></div>
+                </div>
+                <div class="grzx-from">
+                    <div class="ft-text">性别：</div>
+                    <div class="rt-inp"><input type="text" name="username" value="{{ age }}" disabled/></div>
+                </div>
+                <div class="grzx-from">
+                    <div class="ft-text">年龄：</div>
+                    <div class="rt-inp"><input type="text" name="age" value="{{ age }}" disabled/></div>
+                </div>
+                <div class="grzx-from">
+                    <div class="ft-text">学历：</div>
+                    <div class="rt-inp"><input type="text" name="age" value="{{ xueli }}" disabled/>
+                    </div>
+                </div>
+                <div class="grzx-from">
+                    <div class="ft-text">求职状态：</div>
+                    <div class="rt-inp"><input type="text" name="age" value="{{ status }}" disabled/>
+                    </div>
+                </div>
+                <div class="grzx-from">
+                    <div class="ft-text">电子邮箱：</div>
+                    <div class="rt-inp"><input id="youxiang" type="text" name="email" value=".........." disabled/>
+                    </div>
+                </div>
+                <div class="grzx-from">
+                    <div class="ft-text">联系方式：</div>
+                    <div class="rt-inp"><input id="dianhua" type="text" name="phone" value="..........." disabled/>
+                    </div>
+                </div>
+                <div class="grzx-from">
+                    <div class="ft-text">期望城市：</div>
+                    <div class="rt-inp"><input type="text" name="phone" value="{{ city }}" disabled/>
+                    </div>
+                </div>
+                <div class="grzx-from">
+                    <div class="ft-text">工作时间：</div>
+                    <div class="rt-inp"><input type="text" name="phone" value="{{ year }}" disabled/>
+                    </div>
+                </div>
+                <div class="grzx-from">
+                    <div class="ft-text">期望月薪：</div>
+                    <div class="rt-inp"><input type="text" name="phone" value="{{ money }}" disabled/>
+                    </div>
+                </div>
+                <div class="grzx-from">
+                    <div class="ft-text">求职方向：</div>
+                    <div class="rt-inp"><input type="text" name="phone" value="{{ job_title }}" disabled/>
+                    </div>
+                </div>
+                <div class="grzx-from">
+                    <div class="ft-text">教育经历：</div>
+                    <div class="rt-inp"><textarea name="edu" disabled>{{ edu }}</textarea></div>
+                </div>
+                <div class="grzx-from">
+                    <div class="ft-text">个人简介：</div>
+                    <div class="rt-inp"><textarea name="resume" disabled>{{ user_info }}</textarea></div>
+                </div>
+                <div class="grzx-from">
+                    <div class="ft-text">技能特长：</div>
+                    <div class="rt-inp"><textarea name="skill" disabled>{{ skill }}</textarea></div>
+                </div>
+                <div class="grzx-from">
+                    <div class="ft-text">项目经验：</div>
+                    <div class="rt-inp"><textarea name="object" disabled>{{ project_suffer }}</textarea></div>
+                </div>
+                <div class="grzx-from">
+                    <div class="ft-text">工作经验：</div>
+                    <div class="rt-inp"><textarea name="job" disabled>{{ job_suffer }}</textarea></div>
+                </div>
+                <div class="blank20"></div>
+                <div class="grzx-from tj-btn">
+                    <ul>
+                        <li>
+                            <input id="download" type="button" value="下载简历" class="btn-tj" name="{{ id }}">
+                        </li>
+                        <li id="shoucang" name="{{ id }}"></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="blank100"></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+<script type="text/javascript" src={% static "/jquery-1.8.3.js" %}></script>
+<script type="text/javascript">
+    $(function () {
+        $("#download").click(function () {
+            var s_id = this.name;
+            alert(s_id)
+            $.getJSON("/download_resume/",{"s_id": s_id},function(data){
+                if (data['status'] == "200") {
+                    alert("下载成功");
+                    $("#dianhua").val(data['phone']);
+                    $("#youxiang").val(data['email']);
+                    $("#xingming").val(data['name'])
+                    $("#download").val("已下载")
+                    $("#download").attr('disabled',true)
+                    $("#shoucang").html('<input id="jiaru" type="button" value="收藏" class="btn-tj" name={{ id }}>')
+                } else if (data['status'] == "404") {
+                    alert("请先充值")
+                }
+            })
+        });
+
+        $("#shoucang").click(function () {
+            var se_id = $("#shoucang").attr("name")
+            $.getJSON("/jiaru_resume/",{"se_id": se_id},function(data){
+                if (data['status'] == "200") {
+                    alert("收藏成功");
+                    $("#jiaru").val("已收藏")
+                    $("#jiaru").attr('disabled',true)
+                }
+            })
+        })
+    })
+</script>
